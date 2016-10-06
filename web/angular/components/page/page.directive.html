@@ -1,0 +1,6 @@
+<section class='page-content {{ctrl.backgroundImage}}'
+	ng-class="{'with-image' : ctrl.backgroundImage != null, '{{ctrl.pageClass}}' : ctrl.pageClass != null}">
+	<perfect-scrollbar class="scroller" wheel-propagation="true">
+		<div class='full-height' ng-class="{'{{ctrl.bodyClass}}' : ctrl.bodyClass != null}" ng-transclude/>
+	</perfect-scrollbar> 
+</section>

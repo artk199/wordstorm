@@ -1,0 +1,7 @@
+{
+	"restApi" : "test",
+	"allowedLanguages" : ["pl"],
+	"defaultLanguage" : "pl",
+	"devMode" : true,
+	"html5Mode" : false
+}

@@ -1,0 +1,7 @@
+<div class='language-picker'>
+	<span class='language' ng-repeat='language in ctrl.availableLanguages'
+		ng-click="ctrl.changeLanguage(language)"
+		ng-class="{'active' : ctrl.isActiveLanguage(language)}">
+		<img ng-src='images/change-language/lang_{{language}}.png' alt='{{language}}'/>
+	</span>
+</div>

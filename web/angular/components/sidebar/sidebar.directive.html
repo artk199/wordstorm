@@ -1,0 +1,47 @@
+<div id="sidebar" ng-class="{'opened' : ctrl.sidebarOpened}">
+	<user-panel open="ctrl.sidebarOpened"></user-panel>
+	<ul>
+		<li class="expandable"
+			ng-class="{'active' : ctrl.isPageOpened('state1')}"
+		>
+			<a href='#' ng-click="ctrl.openExamplePage()">
+				<span class='inline-children'>
+					<span class="glyphicon glyphicon-book"></span>
+					<span class='option-title' translate="state1.linkName"></span>
+				</span>
+			</a>
+		</li>
+		<li class="expandable"
+			ng-if="ctrl.isPersonLogged()"
+			ng-class="{'active' : ctrl.isPageOpened('state2')}"
+		>
+			<a href='#' ng-click="ctrl.openExamplePage2()">
+				<span class='inline-children'>
+					<span class="glyphicon glyphicon-eye-open"></span>
+					<span>
+						<span class='option-title' translate="state2.linkName"></span>
+						<span class='option-subtitle' translate="state2.linkInfo" ng-if="ctrl.sidebarOpened"></span>
+					</span>
+				</span>
+			</a>
+		</li>
+		<li class="expandable">
+			<a href='#'>
+				<span class='inline-children'>
+					<span class="glyphicon glyphicon glyphicon-star-empty"></span>
+					<span>
+						<span class='option-title' translate="state3.linkName"></span>
+						<span class='option-subtitle' translate="state3.linkInfo" ng-if="ctrl.sidebarOpened"></span>
+					</span>
+				</span>
+			</a>
+		</li>
+	</ul>
+	<ul class="bottom">
+		<li>
+			<a ng-click="ctrl.open()">
+				<span class="glyphicon glyphicon-chevron-right"></span>
+			</a>
+		</li>
+	</ul>
+</div>

@@ -1,0 +1,32 @@
+<page page-class='main-page' background-image="{{ctrl.getBackgroundImage()}}">
+	<div class='social-panel'>
+		<a href='#'>
+			<img class='facebook' src="http://kultowyevent.pl/images/facebook_icon.png" alt="" ng-attr-title="{{'mainPage.facebook.popover' | translate}}"/>
+		</a>
+	</div>
+	
+	<div class='text' >
+		<h3 translate="mainPage.option.{{ctrl.view}}.title"></h3>
+		<p translate="mainPage.option.{{ctrl.view}}.text"></p>
+	</div>
+	
+	<div class='container-fluid options'>
+		<div class="row ">
+			<div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 option"
+				ng-class="{'active' : ctrl.view == ctrl.views.SPEAKING}"
+				ng-click="ctrl.changeOption(ctrl.views.SPEAKING)">
+				<img src='images/main-page/speaking.png' alt='' title='' class='option-icon'/>
+			</div>
+			<div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 option" 
+				ng-class="{'active' : ctrl.view == ctrl.views.LISTENING}"
+				ng-click="ctrl.changeOption(ctrl.views.LISTENING)">
+				<img src='images/main-page/listening.png' alt='' title='' class='option-icon'/>
+			</div>
+			<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 option" 
+				ng-class="{'active' : ctrl.view == ctrl.views.OPTION3}"
+				ng-click="ctrl.changeOption(ctrl.views.OPTION3)">
+				<img src='images/main-page/speaking.png' alt='' title='' class='option-icon'/>
+			</div>
+		</div>
+	</div>
+</page>

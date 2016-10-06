@@ -1,0 +1,282 @@
+<page>
+	<div class='tile with-image people fade-on-hover zoomable user-action'>
+		<h1 translate='register.title'></h1>
+		<div class='show-on-hover text' translate="register.mainText">
+		</div>
+	</div>
+	<div class='container-fluid'>
+		<div class='row'>
+			<div class='col-xs-1 col-sm-1 col-md-3 col-lg-3'></div>
+			<div class='col-xs-10 col-sm-10 col-md-6 col-lg-6'>
+				<form name='registerForm' class='form-horizontal no-group-margins with-top-space'>
+					<!-- Email -->
+					<section class='form-group'
+						ng-class="{'has-error' : registerForm.email.$touched && registerForm.email.$invalid}">
+						<label class="control-label col-xs-12 col-sm-6 col-md-4 col-lg-4"
+							for="email" translate="userPanel.form.email"></label>
+						<div class="col-xs-12 col-sm-6 col-md-8 col-lg-8">
+							<input type="email" name="email" class="form-control" id="email"
+								ng-model="email"
+								ng-attr-placeholder="{{'userPanel.form.email.placeholder' | translate}}"
+								ng-required="true" /> 
+								<span class='error'
+									ng-if="registerForm.email.$touched && registerForm.email.$error.required"
+									translate="userPanel.form.error.emptyField">
+								</span> 
+								<span
+									class='error' translate="userPanel.form.error.wrongEmailAddress"
+									ng-if="registerForm.email.$touched && registerForm.email.$invalid && !registerForm.email.$error.required">
+								</span>
+						</div>
+					</section>	
+					
+					<!-- Password fields -->
+					<section class='form-group'
+						ng-class="{'has-error' : registerForm.password.$touched && registerForm.password.$invalid}">
+						<label class="control-label col-xs-12 col-sm-6 col-md-4 col-lg-4"
+							for="password" translate="userPanel.form.password"></label>
+						<div class="col-xs-12 col-sm-6 col-md-8 col-lg-8">
+							<input type="password" name="password" class="form-control" id="password"
+								ng-model="password"
+								ng-attr-placeholder="{{'userPanel.form.password.placeholder' | translate}}"
+								ng-required="true" /> 
+								<span class='error'
+									ng-if="registerForm.password.$touched && registerForm.password.$error.required"
+									translate="userPanel.form.error.emptyField">
+								</span> 
+						</div>
+					</section>	
+					
+					<section class='form-group'
+						ng-class="{'has-error' : registerForm.password.$touched && registerForm.password.$invalid}">
+						<label class="control-label col-xs-12 col-sm-6 col-md-4 col-lg-4"
+							for="password" translate="userPanel.form.password"></label>
+						<div class="col-xs-12 col-sm-6 col-md-8 col-lg-8">
+							<input type="password" name="password" class="form-control" id="password"
+								ng-model="password"
+								ng-attr-placeholder="{{'userPanel.form.password.placeholder' | translate}}"
+								ng-required="true" /> 
+								<span class='error'
+									ng-if="registerForm.password.$touched && registerForm.password.$error.required"
+									translate="userPanel.form.error.emptyField">
+								</span> 
+						</div>
+					</section>	
+					
+					
+					<!-- SPAM -->
+					<section class='field-section with-separator'>
+						<header>
+							<h3>Name of section</h3>
+						</header>
+						<section class='form-group'
+							ng-class="{'has-error' : registerForm.password.$touched && registerForm.password.$invalid}">
+							<label class="control-label col-xs-12 col-sm-6 col-md-4 col-lg-4"
+								for="password" translate="userPanel.form.password"></label>
+							<div class="col-xs-12 col-sm-6 col-md-8 col-lg-8">
+								<input type="password" name="password" class="form-control" id="password"
+									ng-model="password"
+									ng-attr-placeholder="{{'userPanel.form.password.placeholder' | translate}}"
+									ng-required="true" /> 
+									<span class='error'
+										ng-if="registerForm.password.$touched && registerForm.password.$error.required"
+										translate="userPanel.form.error.emptyField">
+									</span> 
+							</div>
+						</section>	
+						
+						<section class='form-group'
+							ng-class="{'has-error' : registerForm.password.$touched && registerForm.password.$invalid}">
+							<label class="control-label col-xs-12 col-sm-6 col-md-4 col-lg-4"
+								for="password" translate="userPanel.form.password"></label>
+							<div class="col-xs-12 col-sm-6 col-md-8 col-lg-8">
+								<input type="password" name="password" class="form-control" id="password"
+									ng-model="password"
+									ng-attr-placeholder="{{'userPanel.form.password.placeholder' | translate}}"
+									ng-required="true" /> 
+									<span class='error'
+										ng-if="registerForm.password.$touched && registerForm.password.$error.required"
+										translate="userPanel.form.error.emptyField">
+									</span> 
+							</div>
+						</section>	
+						<section class='form-group'
+							ng-class="{'has-error' : registerForm.password.$touched && registerForm.password.$invalid}">
+							<label class="control-label col-xs-12 col-sm-6 col-md-4 col-lg-4"
+								for="password" translate="userPanel.form.password"></label>
+							<div class="col-xs-12 col-sm-6 col-md-8 col-lg-8">
+								<input type="password" name="password" class="form-control" id="password"
+									ng-model="password"
+									ng-attr-placeholder="{{'userPanel.form.password.placeholder' | translate}}"
+									ng-required="true" /> 
+									<span class='error'
+										ng-if="registerForm.password.$touched && registerForm.password.$error.required"
+										translate="userPanel.form.error.emptyField">
+									</span> 
+							</div>
+						</section>	
+						
+						<section class='form-group'
+							ng-class="{'has-error' : registerForm.password.$touched && registerForm.password.$invalid}">
+							<label class="control-label col-xs-12 col-sm-6 col-md-4 col-lg-4"
+								for="password" translate="userPanel.form.password"></label>
+							<div class="col-xs-12 col-sm-6 col-md-8 col-lg-8">
+								<input type="password" name="password" class="form-control" id="password"
+									ng-model="password"
+									ng-attr-placeholder="{{'userPanel.form.password.placeholder' | translate}}"
+									ng-required="true" /> 
+									<span class='error'
+										ng-if="registerForm.password.$touched && registerForm.password.$error.required"
+										translate="userPanel.form.error.emptyField">
+									</span> 
+							</div>
+						</section>	
+					</section>
+					
+					<section class='field-section with-separator'>
+						<header>
+							<h3>Name of section</h3>
+						</header>
+						<section class='form-group'
+							ng-class="{'has-error' : registerForm.password.$touched && registerForm.password.$invalid}">
+							<label class="control-label col-xs-12 col-sm-6 col-md-4 col-lg-4"
+								for="password" translate="userPanel.form.password"></label>
+							<div class="col-xs-12 col-sm-6 col-md-8 col-lg-8">
+								<input type="password" name="password" class="form-control" id="password"
+									ng-model="password"
+									ng-attr-placeholder="{{'userPanel.form.password.placeholder' | translate}}"
+									ng-required="true" /> 
+									<span class='error'
+										ng-if="registerForm.password.$touched && registerForm.password.$error.required"
+										translate="userPanel.form.error.emptyField">
+									</span> 
+							</div>
+						</section>	
+						
+						<section class='form-group'
+							ng-class="{'has-error' : registerForm.password.$touched && registerForm.password.$invalid}">
+							<label class="control-label col-xs-12 col-sm-6 col-md-4 col-lg-4"
+								for="password" translate="userPanel.form.password"></label>
+							<div class="col-xs-12 col-sm-6 col-md-8 col-lg-8">
+								<input type="password" name="password" class="form-control" id="password"
+									ng-model="password"
+									ng-attr-placeholder="{{'userPanel.form.password.placeholder' | translate}}"
+									ng-required="true" /> 
+									<span class='error'
+										ng-if="registerForm.password.$touched && registerForm.password.$error.required"
+										translate="userPanel.form.error.emptyField">
+									</span> 
+							</div>
+						</section>	
+						<section class='form-group'
+							ng-class="{'has-error' : registerForm.password.$touched && registerForm.password.$invalid}">
+							<label class="control-label col-xs-12 col-sm-6 col-md-4 col-lg-4"
+								for="password" translate="userPanel.form.password"></label>
+							<div class="col-xs-12 col-sm-6 col-md-8 col-lg-8">
+								<input type="password" name="password" class="form-control" id="password"
+									ng-model="password"
+									ng-attr-placeholder="{{'userPanel.form.password.placeholder' | translate}}"
+									ng-required="true" /> 
+									<span class='error'
+										ng-if="registerForm.password.$touched && registerForm.password.$error.required"
+										translate="userPanel.form.error.emptyField">
+									</span> 
+							</div>
+						</section>	
+						
+						<section class='form-group'
+							ng-class="{'has-error' : registerForm.password.$touched && registerForm.password.$invalid}">
+							<label class="control-label col-xs-12 col-sm-6 col-md-4 col-lg-4"
+								for="password" translate="userPanel.form.password"></label>
+							<div class="col-xs-12 col-sm-6 col-md-8 col-lg-8">
+								<input type="password" name="password" class="form-control" id="password"
+									ng-model="password"
+									ng-attr-placeholder="{{'userPanel.form.password.placeholder' | translate}}"
+									ng-required="true" /> 
+									<span class='error'
+										ng-if="registerForm.password.$touched && registerForm.password.$error.required"
+										translate="userPanel.form.error.emptyField">
+									</span> 
+							</div>
+						</section>	
+					</section>
+					
+					<section class='field-section with-separator'>
+						<header>
+							<h3>Name of section</h3>
+						</header>
+						<section class='form-group'
+							ng-class="{'has-error' : registerForm.password.$touched && registerForm.password.$invalid}">
+							<label class="control-label col-xs-12 col-sm-6 col-md-4 col-lg-4"
+								for="password" translate="userPanel.form.password"></label>
+							<div class="col-xs-12 col-sm-6 col-md-8 col-lg-8">
+								<input type="password" name="password" class="form-control" id="password"
+									ng-model="password"
+									ng-attr-placeholder="{{'userPanel.form.password.placeholder' | translate}}"
+									ng-required="true" /> 
+									<span class='error'
+										ng-if="registerForm.password.$touched && registerForm.password.$error.required"
+										translate="userPanel.form.error.emptyField">
+									</span> 
+							</div>
+						</section>	
+						
+						<section class='form-group'
+							ng-class="{'has-error' : registerForm.password.$touched && registerForm.password.$invalid}">
+							<label class="control-label col-xs-12 col-sm-6 col-md-4 col-lg-4"
+								for="password" translate="userPanel.form.password"></label>
+							<div class="col-xs-12 col-sm-6 col-md-8 col-lg-8">
+								<input type="password" name="password" class="form-control" id="password"
+									ng-model="password"
+									ng-attr-placeholder="{{'userPanel.form.password.placeholder' | translate}}"
+									ng-required="true" /> 
+									<span class='error'
+										ng-if="registerForm.password.$touched && registerForm.password.$error.required"
+										translate="userPanel.form.error.emptyField">
+									</span> 
+							</div>
+						</section>	
+						<section class='form-group'
+							ng-class="{'has-error' : registerForm.password.$touched && registerForm.password.$invalid}">
+							<label class="control-label col-xs-12 col-sm-6 col-md-4 col-lg-4"
+								for="password" translate="userPanel.form.password"></label>
+							<div class="col-xs-12 col-sm-6 col-md-8 col-lg-8">
+								<input type="password" name="password" class="form-control" id="password"
+									ng-model="password"
+									ng-attr-placeholder="{{'userPanel.form.password.placeholder' | translate}}"
+									ng-required="true" /> 
+									<span class='error'
+										ng-if="registerForm.password.$touched && registerForm.password.$error.required"
+										translate="userPanel.form.error.emptyField">
+									</span> 
+							</div>
+						</section>	
+						
+						<section class='form-group'
+							ng-class="{'has-error' : registerForm.password.$touched && registerForm.password.$invalid}">
+							<label class="control-label col-xs-12 col-sm-6 col-md-4 col-lg-4"
+								for="password" translate="userPanel.form.password"></label>
+							<div class="col-xs-12 col-sm-6 col-md-8 col-lg-8">
+								<input type="password" name="password" class="form-control" id="password"
+									ng-model="password"
+									ng-attr-placeholder="{{'userPanel.form.password.placeholder' | translate}}"
+									ng-required="true" /> 
+									<span class='error'
+										ng-if="registerForm.password.$touched && registerForm.password.$error.required"
+										translate="userPanel.form.error.emptyField">
+									</span> 
+							</div>
+						</section>	
+					</section>
+					
+					<section class='buttons'>
+						<button type="submit" class='button button-action' ng-disabled="registerForm.$invalid">
+							<span>Zarejestruj</span>
+						</button>
+					</section>
+				</form>
+			</div>
+			<div class='col-xs-1 col-sm-1 col-md-3 col-lg-3'></div>
+		</div>
+	</div>
+</page>
