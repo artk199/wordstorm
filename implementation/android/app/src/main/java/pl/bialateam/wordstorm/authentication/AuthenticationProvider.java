@@ -23,7 +23,18 @@ public class AuthenticationProvider {
         authentication.setUsername(username + " aka Jason D");
         StormApplication.setAuthentication(authentication);
         Log.d(TAG,"Successfully logged in user.");
+        //TODO: parse response etc.
         return true;
     }
 
+    public boolean registerAndAuthenticate(String username, String password) {
+        Log.d(TAG,"Registring user: " + username);
+        AuthenticationEndpoint authenticationEndpoint = new AuthenticationEndpoint();
+        authenticationEndpoint.register(username,password);
+        //TODO: parse response etc.
+        if(true){
+            return authenticate(username,password);
+        }
+        return false;
+    }
 }

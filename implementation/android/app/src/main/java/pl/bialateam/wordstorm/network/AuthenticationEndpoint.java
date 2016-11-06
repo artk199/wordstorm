@@ -41,5 +41,7 @@ public class AuthenticationEndpoint {
         return;
     }
 
-
+    public void register(String username, String password) {
+        //TODO: implement method.
+    }
 }

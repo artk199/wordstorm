@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <ImageView
@@ -9,8 +10,7 @@
         android:scaleType="centerCrop"/>
 
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
@@ -19,12 +19,12 @@
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/activity_vertical_margin"
-        tools:context="pl.bialateam.wordstorm.LoginActivity">
+        tools:context="pl.bialateam.wordstorm.RegisterActivity">
 
 
         <!-- Login progress -->
         <ProgressBar
-            android:id="@+id/login_progress"
+            android:id="@+id/register_progress"
             style="?android:attr/progressBarStyleLarge"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -32,7 +32,7 @@
             android:visibility="gone" />
 
         <ScrollView
-            android:id="@+id/login_form"
+            android:id="@+id/register_form"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
@@ -47,7 +47,7 @@
                     android:layout_height="wrap_content">
 
                     <EditText
-                        android:id="@+id/loginText"
+                        android:id="@+id/registerLoginText"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/prompt_login"
@@ -62,7 +62,7 @@
                     android:layout_height="wrap_content">
 
                     <EditText
-                        android:id="@+id/password"
+                        android:id="@+id/registerPassword"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/prompt_password"
@@ -75,23 +75,32 @@
 
                 </android.support.design.widget.TextInputLayout>
 
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/registerRepeatPassword"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/prompt_password_repeat"
+                        android:imeActionId="@+id/login"
+                        android:imeActionLabel="@string/action_sign_in_short"
+                        android:imeOptions="actionUnspecified"
+                        android:inputType="textPassword"
+                        android:maxLines="1"
+                        android:singleLine="true" />
+
+                </android.support.design.widget.TextInputLayout>
+
                 <Button
-                    android:id="@+id/email_sign_in_button"
+                    android:id="@+id/registerButton"
                     style="?android:textAppearanceSmall"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:text="@string/action_sign_in"
+                    android:text="@string/action_register"
                     android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/register_link"
-                    android:paddingTop="20px"
-                    android:gravity="center"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="@string/register_link"
-                    android:textStyle="bold"/>
 
             </LinearLayout>
         </ScrollView>
