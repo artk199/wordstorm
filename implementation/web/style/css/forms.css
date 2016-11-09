@@ -1,0 +1,160 @@
+/* Forms */
+.form-horizontal > .title{
+	display: block;
+	text-align: left;
+	border-bottom: 1px solid #000;
+	margin-bottom: 10px;
+	padding-bottom: 10px;
+}
+
+.form-horizontal.with-top-space{
+	margin-top: 5%;
+}
+
+.form-horizontal .field-section{
+	margin: 5% 0;
+}
+
+.form-horizontal .field-section > header{
+	font-weight: bold;
+    color: #808080;
+    position: relative;
+    margin: 5% 2% 2%;
+}
+
+.form-horizontal .field-section.with-separator > header > *{
+	position: relative;
+	z-index: 1;
+	background: #f5f5f5;
+	padding: 0 30px;
+	margin: 0;
+	display: inline-block;
+}
+
+.form-horizontal .field-section.with-separator > header::after{
+	content: "";
+	display: block;
+	height: 1px;
+	width: 60%;
+	position: absolute;
+	top: 50%;
+	right: 0;
+	z-index: 0;
+	padding: 0;
+	background: #808080;
+}
+
+.form-horizontal .form-group{
+	margin-bottom: 5px;
+}
+
+.form-horizontal.no-group-margins .form-group{
+	margin-left: 0;
+	margin-right: 0;
+}
+
+.form-horizontal .form-group .form-control{
+	border-radius: 0;
+	box-shadow: 0;
+}
+
+.form-horizontal .form-group.has-error .form-control,
+.form-horizontal .form-group .has-error .form-control,
+.form-horizontal .form-group .form-control.has-error,
+.form-horizontal.has-error .form-group .form-control{
+	border: 1px solid #dc1717;
+}
+
+.form-horizontal .buttons{
+	display: block;
+}
+
+> *{
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.form-horizontal textarea{
+    background: #f5f5f5;
+    border: 1px solid #808080;
+    color: #000;
+    width: 100%;
+}
+
+.form-horizontal .error,
+.form-horizontal .field-errors span{
+	color: #da0b0b;
+	padding: 5px;
+    display: block;
+    text-align: left;
+    white-space: normal;
+}
+
+.form-horizontal .form-field .form-field-tooltip{
+	margin-top: 10px;
+}
+
+/* Buttons */
+
+.button{
+	border: 0;
+	color: #dc1717;
+	background: transparent;
+	margin: 5px 20px;
+	transition: 0.5s;
+}
+
+.button:disabled,
+.button:disabled:active,
+.button:disabled:hover,
+.button:disabled:focus{
+	color: #8e8f94;
+	cursor: not-allowed;
+	transition: 0.5s;
+}
+
+.button:hover, 
+.button:active,
+.button:focus{
+	transition: 0.5s;
+	color: #b11919;
+}
+
+.button:last-child{
+	margin-right: 0;	
+}
+
+.button:first-child{
+	margin-left: 0;
+}
+
+.button.button-action{
+	background: #dc1717;
+	color: #fff;
+	padding: 1.5% 7%;
+}
+
+.button.button-action.static{
+	padding: 15px 30px;
+}
+
+.button.button-action:hover, 
+.button.button-action:active,
+.button.button-action:focus{
+	background: #b11919;
+}
+
+.button.button-action:disabled,
+.button.button-action:disabled:active,
+.button.button-action:disabled:hover,
+.button.button-action:disabled:focus{
+	background: #8e8f94;
+	color: #fff;
+}
+
+.button.full-width,
+.button.full-width:first-child,
+.button.full-width:last-child{
+	display: block;
+	margin: 5px 20px;
+}

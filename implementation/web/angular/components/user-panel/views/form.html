@@ -1,0 +1,54 @@
+<form name="loginForm" class="login-form form-horizontal"
+	ng-class="{'has-error' : !loginForm.email.$touched && !loginForm.password.$touched && ctrl.errorOnLogging}">
+	<h3 class='title' translate="userPanel.form.title"></h3>
+
+	<span class="error" translate="errors.WrongUsernameOrPassword" ng-if="ctrl.errors.WrongUsernameOrPassword"></span>
+
+	<form-field name="email" type="email" is-required="true"
+		placeholder="userPanel.form.email.placeholder"
+		label="userPanel.form.email"
+		model="email"
+		error-occured="(loginForm.email.$touched && loginForm.email.$invalid) || ctrl.errors.WrongUsernameOrPassword"
+	>
+		<field-errors>
+			<span translate="userPanel.form.error.emptyField"
+				ng-if="loginForm.email.$touched && loginForm.email.$error.required">
+			</span> 
+			<span translate="userPanel.form.error.wrongEmailAddress"
+				ng-if="loginForm.email.$touched && loginForm.email.$invalid && !loginForm.email.$error.required">
+			</span>
+		</field-errors>
+	</form-field>
+	
+	<form-field name="password" type="password" is-required="true"
+		placeholder="userPanel.form.password.placeholder"
+		label="register.labels.password"
+		model="password"
+		error-occured="(loginForm.password.$touched && loginForm.password.$invalid) || ctrl.errors.WrongUsernameOrPassword"
+	>
+		<field-errors>
+			<span translate="userPanel.form.error.emptyField"
+				ng-if="loginForm.password.$touched && loginForm.password.$error.required">
+			</span>
+		</field-errors>
+	</form-field>
+
+	<section class="buttons text-right">
+		<div class='text-left'>
+			<a href='#' class='button full-width' ng-click="ctrl.goToRegisterPage()">
+				<span class='glyphicon glyphicon-user'></span>
+				<span translate="userPanel.form.buttons.register"></span>
+			</a> 
+			<a href='#' class='button full-width'>
+				<span class='glyphicon glyphicon-flag'></span>
+				<span translate="userPanel.form.buttons.forgottenPassword"></span>
+			</a>
+		</div>
+		<button type="submit" class='button button-action'
+			ng-click="ctrl.logIn(email, password); loginForm.email.$touched = false; loginForm.password.$touched = false;"
+			ng-disabled="loginForm.email.$invalid || loginForm.password.$invalid || ctrl.loggingInProcess">
+			<span class='glyphicon glyphicon-refresh glyphicon-spin'ng-if="ctrl.loggingInProcess"></span> 
+			<span translate="userPanel.form.buttons.password.logIn"></span>
+		</button>
+	</section>
+</form>

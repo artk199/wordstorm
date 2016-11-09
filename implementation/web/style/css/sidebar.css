@@ -1,0 +1,231 @@
+/* Page sidebar */
+#sidebar{
+	height: 100%;
+	display: block;
+	width: 70px;
+	background: #404a53;
+	left: 0;
+	top: 0;
+    z-index: 10;
+    transition: 0.5s;
+    position: absolute;
+    padding-top: 70px;
+}
+
+#sidebar ul{
+	padding: 0;
+	margin: 0;
+	list-style: none;	
+}
+
+#sidebar ul.bottom{
+	position: absolute;
+	bottom: 0;
+    left: 0;
+    width: 100%;
+}
+
+#sidebar ul li{
+	display: block;
+	text-align: center;
+	position: relative;
+}
+
+#sidebar ul li a{
+	display: block;
+	height: 100%;
+	color: #f5f5f5;
+	transition: 0.5s;
+	cursor: pointer;
+	text-decoration: none;
+}
+
+#sidebar ul li a:hover, #sidebar ul li a:active{
+	background: #fba502;
+	transition: 0.5s;
+}
+
+#sidebar ul li a::before{
+	content: "";
+	display: block;
+	padding-top: 20px;
+	height: 1px;
+}
+
+#sidebar ul li a::after{
+	content: "";
+	display: block;
+	padding-bottom: 20px;
+	height: 1px;
+}
+
+#sidebar ul li a .glyphicon{
+	font-size: 25px;
+}
+
+#sidebar ul li a .option-title{
+	width: 100%;
+	transition: 0.5s;
+	display: inline-block;
+	font-size: 11px;
+}
+
+#sidebar ul li a .option-subtitle{
+	font-size: 0;
+	transition: 0.1s;
+	line-height: 0;
+    float: left;
+    clear: both;
+    display: block;
+}
+
+#sidebar ul li.active a{
+	background: #fba502;
+}
+
+#sidebar ul li.active::after{
+	width: 0; 
+  	height: 0; 
+ 	border-top: 20px solid transparent;
+  	border-bottom: 20px solid transparent;
+  	border-left: 20px solid #fba502;
+  	position: absolute;
+  	right: -20px;
+  	top: 25%;
+  	transition: 0.5s;
+  	content: "";
+}
+
+#sidebar ul li.active:hover a{
+	background: #fb9902;
+}
+
+#sidebar ul li.active:hover::after{
+	border-left: 20px solid #fb9902;
+	transition: 0.5s;
+}
+
+/* Sidebar opened */
+#sidebar .user-data{
+	max-height: 0;
+	font-size: 0;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	white-space: nowrap;
+	transition: max-height 0.5s, margin 0.5s, padding 0.5s, background 0.5s, font-size 0.3s;
+}
+
+#sidebar.opened{
+	width: 400px;
+}
+
+#sidebar.opened ul li a .option-subtitle{
+	font-size: 9px;
+	line-height: normal;
+}
+
+#sidebar .bottom .glyphicon-chevron-right{
+	 transition: 0.5s;
+}
+
+#sidebar.opened .bottom .glyphicon-chevron-right{
+	 transform: rotate(180deg);
+	 transition: 0.5s;
+}
+
+#sidebar.opened .user-data{
+	background: #f5f5f5;
+	font-size: 30px;
+	margin: 0;
+	padding: 5% 1%;
+    max-height: 55%;
+	transition: max-height 0.5s, margin 0.5s, padding 0.5s, background 0.5s, font-size 0.3s;
+}
+
+#sidebar.opened .user-data .logged-in .avatar-holder img{
+	max-width: 100%;
+	max-height: 100%;
+	transition: 0.5s;
+}
+
+#sidebar:not(.opened) .user-data > *{
+	font-size: 0;
+	line-height: 0;
+	margin:0;
+	padding:0;
+	transition: 0.1s;
+}
+
+#sidebar .user-data .logged-in .avatar-holder{
+	width: 75px;
+	height: 75px;
+	border-radius: 50%;
+	overflow: hidden;
+}
+
+#sidebar .user-data .logged-in .avatar-holder img{
+	max-width: 0;
+	max-height: 0;
+	transition: 0.1s;
+}
+
+#sidebar .user-data .logged-in h3{
+	padding: 0;
+	margin: 0;
+}
+
+#sidebar .user-data .logged-in .actions{
+	display: block;
+	font-size: 13px;
+	text-align: left;
+}
+
+#sidebar .user-data .logged-in .actions .action{
+	padding: 5px 10px;
+	text-decoration: none;
+}
+
+#sidebar.opened ul li.expandable{
+	text-align: left;
+}
+
+#sidebar.opened ul li a .option-title{
+	width: 80%;
+	font-size: 15px;
+}
+
+#sidebar.opened ul li a .glyphicon{
+	margin: 0 5%;
+}
+
+#sidebar .login-form {
+	margin: 5% 2%;
+	font-size: 13px;
+}
+
+#sidebar .login-form .title{
+	margin-top: 0;
+	padding-top: 0;
+	color: #404a53;
+	border-color: #404a53;
+}
+
+#sidebar .login-form .control-label{
+	color: #404a53;
+}
+
+#sidebar .logged-person-icon{
+    width: 75%;
+    margin-left: 12%;
+    margin-top: 12%;
+    height: 53px;
+    overflow: hidden;
+    border-radius: 50%;
+    margin-bottom:12%;
+}
+
+#sidebar .logged-person-icon img{
+	max-width: 100%;
+	max-height: 100%;
+}

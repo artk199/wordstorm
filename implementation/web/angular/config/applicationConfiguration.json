@@ -1,0 +1,8 @@
+{
+	"restApi" : "http://wordstormapi.azurewebsites.net/api/",
+	"allowedLanguages" : ["pl"],
+	"defaultLanguage" : "pl",
+	"devMode" : true,
+	"html5Mode" : true,
+	"defaultAlertsDisplayTimeInSec" : 10
+}

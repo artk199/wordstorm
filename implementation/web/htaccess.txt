@@ -1,0 +1,9 @@
+Options +FollowSymLinks
+IndexIgnore */*
+RewriteEngine On
+
+## Przekierowanie subdomeny
+RewriteCond %{HTTP_HOST} ^www.wordstorm.co.nf(.*) [NC]
+RewriteRule ^(.*)$ http://wordstorm.co.nf/$1 [R=301,L]
+
+FallbackResource /index.html

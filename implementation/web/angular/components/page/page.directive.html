@@ -1,0 +1,24 @@
+<section class='page-content {{ctrl.backgroundImage}}'
+	ng-class="{'with-image' : ctrl.backgroundImage != null, '{{ctrl.pageClass}}' : ctrl.pageClass != null}">
+	<header class='page-header' ng-if="ctrl.showHeader()" ng-class="ctrl.headerClass">
+		<div class="media">
+			<div class="media-left media-middle"  ng-transclude="headerLeft"></div>
+			<div class="media-body media-middle"  ng-if="ctrl.showHeader()" ng-transclude="header"></div>
+			<div class="media-right media-middle" ng-transclude="headerRight"></div>
+		</div>
+	</header>
+
+	<!-- Show loading data -->
+	<section class="page-body" ng-if="ctrl.isLoading">
+		<spinner></spinner>
+	</section>
+	
+	<!-- Page body -->
+	<perfect-scrollbar ng-if="!ctrl.isLoading && ctrl.scrollableBody" class="page-body scroller" wheel-propagation="true" ng-class="ctrl.bodyClass">
+		<div class='full-height' ng-class="{'{{ctrl.bodyClass}}' : ctrl.bodyClass != null}" ng-transclude="body"></div>
+	</perfect-scrollbar> 
+	<section class='full-height' ng-if="!ctrl.isLoading && !ctrl.scrollableBody" ng-class="ctrl.bodyClass" ng-transclude="body"></section>
+	
+	<!-- Page footer -->
+	<footer class='page-footer' ng-if="ctrl.isTranscludeGiven('body')" ng-transclude="footer"></footer>
+</section>

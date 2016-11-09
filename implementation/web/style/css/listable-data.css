@@ -1,0 +1,213 @@
+.listable-data header{
+	display: flex;
+	justify-content: space-between;
+	    padding: 0 20px;
+}
+
+.listable-data header .btn-group > .button:not(:first-child){
+	margin-left: 1px;
+}
+
+.listable-data header .button{
+	background: #404a53;
+    border-radius: 0;
+    border: none;
+    color: #fff;
+    margin: 0;
+    transition: 0.3s;
+}
+
+.listable-data header .button:hover, 
+.listable-data header .button:active,
+.listable-data header .button:focus{
+	background: #272829;
+}
+
+.listable-data header .button.active{
+	background: #6a7d8e
+}
+
+.listable-data .list{
+	position: relative;
+	padding-left: 40px;
+	padding-right: 20px;
+}
+
+.listable-data .list::before{
+    content: "";
+	background: linear-gradient(124deg, #2582f7,#0c168a);
+    width: 2px;
+    height: 100%;
+    top: 0;
+    left: 20px;
+    display: block;
+    position: absolute;
+}
+
+.listable-data .list::after{
+	content: "";
+	display: block;
+	clear: both;
+}
+
+.listable-data .list .group-name{
+	position: relative;
+	text-transform: capitalize;
+	clear: both;
+}
+
+.listable-data .list .group-name::before{
+    content: "";
+    display: block;
+    width: 10px;
+    height: 10px;
+    border: 1px solid #2170e5;
+    border-radius: 50%;
+    position: absolute;
+    top: 9px;
+    left: -24px;
+    background: #f5f5f5;
+}
+
+/* Items */
+.listable-data .list .item .item-icon-container{
+	width: 50px;
+    height: 50px;
+    overflow: hidden;
+    display: flex;
+    align-content: center;
+    border-radius: 50%;
+    margin: 0 auto;
+}
+
+.listable-data .list .item .item-icon{
+	width: 100%;
+}
+
+.listable-data.grid-view .list .item {
+	float: left;
+	margin: 10px 5px;
+    width: 285px;
+    transition: 0.3s;
+}
+
+.listable-data.grid-view .list .item .card{
+	background: #fff;
+	position: relative;
+}
+
+.listable-data.grid-view .list .item .card > header{
+	background: #4c7bd2;
+    width: 100%;
+    height: 120px;
+    display: block;
+    color: #fff;
+    padding: 0;
+    margin: 0;
+    position: relative;
+    transition: 0.5s;
+}
+
+.listable-data.grid-view .list .item .card:hover > header{
+	background: #405f98;
+}
+
+.listable-data.grid-view .list .item .card > header .button-empty{
+	font-size: 12px;
+	background: transparent;
+	padding: 10px;
+}
+
+.listable-data.grid-view .list .item .card > header .button-empty:disabled{
+	color: #acb7d2;
+}
+
+.listable-data.grid-view .list .item .card > header .button-empty:hover{
+	background: rgba(255,255,255,0.5);
+}
+
+.listable-data.grid-view .list .item .card > header .edit-button{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.listable-data.grid-view .list .item .card > header .change-picture-button{
+	position: absolute;
+	bottom: 10px;
+	right: 10px;
+}
+
+.listable-data.grid-view .list .item .card > header .remove-button{
+	position: absolute;
+	bottom: 10px;
+	left: 10px;
+}
+
+.listable-data.grid-view .list .item .card > header h1{
+    font-size: 20px;
+    padding: 20px;
+    margin: 0;
+    max-width: 90%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.listable-data.grid-view .list .item .card > header input{
+    font-size: 20px;
+    height: 30px;
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    width: 60%;
+    margin: 18px 16px;
+    color: #000;
+}
+
+.listable-data.grid-view .list .item .card > .card-body{
+	padding: 0 30px 30px;
+}
+
+.listable-data.grid-view .list .item .card > .card-body .progress-bar{
+    margin-top: -65px;
+    margin-bottom: 20px;
+    width: 120px;
+}
+
+.listable-data.grid-view .list .item .card > .card-body  .progress-bar > .content h3{
+    font-size: 30px;
+}
+
+.listable-data.grid-view .list .item .card > .card-body  .progress-bar > .content .small{
+	display: inline-block;
+    margin-left: -8px;
+}
+
+.listable-data.grid-view .list .item .card > .card-body .card-data .glyphicon::before{
+	top: 2px;
+    position: relative;
+}
+
+.listable-data.grid-view .list .item .card > .card-curtain{
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transition: 0.3s;
+    background: rgba(0, 0, 0, 0.8);
+    color: #fff;
+}
+
+.listable-data.grid-view .list .item .card > .card-curtain > header{
+    display: block;
+    font-size: 20px;
+    text-align: center;
+}
+
+.listable-data.grid-view .list .item .card > .card-curtain > header h1{
+	font-size: 20px;
+    margin-top: 25%;
+    margin-bottom: 25%;
+}

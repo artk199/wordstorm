@@ -1,0 +1,36 @@
+<header id="main-header">
+	<div class='color-bar'>
+		<span class='red'></span>
+		<span class='pink'></span>
+		<span class='green'></span>
+		<span class='orange'></span>
+		<span class='violet'></span>
+		<span class='blue'></span>
+	</div>
+	<section class='content inline-children'>
+		<div class='left inline-children'>
+			<div class="logo inline-children clickable" ng-click="ctrl.goToHome()">
+				<img src='style/img/logo_simple.png' alt='Word Storm Logo' title='Word Storm'/>
+				<h1>Word Storm</h1>
+			</div>
+		</div>
+		<div class='right inline-children'>
+			<div ng-if="ctrl.displayDevMode">
+				<dev-panel auto-refresh="true"></dev-panel>
+			</div>
+			<div ng-if="ctrl.getAvailableLanguages() != null && ctrl.getAvailableLanguages().length > 1">
+				<change-language available-languages="ctrl.getAvailableLanguages()"></change-language>
+			</div>
+			<div class='search-bar'>
+				<span class='glyphicon glyphicon-search'></span>
+				<input ng-attr-placeholder="{{'navbar.search.placeholder' | translate}}"/>
+			</div>
+		</div>
+	</section>
+</header>
+<sidebar></sidebar>
+<div id='page-body'>
+	<alerts group="global-alerts" overflowing="true"></alerts>
+	<spinner spinner-class="fancy" ng-if="ctrl.isLoading()"></spinner>
+	<div ng-if="!ctrl.isLoading()" class='ui-view-container' ui-view></div>
+</div>

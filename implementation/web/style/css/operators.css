@@ -1,0 +1,19 @@
+.link-tree {
+	display: block;
+}
+
+.link-tree > *{
+	display: inline-block;
+	vertical-align: middle;
+	white-space: nowrap;
+}
+
+.link-tree > * > *{
+	white-space: normal;
+}
+
+.link-tree > *:not(:first-child)::before{
+	content: "/";
+	padding: 0 2%;
+	display: inline;
+}

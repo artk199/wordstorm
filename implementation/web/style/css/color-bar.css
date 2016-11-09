@@ -1,0 +1,60 @@
+/* Color bars */
+.color-bar{
+	display: block;
+	height: 5px;
+}
+
+.color-bar > *{
+	float: left;
+	height: inherit;
+	position: relative;
+}
+
+.color-bar > *:not(:last-child)::after{
+	content: "";
+	height: 100%;
+	float: right;
+	background: #fff;
+	width: 1px;
+	display: block;
+}
+
+.color-bar > *::before{
+	content: "";
+	display: block;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	transition: 1s;
+}
+
+.color-bar > *:hover::before{
+	background: rgba(255,255,255,0.5);
+	transition: 1s;
+}
+
+.color-bar .orange{
+	background: #ffa800;
+}
+
+.color-bar .pink{
+	background: #ff5aee;
+}
+
+.color-bar .blue{
+	background: #1a69e1;
+}
+
+.color-bar .violet{
+	background: #980bda;
+}
+
+.color-bar .red{
+	background: #da0b0b;
+}
+
+.color-bar .green{
+	background: #1dcf00;
+}

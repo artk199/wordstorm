@@ -1,0 +1,89 @@
+<page scrollable-body="true">
+	<page-body>
+		<div class='tile with-image people fade-on-hover zoomable user-action'>
+			<h1 translate='register.title'></h1>
+			<div class='text' translate="register.mainText"></div>
+		</div>
+		<div class='container-fluid'>
+			<div class='row'>
+				<div class='col-xs-1 col-sm-1 col-md-3 col-lg-3'></div>
+				<div class='col-xs-10 col-sm-10 col-md-6 col-lg-6'>
+					<form name='registerForm' class='form-horizontal no-group-margins with-top-space'>
+						<span class="error" ng-if="ctrl.errors != null" translate="register.serviceErrors.generalInfo"></span>
+						
+						<!-- Email -->
+						<form-field name="email" type="email" is-required="true"
+							placeholder="register.placeholders.email"
+							label="register.labels.email"
+							model="ctrl.formData.email"
+							error-occured="registerForm.email.$touched && registerForm.email.$invalid || ctrl.errors.EmailIsNotFree"
+						>
+							<field-errors>
+								<span translate="userPanel.form.error.emptyField"
+									ng-if="registerForm.email.$touched && registerForm.email.$error.required">
+								</span> 
+								<span translate="userPanel.form.error.wrongEmailAddress"
+									ng-if="registerForm.email.$touched && registerForm.email.$invalid && !registerForm.email.$error.required">
+								</span>
+								<span translate="errors.EmailIsNotFree"
+									ng-if="ctrl.errors.EmailIsNotFree">
+								</span>
+							</field-errors>
+						</form-field>	
+						
+						<!-- Password fields -->
+						<form-field name="password" type="password" is-required="true"
+							placeholder="register.placeholders.password"
+							label="register.labels.password"
+							model="ctrl.formData.password"
+							tooltip="register.passwordPolicyRules"
+							error-occured="(registerForm.password.$touched && registerForm.password.$invalid) || ctrl.errors.PasswordFormatIsInvalid"
+						>
+							<field-errors>
+								<span translate="userPanel.form.error.emptyField"
+									ng-if="registerForm.password.$touched && registerForm.password.$error.required">
+								</span> 
+								<span translate="errors.PasswordFormatIsInvalid"
+									translate-value-policy-rules="{{'register.passwordPolicyRules' | translate}}"
+									ng-if="ctrl.errors.PasswordFormatIsInvalid">
+								</span> 
+							</field-errors>
+						</form-field>
+						
+						<form-field name="confirmPassword" type="password" is-required="true"
+							placeholder="register.placeholders.confirmPassword"
+							label="register.labels.confirmPassword"
+							model="ctrl.formData.confirmPassword"
+							error-occured="registerForm.confirmPassword.$touched && (registerForm.confirmPassword.$invalid || !ctrl.isPasswordValid())"
+						>
+							<field-errors>
+								<span translate="userPanel.form.error.emptyField"
+									ng-if="registerForm.confirmPassword.$touched && registerForm.confirmPassword.$error.required">
+								</span> 
+								<span translate="form.error.passwordConfirmation"
+									ng-if="registerForm.confirmPassword.$touched && !registerForm.confirmPassword.$error.required 
+											&& !ctrl.isPasswordValid()">
+								</span> 
+							</field-errors>
+						</form-field>
+	
+						<section class='buttons text-center'>
+							<button type="reset" class='button button-action'
+									ng-click = "ctrl.clearForm(registerForm)"
+									ng-disabled="!(ctrl.isFormFilled() || registerForm.email.$viewValue.length > 0) || ctrl.formSending"
+									translate="buttons.clear">
+							</button>
+							<button type="submit" class='button button-action' 
+									ng-click="ctrl.register(registerForm)"
+									ng-disabled="registerForm.$invalid || !ctrl.isPasswordValid() || ctrl.formSending">
+									<span class='glyphicon glyphicon-refresh glyphicon-spin' ng-if="ctrl.formSending"></span>
+									<span translate="register.buttons.save"></span>
+							</button>
+						</section>
+					</form>
+				</div>
+				<div class='col-xs-1 col-sm-1 col-md-3 col-lg-3'></div>
+			</div>
+		</div>
+	</page-body>
+</page>
