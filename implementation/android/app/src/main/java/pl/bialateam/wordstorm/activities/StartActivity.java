@@ -1,10 +1,12 @@
 package pl.bialateam.wordstorm.activities;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -22,6 +24,7 @@ import java.util.List;
 import pl.bialateam.wordstorm.R;
 import pl.bialateam.wordstorm.activities.start.CollectionListAdapter;
 import pl.bialateam.wordstorm.authentication.Authentication;
+import pl.bialateam.wordstorm.authentication.AuthenticationProvider;
 import pl.bialateam.wordstorm.network.CollectionEndpoint;
 import pl.bialateam.wordstorm.pojo.Collection;
 
@@ -30,10 +33,14 @@ public class StartActivity extends AppCompatActivity
 
     TextView usernameTextView;
     TextView emailTextView;
+    SwipeRefreshLayout swipeRefreshLayout;
+    CollectionListAdapter adapter;
+    LoadCollectionsTask loadCollectionsTask = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_start);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -49,13 +56,17 @@ public class StartActivity extends AppCompatActivity
         });
          **/
 
-        CollectionEndpoint collectionEndpoint = new CollectionEndpoint();
-        List<Collection> collectionList = collectionEndpoint.getAllCollections();
-
-        CollectionListAdapter adapter = new CollectionListAdapter(this,collectionList);
+        adapter = new CollectionListAdapter(this,new ArrayList());
         ListView collectionListView = (ListView) findViewById(R.id.collection_list_view);
         collectionListView.setAdapter(adapter);
 
+        swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.content_start);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+                                                    @Override
+                                                    public void onRefresh() {
+                                                        refreshCollections();
+                                                    }
+                                                });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -68,6 +79,19 @@ public class StartActivity extends AppCompatActivity
         View header = navigationView.getHeaderView(0);
         usernameTextView = (TextView) header.findViewById(R.id.expanded_menu_username);
         emailTextView = (TextView) header.findViewById(R.id.expanded_menu_email);
+
+        refreshCollections();
+    }
+
+
+    private void refreshCollections(){
+        if(loadCollectionsTask != null){
+            return;
+        }
+
+        loadCollectionsTask = new LoadCollectionsTask();
+        loadCollectionsTask.execute();
+
     }
 
     @Override
@@ -127,7 +151,7 @@ public class StartActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_logout) {
-            //TODO: perfrom additional actions when logging out ie. switch to login screen
+            //TODO: perfrom additional actions when logging out, ie. switch to login screen/
             StormApplication.setAuthentication(null);
         }
 
@@ -136,5 +160,30 @@ public class StartActivity extends AppCompatActivity
         return true;
     }
 
+    /**
+     * Represents an asynchronous login/registration task used to authenticate
+     * the user.
+     */
+    public class LoadCollectionsTask extends AsyncTask<Void, Void, List<Collection>> {
 
+        @Override
+        protected void onPreExecute() {
+            swipeRefreshLayout.setRefreshing(true);
+        }
+
+        @Override
+        protected List<Collection> doInBackground(Void... params) {
+            CollectionEndpoint collectionEndpoint = new CollectionEndpoint();
+            List<Collection> collectionList = collectionEndpoint.getAllCollections();
+            return collectionList;
+        }
+
+        @Override
+        protected void onPostExecute(List<Collection> collectionList) {
+            adapter.clear();
+            adapter.addAll(collectionList);
+            swipeRefreshLayout.setRefreshing(false);
+            loadCollectionsTask = null;
+        }
+    }
 }

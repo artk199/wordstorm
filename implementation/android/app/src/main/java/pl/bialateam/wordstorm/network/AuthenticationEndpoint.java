@@ -20,15 +20,13 @@ import pl.bialateam.wordstorm.authentication.Authentication;
  * Created by Artur on 03.11.2016.
  */
 
-public class AuthenticationEndpoint {
+public class AuthenticationEndpoint extends Endpoint {
 
     private static final String TAG = "AuthenticationEndpoint";
 
     public Authentication login(String username, String password){
 
         Authentication authentication = null;
-
-        String url ="http://wordstormapi.azurewebsites.net/api/Login";
 
         JSONObject params = new JSONObject();
 
@@ -40,22 +38,12 @@ public class AuthenticationEndpoint {
             return authentication;
         }
 
-        RequestFuture<JSONObject> future = RequestFuture.newFuture();
-
-        JsonObjectRequest stringRequest = new JsonObjectRequest(Request.Method.POST, url, params, future, future);
-
-        StormApplication.getRequestQueue().add(stringRequest);
-
         try {
-            JSONObject jsonObject = future.get();
+            JSONObject jsonObject = doPost("Login",params);
             JSONObject result = jsonObject.getJSONObject("Result");
             authentication = new Authentication();
             authentication.setUsername(username);
             authentication.setToken(result.getString("access_token"));
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
         } catch (JSONException e) {
             e.printStackTrace();
         }

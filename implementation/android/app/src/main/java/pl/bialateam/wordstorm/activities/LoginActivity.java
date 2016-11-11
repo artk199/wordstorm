@@ -3,6 +3,7 @@ package pl.bialateam.wordstorm.activities;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 
@@ -13,6 +14,8 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -155,6 +158,11 @@ public class LoginActivity extends AppCompatActivity{
         }
     }
 
+    private void switchActivity(){
+        Intent startActivity = new Intent(LoginActivity.this,StartActivity.class);
+        LoginActivity.this.startActivity(startActivity);
+    }
+
     /**
      * Represents an asynchronous login/registration task used to authenticate
      * the user.
@@ -181,6 +189,7 @@ public class LoginActivity extends AppCompatActivity{
             showProgress(false);
 
             if (success) {
+                switchActivity();
                 finish();
             } else {
                 mPasswordView.setError(getString(R.string.error_incorrect_password));
