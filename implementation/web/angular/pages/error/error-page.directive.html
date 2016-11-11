@@ -1,0 +1,23 @@
+<page page-class='error-page' background-image="with-image bluescreen without-screen">
+	<page-body>
+		<section>
+			<h1 translate="error.page.title"></h1>
+			<span class='glyphicon glyphicon-warning-sign'></span>
+			
+			<div class='container-fluid'>
+				<div class='row'>
+					<div class='col-xs-1 col-sm-1 col-md-3 col-lg-3'></div>
+					<div class='col-xs-10 col-sm-10 col-md-6 col-lg-6 white-background'>
+						<p translate="error.page.info"></p>
+						
+						<div class='error-info form-horizontal'>
+							<h5 translate="error.page.errorCause"></h5>
+							<textarea ng-model="ctrl.errorInfo" ng-readonly="true" rows="15"></textarea>
+						</div>
+					</div>
+					<div class='col-xs-1 col-sm-1 col-md-3 col-lg-3'></div>
+				</div>
+			</div>
+		</section>
+	</page-body>
+</page>

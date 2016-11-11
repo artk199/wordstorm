@@ -1,0 +1,26 @@
+<div id="sidebar" ng-class="{'opened' : ctrl.sidebarOpened}">
+	<user-panel open="ctrl.sidebarOpened"></user-panel>
+	<ul>
+		<li class="expandable"
+			ng-if="ctrl.isPersonLogged()"
+			ng-class="{'active' : ctrl.isPageOpened('myLibrary')}"
+		>
+			<a href='#' ng-click="ctrl.openMyLibrary()">
+				<span class='inline-children'>
+					<span class="glyphicon glyphicon-book"></span>
+					<span>
+						<span class='option-title' translate="myLibrary.linkName"></span>
+						<span class='option-subtitle' translate="myLibrary.linkInfo" ng-if="ctrl.sidebarOpened"></span>
+					</span>
+				</span>
+			</a>
+		</li>
+	</ul>
+	<ul class="bottom">
+		<li>
+			<a ng-click="ctrl.open()">
+				<span class="glyphicon glyphicon-chevron-right"></span>
+			</a>
+		</li>
+	</ul>
+</div>

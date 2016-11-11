@@ -1,0 +1,17 @@
+<section class='form-group form-field' ng-class="{'has-error' : ctrl.errorOccured}" ng-switch="ctrl.type">
+	<div ng-switch-default>
+		<label class="control-label col-xs-12 col-sm-5 col-md-4 col-lg-4"
+			for="{{ctrl.name}}" translate="{{ctrl.label}}"></label>
+		<div class="col-xs-10 col-sm-5 col-md-6 col-lg-6">
+			<input type="{{ctrl.type}}" name="{{ctrl.name}}" class="form-control" id="{{ctrl.name}}"
+				ng-model="ctrl.model"
+				ng-attr-placeholder="{{ctrl.placeholder | translate}}"
+				ng-required="ctrl.isRequired" />
+			<div class='field-errors' ng-transclude="errors"></div>
+		</div>
+		<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+			<span class='glyphicon glyphicon glyphicon-question-sign form-field-tooltip' 
+				ng-if="ctrl.tooltip != null" uib-tooltip="{{ctrl.tooltip | translate}}"></span>
+		</div>
+	</div>
+</section>	
