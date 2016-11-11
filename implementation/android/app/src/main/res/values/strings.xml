@@ -23,4 +23,8 @@
     <string name="prompt_login">Login</string>
     <string name="register_link"><u>or register here</u></string>
     <string name="error_password_mismatch">Password mismatch</string>
+    <string name="nav_user_section">User</string>
+    <string name="nav_collections">Collections</string>
+    <string name="nav_logout">Logout</string>
+    <string name="nav_sync">Sync</string>
 </resources>

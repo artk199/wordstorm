@@ -1,4 +1,4 @@
-package pl.bialateam.wordstorm;
+package pl.bialateam.wordstorm.activities;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import pl.bialateam.wordstorm.R;
 import pl.bialateam.wordstorm.authentication.AuthenticationProvider;
 
 public class RegisterActivity extends AppCompatActivity {

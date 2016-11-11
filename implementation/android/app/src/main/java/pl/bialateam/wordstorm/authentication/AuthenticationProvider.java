@@ -2,7 +2,7 @@ package pl.bialateam.wordstorm.authentication;
 
 import android.util.Log;
 
-import pl.bialateam.wordstorm.StormApplication;
+import pl.bialateam.wordstorm.activities.StormApplication;
 import pl.bialateam.wordstorm.network.AuthenticationEndpoint;
 
 /**
@@ -16,15 +16,14 @@ public class AuthenticationProvider {
 
     public boolean authenticate(String username,String password){
         Log.d(TAG,"Logging username: " + username);
-        Authentication authentication = new Authentication();
-        //TODO: Set current user
         AuthenticationEndpoint authenticationEndpoint = new AuthenticationEndpoint();
-        authenticationEndpoint.login();
-        authentication.setUsername(username + " aka Jason D");
-        StormApplication.setAuthentication(authentication);
-        Log.d(TAG,"Successfully logged in user.");
-        //TODO: parse response etc.
-        return true;
+        Authentication authentication = authenticationEndpoint.login(username,password);
+        if(authentication != null) {
+            StormApplication.setAuthentication(authentication);
+            Log.d(TAG, "Successfully logged in user: " + username);
+            return true;
+        }
+        return false;
     }
 
     public boolean registerAndAuthenticate(String username, String password) {

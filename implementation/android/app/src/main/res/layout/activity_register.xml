@@ -19,7 +19,7 @@
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/activity_vertical_margin"
-        tools:context="pl.bialateam.wordstorm.RegisterActivity">
+        tools:context="pl.bialateam.wordstorm.activities.RegisterActivity">
 
 
         <!-- Login progress -->

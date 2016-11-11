@@ -1,4 +1,4 @@
-package pl.bialateam.wordstorm;
+package pl.bialateam.wordstorm.activities;
 
 import android.app.Application;
 
@@ -13,7 +13,10 @@ import pl.bialateam.wordstorm.authentication.Authentication;
 
 public class StormApplication extends Application {
 
+    //API request queue
     private static RequestQueue requestQueue;
+
+    //Logged in user details
     private static Authentication authentication;
 
     @Override

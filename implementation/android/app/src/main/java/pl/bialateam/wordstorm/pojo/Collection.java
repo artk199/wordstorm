@@ -7,7 +7,8 @@ package pl.bialateam.wordstorm.pojo;
 public class Collection {
 
     String id;
-    String name;
+    //TODO: Remove to cos;
+    String name = "test";
     boolean isPublic;
     int difficultLevel;
     Category category;
