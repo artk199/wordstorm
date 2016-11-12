@@ -19,7 +19,10 @@
 		service.collection = {
 			getAll: getAllCollections,
 			create: createCollection,
-			get: getCollection
+			get: getCollection,
+			remove: removeCollection,
+			removeList: removeListOfCollections,
+			edit: editCollection
 		};
 		
 		//////////////////////////////
@@ -40,7 +43,7 @@
 		}
 		
 		function isUserLogged(){
-			return restMock.isPersonLogged();
+			return restConfig.createGetPromise("User/Token");
 		}
 		
 		// Current user collection functions
@@ -56,6 +59,21 @@
 		
 		function getCollection(collectionId, useCache, forceReload){
 			return restCache.get("collectionsCache", "Collection/" + collectionId, null, null, useCache, forceReload);
+		}
+		
+		function removeCollection(collectionId){
+			restCache.clearCache("collectionsCache");
+			return restConfig.createDeletePromise("Collection/Delete/" + collectionId);
+		}
+		
+		function removeListOfCollections(collectionsList){
+			restCache.clearCache("collectionsCache");
+			return restConfig.createDeletePromise("Collection/Delete", collectionsList);
+		}
+		
+		function editCollection(collectionData){
+			restCache.clearCache("collectionsCache");
+			return restConfig.createPutPromise("Collection", collectionData);
 		}
 	}
 }());

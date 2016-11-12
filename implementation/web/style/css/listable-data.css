@@ -1,30 +1,50 @@
-.listable-data header{
+.listable-data > header{
 	display: flex;
 	justify-content: space-between;
-	    padding: 0 20px;
+	padding: 0 20px 5px;
 }
 
-.listable-data header .btn-group > .button:not(:first-child){
+.listable-data > header .btn-group > .button:not(:first-child){
 	margin-left: 1px;
 }
 
+.listable-data > header .right-section{
+	display: flex;
+	align-items: center;
+}
+
+.listable-data > header .right-section .button{
+	margin-left: 5px;
+}
+
+.listable-data > header .button{
+    padding: 6px 10px;
+}
+
 .listable-data header .button{
-	background: #404a53;
+	border: none;
     border-radius: 0;
-    border: none;
-    color: #fff;
     margin: 0;
     transition: 0.3s;
 }
 
-.listable-data header .button:hover, 
-.listable-data header .button:active,
-.listable-data header .button:focus{
+.listable-data header .button:not(.red){
+    background: #404a53;
+    color: #fff;
+}
+
+.listable-data header .button:not(.red):hover, 
+.listable-data header .button:not(.red):active,
+.listable-data header .button:not(.red):focus{
 	background: #272829;
 }
 
 .listable-data header .button.active{
 	background: #6a7d8e
+}
+
+.listable-data > header .search-bar{
+	padding: 3px 5px 4px 5px;
 }
 
 .listable-data .list{
@@ -84,6 +104,86 @@
 	width: 100%;
 }
 
+/* List view */
+.listable-data.list-view .list {
+	padding-top: 5px;
+}
+
+.listable-data.list-view .list .item,
+.listable-data.list-view .list .list-item:nth-child(even) .item{
+	 padding: 10px 0;
+	 border-bottom: 1px solid #c6c8cc;
+	 transition: 0.3s;
+	 background: transparent;
+}
+
+.listable-data.list-view .list .item:hover,
+.listable-data.list-view .list .list-item:nth-child(even) .item{
+	background: #efeff1;
+}
+
+.listable-data.list-view .list .list-item:nth-child(even) .item:hover{
+	background: #e5e5e6;
+}
+
+.listable-data.list-view .list .item .item-icon-container{
+    height: 50px;
+    width: 50px;
+    line-height: 50px;
+    background: #4c7bd2;
+    border-radius: 50%;
+    position: relative;
+    overflow:hidden;
+    text-align:center;
+    display: block;
+    opacity: 0.99;
+    transition: 0.3s;
+}
+
+.listable-data.list-view .list .item:hover .item-icon-container{
+	background-color: #405f98;
+}
+
+.listable-data.list-view .list .item .item-icon-container .item-selector{
+    margin: 0;
+    display: block;
+    position: absolute;
+    top: 40%;
+    left: 38%;
+}
+
+.listable-data.list-view .list .item .item-icon-container .item-icon{
+	margin:-100%;
+}
+
+.listable-data.list-view .list .item h3{
+    margin: 10px 0;
+	padding: 0;
+}
+
+.listable-data.list-view .list .item .name-input{
+	height: 35px;
+    margin: 5px 0;
+    width: 80%;
+    font-size: 22px;
+}
+
+.listable-data.list-view .list .item .buttons {
+	padding-right: 15px;
+}
+
+.listable-data.list-view .list .item .buttons h5{
+	margin: 0 0 5px 0;
+	padding: 0;
+	font-weight: bold;
+}
+
+.listable-data.list-view .list .item .buttons .button{
+    margin: 0;
+    padding: 7px 10px;
+}
+
+/* Grid view */
 .listable-data.grid-view .list .item {
 	float: left;
 	margin: 10px 5px;
@@ -110,6 +210,10 @@
 
 .listable-data.grid-view .list .item .card:hover > header{
 	background: #405f98;
+}
+
+.listable-data.grid-view .list .item .card button:disabled{
+	cursor: not-allowed;
 }
 
 .listable-data.grid-view .list .item .card > header .button-empty{

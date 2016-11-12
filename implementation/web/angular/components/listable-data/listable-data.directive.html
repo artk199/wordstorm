@@ -1,4 +1,4 @@
-<div class='listable-data' ng-class="{'list-view' : ctrl.isListMode(), 'grid-view' : ctrl.isGridMode()}">
+<div class='listable-data vertical-grid' ng-class="{'list-view' : ctrl.isListMode(), 'grid-view' : ctrl.isGridMode()}">
 	<header>
 		<div class="btn-group">
 		  <button type="button" class="btn button" 
@@ -20,31 +20,24 @@
 		<section class='right-section'>
 			<div class='search-bar with-remove-option' ng-if="ctrl.isSearchModeOn()">
 				<span class='glyphicon glyphicon-search'></span>
-				<input ng-model="ctrl.searchText" ng-attr-placeholder="{{'navbar.search.placeholder' | translate}}"/>
+				<input auto-focus ng-model="ctrl.searchText" ng-attr-placeholder="{{'listableData.searchPlaceholder' | translate}}"/>
 				<span class='glyphicon glyphicon-remove remove-option' ng-click="ctrl.switchSearchMode()"></span>
 			</div>
 			<button type="button" class="btn button" ng-if="!ctrl.isSearchModeOn()" ng-click="ctrl.switchSearchMode()">
 				<span class='glyphicon glyphicon-search'></span>
 				<span translate="button.search"></span>
 			</button>
+			<div ng-transclude="headerRight"></div>
 		</section>
 	</header>
 	
-	<div class='list'>
-		<div ng-if="ctrl.groupField != null">
-			<div class='group' ng-repeat="(groupName, groupItems) in ctrl.list | filter: ctrl.filterItems | groupBy: ctrl.groupField">
-				<div class='group-name' ng-if="groupName != 'undefined'">
-					<h3 ng-bind="groupName"></h3>
-				</div>
-				<div class='list-item' ng-repeat="item in groupItems">
-					<compile-html html="{{ctrl.createDirectiveForItem()}}"></compile-html>
-				</div>
-			</div>
-		</div>
-		<div class='group' ng-if="ctrl.groupField == null">
-			<div class='list-item' ng-repeat="item in ctrl.list | filter: ctrl.filterItems">
-				<compile-html html="{{ctrl.createDirectiveForItem()}}"></compile-html>
-			</div>
-		</div>
+	<div class='list rest-height' ng-if="!ctrl.scrollableBody">
+		<ng-include src="'angular/components/listable-data/listable-data-list-part.html'"></ng-include>
 	</div>
+	
+	<perfect-scrollbar ng-if="ctrl.scrollableBody" class="rest-height scroller" wheel-propagation="false">
+		<div class="list">
+			<ng-include src="'angular/components/listable-data/listable-data-list-part.html'"></ng-include>
+		</div>
+	</perfect-scrollbar> 
 </div>

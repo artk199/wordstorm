@@ -19,7 +19,7 @@
 		function getCheckPersonLoggedPromise(reload){
 			if(reload == true || checkPersonLoggedPromise == null){
 				checkPersonLoggedPromise = rest.user.isLogged().then(function(data){
-					personLogged = data;
+					personLogged = data != null? data.Result : false;
 				});
 			}
 			return checkPersonLoggedPromise;
@@ -38,21 +38,17 @@
 			
 			return rest.user.login(email, password).then(function(data){
 				if(data == null || data.responseError != null){
-					handleErrorOnLoggin(data != null ? data.responseError : null);
+					personLogged = false;
 					return false;
 				}
 				else{
 					var userData = data.Result;
 					cookies.credentials.store(userData);
 					loggedPersonData.email = email;
-					personLogged = userData;
+					personLogged = true;
 					return true;
 				}
 			});
-		}
-		
-		function handleErrorOnLoggin(){
-			
 		}
 		
 		function logPersonOut(){

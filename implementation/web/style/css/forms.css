@@ -104,6 +104,10 @@
 	transition: 0.5s;
 }
 
+.button.one-line{
+	white-space: nowrap;
+}
+
 .button:disabled,
 .button:disabled:active,
 .button:disabled:hover,

@@ -16,23 +16,28 @@
 	    		displayDirectiveName: '@',
 	    		displayDirectiveParameters: '=',
 	    		filterFunction: '=',
-	    		view: '@'
+	    		view: '@',
+	    		scrollableBody: '=',
+	    		events: '='
 	    	},
 	    	transclude:{
-	    		errors: '?fieldErrors'
+	    		errors: '?fieldErrors',
+	    		headerRight: '?listableDataHeaderRight'
 	    	}
 	    };
 	}
+	
 	var viewModes = {
 		LIST: "list",
 		GRID: "grid"
 	};
 	
-	DirectiveController.$inject = [];
-	function DirectiveController(){
+	DirectiveController.$inject = ['settings'];
+	function DirectiveController(settings){
 		var ctrl = this;
 		var searchMode = false;
-		ctrl.viewMode = ctrl.view != null ? ctrl.view : viewModes.LIST;
+		
+		ctrl.viewMode = ctrl.view != null ? ctrl.view : getDefaultListView();
 		
 		ctrl.isSearchModeOn = isSearchModeOn;
 		ctrl.switchSearchMode = switchSearchMode;
@@ -57,6 +62,10 @@
 		
 		function switchToViewMode(mode){
 			ctrl.viewMode = mode;
+			settings.DEFAULT_LIST_TYPE.set(mode);
+			if(ctrl.events != null && ctrl.events.onViewChange != null){
+				ctrl.events.onViewChange(mode);
+			}
 		}
 		
 		function isListMode(){
@@ -82,6 +91,10 @@
 				return ctrl.filterFunction(item, ctrl.searchText);
 			}
 			return true;
+		}
+		
+		function getDefaultListView(){
+			return settings.DEFAULT_LIST_TYPE.get();
 		}
 	}
 }());

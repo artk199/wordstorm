@@ -34,9 +34,10 @@
 	
 	// --------- DEPENDENCIES ---------
 	var app = angular.module('wordStormApp', [
-	  'wordStormApp.components',
+      'wordStormApp.components',
 	  'wordStormApp.services',
 	  'wordStormApp.filters',
+	  'wordStormApp.pages',
 	  'pascalprecht.translate',
 	  'ui.router',
 	  "ngCookies",
@@ -126,4 +127,5 @@
 	angular.module('wordStormApp.services', []);
 	angular.module('wordStormApp.filters', []);
 	angular.module('wordStormApp.components', []);
+	angular.module('wordStormApp.pages', []);
 }());

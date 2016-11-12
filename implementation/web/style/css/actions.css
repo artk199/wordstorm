@@ -1,11 +1,15 @@
 /* Actions */
-.user-action .show-on-hover, .user-action:hover .hide-on-hover{
+.user-action .show-on-hover, 
+.user-action:hover .hide-on-hover,
+.user-action.action-active .hide-on-hover{
 	transition: 0.5s;
 	opacity: 0;
 	visibility: hidden;
 }
 
-.user-action:hover  .show-on-hover, .user-action.hide-on-hover{
+.user-action:hover  .show-on-hover, 
+.user-action.action-active  .show-on-hover, 
+.user-action.hide-on-hover{
 	transition: 0.5s;
 	opacity: 1;
 	visibility: visible;

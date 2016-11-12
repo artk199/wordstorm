@@ -15,7 +15,8 @@
 	    		headerClass: '@',
 	    		bodyClass: '@',
 	    		isLoading: '=',
-	    		scrollableBody: '='
+	    		scrollableBody: '=',
+	    		disallowNotLogged: '='
 	    	},
 	    	transclude: {
 	    		header: '?pageHeader',
@@ -27,15 +28,28 @@
 	    };
 	}
 	
-	DirectiveController.$inject = ['$transclude'];
-	function DirectiveController($transclude){
+	DirectiveController.$inject = ['$transclude', 'userPanelService', 'pages'];
+	function DirectiveController($transclude, userPanelService, pages){
 		var ctrl = this;
 		
 		ctrl.isTranscludeGiven = isTranscludeGiven;
 		ctrl.showHeader = showHeader;
 		
+		init();
+		
 		//////////////////
 		
+		function init(){
+			if(ctrl.disallowNotLogged){
+				userPanelService.checkPersonLogged().then(function(){
+					var isLogged = userPanelService.isPersonLogged();
+					if(!isLogged){
+						pages.authError();
+					}
+				});
+			}
+		}
+			
 		function isTranscludeGiven(slot){
 			return $transclude.isSlotFilled(slot);
 		}
