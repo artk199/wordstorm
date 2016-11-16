@@ -18,6 +18,7 @@
 			groupName: null,
 			collectionObj: null
 		});
+		addState("authError", "/authorization-error", "<authorization-error-page></authorization-error-page>");
 		
 		///////////////////////////
 		

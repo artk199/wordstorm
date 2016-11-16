@@ -1,5 +1,6 @@
 {
 	"errors.EmailIsNotFree" : "Wprowadzony adres e-mail jest już zajęty.",
 	"errors.PasswordFormatIsInvalid" : "Hasło nie spełnia wymagań polityki haseł. {{policyRules}}",
-	"errors.WrongUsernameOrPassword" : "Wprowadzona nazwa użytkownika albo hasło nie jest poprawne."
+	"errors.WrongUsernameOrPassword" : "Wprowadzona nazwa użytkownika albo hasło nie jest poprawne.",
+	"errors.EmailAddressFormatIsInvalid" : "Podany adres e-mail jest nieprawidłowy"
 }

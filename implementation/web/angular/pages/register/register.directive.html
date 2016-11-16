@@ -16,7 +16,8 @@
 							placeholder="register.placeholders.email"
 							label="register.labels.email"
 							model="ctrl.formData.email"
-							error-occured="registerForm.email.$touched && registerForm.email.$invalid || ctrl.errors.EmailIsNotFree"
+							error-occured="(registerForm.email.$touched && registerForm.email.$invalid)
+								 || ctrl.errors.EmailIsNotFree || ctrl.errors.EmailAddressFormatIsInvalid"
 						>
 							<field-errors>
 								<span translate="userPanel.form.error.emptyField"
@@ -28,6 +29,8 @@
 								<span translate="errors.EmailIsNotFree"
 									ng-if="ctrl.errors.EmailIsNotFree">
 								</span>
+								<span translate="errors.EmailAddressFormatIsInvalid"
+									ng-if="ctrl.errors.EmailAddressFormatIsInvalid"/>
 							</field-errors>
 						</form-field>	
 						

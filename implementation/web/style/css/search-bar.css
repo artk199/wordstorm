@@ -4,6 +4,7 @@
 	padding: 5px;
 	background: #fff;
 	position: relative;
+	white-space: nowrap;
 }
 
 .search-bar > .glyphicon-search{
@@ -13,10 +14,11 @@
 	cursor: pointer;
 }
 
-.search-bar > input{
+.search-bar > input, .search-bar > input:focus{
 	padding-left: 25px;
 	background: none;
 	border: none;
+	outline: none;
 }
 
 .search-bar .remove-option{

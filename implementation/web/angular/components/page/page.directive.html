@@ -1,4 +1,4 @@
-<section class='page-content {{ctrl.backgroundImage}}'
+<section class='page-content vertical-grid {{ctrl.backgroundImage}}'
 	ng-class="{'with-image' : ctrl.backgroundImage != null, '{{ctrl.pageClass}}' : ctrl.pageClass != null}">
 	<header class='page-header' ng-if="ctrl.showHeader()" ng-class="ctrl.headerClass">
 		<div class="media">
@@ -14,8 +14,8 @@
 	</section>
 	
 	<!-- Page body -->
-	<perfect-scrollbar ng-if="!ctrl.isLoading && ctrl.scrollableBody" class="page-body scroller" wheel-propagation="true" ng-class="ctrl.bodyClass">
-		<div class='full-height' ng-class="{'{{ctrl.bodyClass}}' : ctrl.bodyClass != null}" ng-transclude="body"></div>
+	<perfect-scrollbar ng-if="!ctrl.isLoading && ctrl.scrollableBody" class="page-body rest-height scroller" wheel-propagation="true">
+		<div class='full-height' ng-class="ctrl.bodyClass" ng-transclude="body"></div>
 	</perfect-scrollbar> 
 	<section class='full-height' ng-if="!ctrl.isLoading && !ctrl.scrollableBody" ng-class="ctrl.bodyClass" ng-transclude="body"></section>
 	

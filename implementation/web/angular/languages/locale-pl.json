@@ -61,8 +61,11 @@
 	"myLibrary.addNewCollection.form.public.tooltip" : "Pozwala określić, czy pozostali użytkownicy będą mogli skorzystać z fiszek wewnątrz tej kolekcji.",
 	"myLibrary.collections.progressTooltip" : "Liczba znanych słówek",
 	"myLibrary.collections.public" : "Kolekcja oznaczona jako publiczna",
-	"myLibrary.collections.wordsCount" : "Liczba słówek: {{wordsCount}}",
+	"myLibrary.collections.private" : "Kolekcja oznaczona jako prywatna",
+	"myLibrary.collections.wordsCount" : "Liczba słówek:",
+	"myLibrary.collections.knownWordsCount" : "Liczba znanych słówek: {{wordsCount}}",
 	"myLibrary.collections.buttons.changePicture" : "Zmień obrazek tła dla tej kolekcji",
+	"myLibrary.buttons.removeSelected" : "Usuń zaznaczone",
 	"buttons.close" : "Zamknij",
 	"buttons.save" : "Zapisz",
 	"buttons.clear" : "Wyczyść",
@@ -72,5 +75,7 @@
 	"button.remove" : "Usuń",
 	"button.yes" : "Tak",
 	"button.no" : "Nie",
-	"button.remove.confirmAction" : "Czy na pewno chcesz usunąć ten obiekt?"
+	"button.cancel" : "Anuluj",
+	"button.remove.confirmAction" : "Czy na pewno chcesz usunąć ten obiekt?",
+	"listableData.searchPlaceholder" : "Wyszukaj na liście..."
 }

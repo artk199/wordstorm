@@ -1,5 +1,5 @@
 (function () {
-	angular.module("wordStormApp.components")
+	angular.module("wordStormApp.pages")
 	.directive("mainPage", Directive);
 	
 	function Directive(){
@@ -57,6 +57,7 @@
 		
 		function changeOption(option){
 			ctrl.view = option;
+			unregisterChangeOptionInterval();
 		}
 		
 		function getBackgroundImage(){
@@ -78,7 +79,7 @@
 		
 		function unregisterChangeOptionInterval(){
 			if(changeOptionInterval != null){
-				changeOptionInterval();
+				$interval.cancel(changeOptionInterval);
 			}
 		}
 	}

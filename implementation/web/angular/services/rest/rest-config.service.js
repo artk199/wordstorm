@@ -8,6 +8,8 @@
 		
 		service.createGetPromise = createGetPromise;
 		service.createPostPromise = createPostPromise;
+		service.createDeletePromise = createDeletePromise;
+		service.createPutPromise = createPutPromise;
 		
 		///////////////////
 		
@@ -16,10 +18,24 @@
 					skipDefaultParameters != true ? addStandardHeaders(parameters) : parameters);
 		}
 		
+		function createDeletePromise(url, data, parameters, skipDefaultParameters){
+			return $http({
+			    method: 'DELETE',
+			    url: config.restApi + url,
+			    data: data,
+			    headers: skipDefaultParameters != true ? addStandardHeaders(parameters).headers : parameters
+			});
+		}
+		
 		function createPostPromise(url, data, parameters, skipDefaultParameters){
 			return $http.post(config.restApi + url, angular.toJson(data), 
 					skipDefaultParameters != true ? addStandardHeaders(parameters) : parameters);
 		}
+		
+		function createPutPromise(url, data, parameters, skipDefaultParameters){
+			return $http.put(config.restApi + url, angular.toJson(data), 
+					skipDefaultParameters != true ? addStandardHeaders(parameters) : parameters);
+		}		
 		
 		function addStandardHeaders(parameters){
 			var params = parameters || {};

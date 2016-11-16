@@ -1,5 +1,5 @@
 (function () {
-	angular.module("wordStormApp.components")
+	angular.module("wordStormApp.pages")
 	.directive("myLibraryPage", Directive);
 	
 	function Directive(){
@@ -14,7 +14,8 @@
 	}
 	
 	var loadingData = {
-		COLLECTION_LIST : false
+		COLLECTION_LIST: false,
+		REMOVING_SELECTED: false
 	};
 	
 	var views = {
@@ -33,26 +34,30 @@
 		
 		ctrl.collection = null;
 		ctrl.isLoading = isLoading;
+		
 		ctrl.addCollection = addCollection;
 		ctrl.showAllCollections = showAllCollections;
-	
+		
 		ctrl.clearForm = clearForm;
 		ctrl.sendAddCollectionRequest = sendAddCollectionRequest;
 		
 		ctrl.refreshCollectionsList = refreshCollectionsList;
 		ctrl.collectionListFilter = collectionListFilter;
 			
+		ctrl.parametersForCollectionsList = initParametersForCollectionsList();	
+		ctrl.listableDataEvents = initListableDataEvents();
+		
+		ctrl.isAnyCollectionSelected = isAnyCollectionSelected;
+		ctrl.isRemovingSelected = isRemovingSelected;
+		ctrl.removeSelectedCollections = removeSelectedCollections;
+		
 		init();
 		
 		//////////////////
 		function init(){
-			if($stateParams.params != null && $stateParams.params.groupId != null){
-				
-			}
-			else{
-				ctrl.view = views.ALL_COLLECTIONS;
-				refreshCollectionsList(null, null, true);
-			}
+			ctrl.view = views.ALL_COLLECTIONS;
+			refreshCollectionsList(null, null, true);
+			selectedCollections = [];
 		}
 		
 		function refreshCollectionsList(pageSize, pageNumber, useCache, forceReload){
@@ -63,6 +68,31 @@
 				}
 				loadingData.COLLECTION_LIST = false;
 			});
+		}
+		
+		function initParametersForCollectionsList(){
+			return {
+				removeCollection: silentRemoveCollection,
+				editCollection: silentEditCollection,
+				selectedCollections: []
+			}
+		}
+		
+		function silentRemoveCollection(collectionId){
+			// Remove collection from local store
+			for(var i = 0; i < ctrl.collection.length; i++){
+				if(ctrl.collection[i].Id == collectionId){
+					ctrl.collection.splice(i, 1);
+				}
+			}
+			
+			// Refresh promise from cache
+			return rest.collection.getAll(null, null, true, true);
+		}
+		
+		function silentEditCollection(collection){		
+			// Refresh promise from cache
+			return rest.collection.getAll(null, null, true, true);
 		}
 		
 		function isLoading(){
@@ -107,6 +137,33 @@
 			pages.myLibrary.collection(collection.Id, collection.Name, collection);
 		}
 		
+		function initListableDataEvents(){
+			return {
+				onViewChange: function(){ ctrl.parametersForCollectionsList.selectedCollections = []; }
+			}
+		}
+		
+		// ===== Removing selected =====
+		
+		function isRemovingSelected(){
+			return loadingData.REMOVING_SELECTED;
+		}
+		
+		function isAnyCollectionSelected(){
+			return ctrl.parametersForCollectionsList.selectedCollections.length > 0;
+		}
+		
+		function removeSelectedCollections(){
+			var selectedCollections = ctrl.parametersForCollectionsList.selectedCollections;
+			loadingData.REMOVING_SELECTED = true;
+			
+			rest.collection.removeList(selectedCollections).then(function(result){
+				refreshCollectionsList(null, null, true, true);
+				loadingData.REMOVING_SELECTED = false;
+			});
+		}
+		
+		
 		// ===== Add collection functions =====
 		function initAddCollectionFormData(){
 			return {
@@ -125,8 +182,10 @@
 			ctrl.formSending = true;
 			
 			rest.collection.create([ctrl.addCollectionFormData]).then(function(result){
-				var collection = result[0];
-				openCollection(collection);
+				if(result.Result){
+					var collection = result.Result[0];
+					openCollection(collection);
+				}
 			});
 			
 			clearForm(form);

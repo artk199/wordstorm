@@ -1,5 +1,5 @@
 (function () {
-	angular.module("wordStormApp.components")
+	angular.module("wordStormApp.pages")
 	.directive("collectionPage", Directive);
 	
 	function Directive(){

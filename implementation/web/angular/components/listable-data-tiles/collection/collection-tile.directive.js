@@ -28,11 +28,17 @@
 		EDIT: "edit"
 	};
 	
-	DirectiveController.$inject = ['pages'];
-	function DirectiveController(pages){
+	var loadingData = {
+		REMOVING_COLLECTION: false,
+		EDITING_COLLECTION: false
+	};
+	
+	DirectiveController.$inject = ['pages', 'rest'];
+	function DirectiveController(pages, rest){
 		var ctrl = this;
 		var mode = null;
 		
+		ctrl.selected = false;
 		ctrl.getProgress = getProgress;
 		ctrl.openCollection = openCollection;
 		ctrl.getModeInclude = getModeInclude;
@@ -41,7 +47,16 @@
 		ctrl.openEditMode = openEditMode;
 		ctrl.isEditMode = isEditMode;
 		ctrl.switchToNormalMode = switchToNormalMode;
+		ctrl.isNormalMode = isNormalMode;
 		ctrl.formData = null;
+		
+		ctrl.removeCollection = removeCollection;
+		ctrl.isCollectionRemoving = isCollectionRemoving;
+		ctrl.editCollection = editCollection;
+		ctrl.isCollectionEditing = isCollectionEditing;
+		ctrl.hasCollectionChanged = hasChollectionChangedByEdit;
+		ctrl.selectCollection = selectCollection;
+		ctrl.isCollectionSelected = isCollectionSelected;
 		
 		/////////////////////
 		
@@ -77,13 +92,90 @@
 		function openEditMode(){
 			mode = modes.EDIT;
 			ctrl.formData = {
-				Name: ctrl.item.Name
+				Name: ctrl.item.Name,
+				IsPublic: ctrl.item.IsPublic,
+				Id: ctrl.item.Id
 			};
 		}
 		
 		function switchToNormalMode(){
 			mode = null;
 			ctrl.formData = null;
+		}
+		
+		function isNormalMode(){
+			return mode == null;
+		}
+		
+		function selectCollection(){
+			if(ctrl.parameters != null && ctrl.parameters.selectedCollections != null){
+				var position = ctrl.parameters.selectedCollections.indexOf(ctrl.item.Id);
+				if(position < 0){
+					ctrl.parameters.selectedCollections.push(ctrl.item.Id);
+				}
+				else{
+					ctrl.parameters.selectedCollections.splice(position, 1);
+				}
+			}
+		}
+		
+		function isCollectionSelected(){
+			if(ctrl.parameters != null && ctrl.parameters.selectedCollections != null){
+				var position = ctrl.parameters.selectedCollections.indexOf(ctrl.item.Id);
+				return position >=0;
+			}
+			return false;
+		}
+		
+		// ===== Removing collection functions =====
+		function isCollectionRemoving(){
+			return loadingData.REMOVING_COLLECTION;
+		}
+		
+		function removeCollection(){
+			// Dont allow for removing collection twice
+			if(!loadingData.REMOVING_COLLECTION){
+				loadingData.REMOVING_COLLECTION = true;
+				
+				rest.collection.remove(ctrl.item.Id).then(function(result){
+					if(ctrl.parameters != null && ctrl.parameters.removeCollection != null){
+						ctrl.parameters.removeCollection(ctrl.item.Id);
+					}
+					loadingData.REMOVING_COLLECTION = false;
+				});
+			}
+		};
+		
+		// ===== Editing collection functions =====
+		function isCollectionEditing(){
+			return loadingData.EDITING_COLLECTION;
+		}
+		
+		function editCollection(){
+			// Dont allow for editing collection twice
+			if(!loadingData.EDITING_COLLECTION){
+				loadingData.EDITING_COLLECTION = true;
+		
+				rest.collection.edit([ctrl.formData]).then(function(result){
+					if(ctrl.parameters != null && ctrl.parameters.editCollection != null){
+						ctrl.parameters.editCollection(ctrl.item.Id);
+					}
+					
+					saveEditedData();
+					switchToNormalMode();
+					loadingData.EDITING_COLLECTION = false;
+				});
+			}
+		}
+		
+		function saveEditedData(){
+			ctrl.item.Name = ctrl.formData.Name;
+			ctrl.item.IsPublic = ctrl.formData.IsPublic;
+		}
+		
+		function hasChollectionChangedByEdit(){
+			return ctrl.item.Name != ctrl.formData.Name 
+				|| ctrl.item.IsPublic != ctrl.formData.IsPublic;
 		}
 	}
 }());

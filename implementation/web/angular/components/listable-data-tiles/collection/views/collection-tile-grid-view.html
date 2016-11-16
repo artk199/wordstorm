@@ -1,93 +1,117 @@
-<div class="clickable card user-action" ng-click="ctrl.openCollection(ctrl.item)">
-	<header>
-		<h1 ng-if="!ctrl.isEditMode()" ng-bind-html="ctrl.item.Name | highlight: ctrl.searchText"></h1>
-		
-		<form ng-if="ctrl.isEditMode()"  name='collectionForm' class='form-horizontal'>
-			<input ng-model="ctrl.formData.Name"
-				ng-attr-placeholder="{{'myLibrary.addNewCollection.form.collectionName.placeholder' | translate}}"
-				name="name"
-			/>
-			<button type="reset" class="button button-empty"
-				uib-tooltip="{{'buttons.clear' | translate}}"
-				ng-click="ctrl.switchToNormalMode();$event.stopPropagation(); $event.preventDefault();"
-			>
-				<span class='glyphicon glyphicon-remove'></span>
-			</button>
-			<button type="submit" class="button button-empty"
-				uib-tooltip="Jeszcze nie dziala. Prosze nie psuc."
-				ng-disabled="ctrl.formData.Name.length == 0"
-			>
-				<span class='glyphicon glyphicon-ok'></span>
-			</button>
-		</form>
-			
-		<button ng-if="!ctrl.isEditMode()" class="button button-empty edit-button show-on-hover"
-			ng-click="ctrl.openEditMode();"
-		>
-			<span class='glyphicon glyphicon-pencil'></span>
-		</button>
-		<button class='button button-empty change-picture-button show-on-hover'
-			ng-click="$event.stopPropagation();"
-		>
-			<span class='glyphicon glyphicon-picture'></span>
-		</button>
-		<button class="button button-empty remove-button show-on-hover"
-			ng-click="ctrl.openRemoveMode();"
-		>
-			<span class='glyphicon glyphicon-remove'></span>
-		</button>
-	</header>
-	
-	<section class='card-curtain' ng-if="ctrl.isRemoveMode()">
+<form name='collectionForm' class='form-horizontal'>
+	<div class="clickable card user-action" ng-click="ctrl.openCollection(ctrl.item)">
 		<header>
-			<h1 translate="button.remove.confirmAction"></h1>
+			<h1 ng-if="!ctrl.isEditMode()" ng-bind-html="ctrl.item.Name | highlight: ctrl.searchText"></h1>
 			
-			<div class='buttons justify-content'>
-				<button class='button button-action'
+			<!-- Edit mode -->
+			<span ng-if="ctrl.isEditMode()">
+				<input ng-model="ctrl.formData.Name"
+					ng-attr-placeholder="{{'myLibrary.addNewCollection.form.collectionName.placeholder' | translate}}"
+					name="name"
+				/>
+				<button type="reset" class="button button-empty"
+					uib-tooltip="{{'button.cancel' | translate}}"
+					ng-disabled="ctrl.isCollectionEditing()"
 					ng-click="ctrl.switchToNormalMode();$event.stopPropagation(); $event.preventDefault();"
 				>
-					<span class='glyphicon glyphicon-chevron-left'></span>
-					<span translate="button.no"></span>
+					<span class='glyphicon glyphicon-remove'></span>
 				</button>
-				<button class='button button-action'
-					uib-tooltip="Jeszcze nie dziala. Prosze nie psuc."
-					ng-click="$event.stopPropagation(); $event.preventDefault();"
+				<button type="submit" class="button button-empty"
+					ng-disabled="ctrl.formData.Name.length == 0 || ctrl.isCollectionEditing() || !ctrl.hasCollectionChanged()"
+					ng-click="ctrl.editCollection();$event.stopPropagation(); $event.preventDefault();"
+				>
+					<span class='glyphicon glyphicon-ok'
+						ng-class="{'glyphicon-ok' : !ctrl.isCollectionEditing(),
+								   'glyphicon-refresh glyphicon-spin' : ctrl.isCollectionEditing()}"
+					></span>
+				</button>
+			</span>
+			
+			<!-- Normal mode -->
+			<span ng-if="!ctrl.isEditMode()">
+				<button  class="button button-empty edit-button show-on-hover"
+					ng-click="ctrl.openEditMode();"
+				>
+					<span class='glyphicon glyphicon-pencil'></span>
+				</button>
+				<button class='button button-empty change-picture-button show-on-hover'
+					ng-click="$event.stopPropagation();"
+				>
+					<span class='glyphicon glyphicon-picture'></span>
+				</button>
+				<button class="button button-empty remove-button show-on-hover"
+					ng-click="ctrl.openRemoveMode();"
 				>
 					<span class='glyphicon glyphicon-remove'></span>
-					<span translate="button.yes"></span>
 				</button>
-			</div>
+			</span>
 			
 		</header>
-	</section>
 		
-	<section class='card-body'>
-		<progress-bar progress="ctrl.getProgress()" 
-			max-progress="ctrl.item.TotalKnownWords"
-			background="#fff"
-			tooltip="myLibrary.collections.progressTooltip"
-		>
-			<progress-content>
-				<h3>
-					<span ng-bind-html="ctrl.item.TotalKnownWords | highlight: ctrl.searchText"></span>
-					<span class='small' ng-bind-html="ctrl.item.TotalWords | highlight: ctrl.searchText"></span>
-				</h3>
-			</progress-content>
-		</progress-bar>
-		
-		<div class='card-data'>
-			<div class='row'>
-				<span class="col-xs-2 col-sm-2 col-md-2 col-lg-2 glyphicon glyphicon-user"></span>
-				<span class="col-xs-10 col-sm-10 col-md-10 col-lg-10" 
-					translate="myLibrary.collections.public"></span>
+		<!-- Delete mode -->
+		<section class='card-curtain' ng-if="ctrl.isRemoveMode()">
+			<header>
+				<h1 translate="button.remove.confirmAction"></h1>
+				
+				<div class='buttons justify-content'>
+					<button class='button button-action'
+						ng-click="ctrl.switchToNormalMode();$event.stopPropagation(); $event.preventDefault();"
+						ng-disabled="ctrl.isCollectionRemoving()"
+					>
+						<span class='glyphicon glyphicon-chevron-left'></span>
+						<span translate="button.no"></span>
+					</button>
+					<button class='button button-action'
+						ng-click="ctrl.removeCollection(); $event.stopPropagation(); $event.preventDefault();"
+						ng-disabled="ctrl.isCollectionRemoving()"
+					>
+						<span class='glyphicon' 
+							ng-class="{'glyphicon-refresh glyphicon-spin' : ctrl.isCollectionRemoving(), 
+									   'glyphicon-ok' : !ctrl.isCollectionRemoving()}">
+						</span>
+						<span translate="button.yes"></span>
+					</button>
+				</div>
+			</header>
+		</section>
+			
+		<section class='card-body'>
+			<progress-bar progress="::ctrl.getProgress()" 
+				max-progress="::ctrl.item.TotalKnownWords"
+				background="#fff"
+				tooltip="myLibrary.collections.progressTooltip"
+			>
+				<progress-content>
+					<h3>
+						<span ng-bind-html="ctrl.item.TotalKnownWords | highlight: ctrl.searchText"></span>
+						<span class='small' ng-bind-html="ctrl.item.TotalWords | highlight: ctrl.searchText"></span>
+					</h3>
+				</progress-content>
+			</progress-bar>
+			
+			<div class='card-data'>
+				<div class='row'>
+					<span class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+						<span class='glyphicon glyphicon-user' ng-if="!ctrl.isEditMode()"></span>
+						<input type="checkbox" ng-if="ctrl.isEditMode()" ng-model="ctrl.formData.IsPublic"/>
+					</span>
+					<div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
+						<span translate="myLibrary.collections.public"
+							ng-if="ctrl.isEditMode() ? ctrl.formData.IsPublic : ctrl.item.IsPublic">
+						</span>
+						<span translate="myLibrary.collections.private"
+							ng-if="ctrl.isEditMode() ? !ctrl.formData.IsPublic : !ctrl.item.IsPublic">
+						</span>
+					</div>
+				</div>
+				<div class='row'>
+					<span class="col-xs-2 col-sm-2 col-md-2 col-lg-2 glyphicon glyphicon-comment"></span>
+					<div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
+						<span translate="myLibrary.collections.wordsCount"></span>
+						<span ng-bind-html="ctrl.item.TotalWords | highlight: ctrl.searchText"></span>
+					</div>
+				</div>
 			</div>
-			<div class='row'>
-				<span class="col-xs-2 col-sm-2 col-md-2 col-lg-2 glyphicon glyphicon-comment"></span>
-				<span class="col-xs-10 col-sm-10 col-md-10 col-lg-10" 
-					ng-bind-html="'myLibrary.collections.wordsCount' 
-						| translate: {wordsCount: ctrl.item.TotalWords} 
-						| highlight: ctrl.searchText"></span>
-			</div>
-		</div>
-	</section>
-</div>
+		</section>
+	</div>
+</form>

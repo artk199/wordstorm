@@ -1,5 +1,5 @@
 (function () {
-	angular.module("wordStormApp.components")
+	angular.module("wordStormApp.pages")
 	.directive("registerPage", Directive);
 	
 	function Directive(){
@@ -66,20 +66,23 @@
 		function registerUser(registerForm){
 			ctrl.formSending = true;
 			rest.register.create(ctrl.formData).then(function(data){
-				// Services logic returned error
-				if(data.responseError != null){
-					handleFormError(data.responseError);
+				if(data){
+					// Services logic returned error
+					if(data.responseError != null){
+						handleFormError(data.responseError);
+					}
+					else{
+						alerts.addGlobalAlert({
+							title: 'register.alerts.success.title',
+							titleParams: {name: ctrl.formData.email},
+							subtitle: 'register.alerts.success.subtitle',
+							type: 'success'
+						});
+						
+						clearForm(registerForm);
+					}
 				}
-				else{
-					alerts.addGlobalAlert({
-						title: 'register.alerts.success.title',
-						titleParams: {name: ctrl.formData.email},
-						subtitle: 'register.alerts.success.subtitle',
-						type: 'success'
-					});
-					
-					clearForm(registerForm);
-				}
+				
 				ctrl.formSending = false;
 			});
 		}
