@@ -28,13 +28,45 @@
 		
 		service.myLibrary = {
 			allCollections : function(){
-				$state.go("my-library");
+				$state.go("myLibrary");
 			},
-			collection : function(groupId, groupName, collectionObj){
+			collection : function(collectionId, collectionName){
 				$state.go("collection", {
-					groupId: groupId,
-					groupName: paresUrlParameter(groupName),
-					collectionObj: collectionObj
+					collectionId: collectionId,
+					collectionName: parseUrlParameter(collectionName)
+				});
+			},
+			addCollection: function(){
+				$state.go("addCollection");
+			},
+			editCollection : function(collectionId, collectionName){
+				$state.go("editCollection", {
+					collectionId: collectionId,
+					collectionName: parseUrlParameter(collectionName)
+				});
+			},
+		};
+		
+		service.publicLibrary = {
+			main: function(){	
+				$state.go("publicLibrary");
+			}
+		};
+		
+		service.word = {
+			show: function(wordId, word){
+				$state.go("word", {word: word, wordId: wordId});
+			},
+			add: function(collectionId, collectionName){
+				$state.go("addWord", {
+					collectionId: collectionId, 
+					collectionName: parseUrlParameter(collectionName)
+				});
+			},
+			edit: function(wordId, word){
+				$state.go("editWord", {
+					word: parseUrlParameter(word), 
+					wordId: wordId
 				});
 			}
 		};
@@ -43,7 +75,9 @@
 			return $state.is(stateName);
 		};
 		
-		function paresUrlParameter(parameter){
+		////////////////////
+		
+		function parseUrlParameter(parameter){
 			var result = null;
 			if(parameter){
 				result = parameter.toString().toLowerCase().replace(/\s+/g, "-");

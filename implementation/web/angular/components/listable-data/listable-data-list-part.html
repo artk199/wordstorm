@@ -1,15 +1,18 @@
 <div ng-if="ctrl.groupField != null">
 	<div class='group' ng-repeat="(groupName, groupItems) in ctrl.list | filter: ctrl.filterItems | groupBy: ctrl.groupField">
-		<div class='group-name' ng-if="groupName != 'undefined'">
+		<div class='group-name' ng-if="::(groupName != 'undefined')">
 			<h3 ng-bind="groupName"></h3>
 		</div>
-		<div class='list-item' ng-repeat="item in groupItems">
-			<compile-html html="{{ctrl.createDirectiveForItem()}}"></compile-html>
+		<div class='list-item' ng-repeat="item in ::groupItems | limitTo: ctrl.getMaxListSize()">
+			<compile-html html="{{::ctrl.createDirectiveForItem()}}"></compile-html>
 		</div>
 	</div>
 </div>
 <div class='group' ng-if="ctrl.groupField == null">
-	<div class='list-item' ng-repeat="item in ctrl.list | filter: ctrl.filterItems">
-		<compile-html html="{{ctrl.createDirectiveForItem()}}"></compile-html>
+	<div class='list-item' 
+		ng-repeat="item in (ctrl.filteredList = (ctrl.list | filter: ctrl.filterItems)
+			| limitTo: ctrl.getMaxListSize() : ctrl.getListStartItem())"
+	>
+		<compile-html html="{{::ctrl.createDirectiveForItem()}}"></compile-html>
 	</div>
 </div>

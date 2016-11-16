@@ -17,11 +17,13 @@
 	    		displayDirectiveParameters: '=',
 	    		filterFunction: '=',
 	    		view: '@',
+	    		noViewChange: '=',
 	    		scrollableBody: '=',
-	    		events: '='
+	    		events: '=',
+	    		pagination: '='
 	    	},
 	    	transclude:{
-	    		errors: '?fieldErrors',
+	    		listEmpty: '?listableDataEmptyList',
 	    		headerRight: '?listableDataHeaderRight'
 	    	}
 	    };
@@ -48,8 +50,24 @@
 		ctrl.isGridMode = isGridMode;
 		ctrl.createDirectiveForItem = createDirectiveForItem;
 		ctrl.filterItems = filterItems;
+		ctrl.listCurrentPage = null;
+		ctrl.filteredList = null;
+		
+		ctrl.getMaxListSize = getMaxListSize;
+		ctrl.getListStartItem = getListStartItem;
+		ctrl.refreshPagination = refreshPagination;
+		
+		init();
 		
 		/////////////////////////
+		
+		function init(){
+			refreshPagination();
+		}
+		
+		function refreshPagination(){
+			ctrl.listCurrentPage = 1;
+		}
 		
 		function isSearchModeOn(){
 			return searchMode;
@@ -82,6 +100,7 @@
 			result += " parameters='ctrl.displayDirectiveParameters'";
 			result += " mode='ctrl.viewMode'";
 			result += " item='item'";
+			result += " index='$index'";
 			result += "></" + ctrl.displayDirectiveName + ">";
 			return result;
 		}
@@ -95,6 +114,22 @@
 		
 		function getDefaultListView(){
 			return settings.DEFAULT_LIST_TYPE.get();
+		}
+		
+		function getMaxListSize(){	
+			var result = ctrl.list.length;
+			if(ctrl.pagination != null && ctrl.pagination.maxSize != null){
+				result = ctrl.pagination.maxSize;
+			}
+			return result;
+		}
+		
+		function getListStartItem(){
+			var result = null;
+			if(ctrl.pagination != null && ctrl.pagination.maxSize != null){
+				result = (ctrl.listCurrentPage - 1) * ctrl.pagination.maxSize;
+			}
+			return result;
 		}
 	}
 }());

@@ -24,6 +24,7 @@
 	function DirectiveController(userPanelService, pages){
 		var ctrl = this;
 		var isPersonLoggedLoading = false;
+		var isUserDataLoading = false;
 		
 		ctrl.view = views.LOG_IN_FORM;
 		
@@ -35,13 +36,16 @@
 		ctrl.logOut = logPersonOut;
 		ctrl.isPersonLogged = isPersonLogged;
 		ctrl.goToRegisterPage = pages.register;
+		ctrl.userData = null;
 		
 		init();
 		
 		///////////////////////////
 		
 		function init(){
-			refreshIsPersonLogged();
+			refreshIsPersonLogged().then(function(){
+				refreshUserData();
+			});
 		}
 		
 		function isPersonLogged(){
@@ -50,14 +54,22 @@
 		
 		function refreshIsPersonLogged(){
 			isPersonLoggedLoading = true;
-			userPanelService.checkPersonLogged().then(function(){
+			return userPanelService.checkPersonLogged().then(function(){
 				ctrl.view = userPanelService.isPersonLogged() ? views.LOGGED_IN : views.LOG_IN_FORM;
 				isPersonLoggedLoading = false;
 			});
 		}
 		
+		function refreshUserData(){
+			isUserDataLoading = true;
+			return userPanelService.loadPersonData().then(function(data){
+				ctrl.userData = data;
+				isUserDataLoading = false;
+			});
+		}
+		
 		function isLoading(){
-			return isPersonLoggedLoading;
+			return isPersonLoggedLoading || isUserDataLoading;
 		}
 		
 		function logPersonIn(email, password){

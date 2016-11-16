@@ -46,7 +46,7 @@ body{
 	position: relative;
 }
 
-.vertical-grid > .rest-height.scroller > div{
+.vertical-grid > .rest-height.scroller > div:not(.ps-scrollbar-x-rail){
 	height: 100%;
 }
 
@@ -121,13 +121,18 @@ body{
 	padding: 0;
 }
 
-#page-body .page-content > .page-header h1.previous-link{
+#page-body .page-content > .page-header .previous-link{
 	transition: 0.3s;
 	cursor: pointer;
 }
 
-#page-body .page-content > .page-header h1.previous-link:hover{
+#page-body .page-content > .page-header .previous-link:hover{
     color: #dc1717;
+}
+
+#page-body .page-content > .page-header .previous-link:hover::before{
+	color: #404a53;
+	transition: 0s;
 }
 
 #page-body .page-content > .page-header .buttons{
@@ -433,6 +438,11 @@ body{
 .vertical-middle{
 	display: flex;
     align-items: center;
+}
+
+.justified-content{
+	display: flex;
+	justify-content: space-between;
 }
 
 .highlighted{

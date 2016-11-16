@@ -1,0 +1,80 @@
+<page page-class='collection-page' scrollable-body="true" is-loading="ctrl.isLoading()" disallow-not-logged="true">
+	<page-header>
+		<div class='link-tree'>
+			<h1 class='previous-link' ng-click="ctrl.showAllCollections()">
+				<span translate='myLibrary.title'></span>
+			</h1>
+			<h2 ng-if="!ctrl.isLoading()">
+				<span ng-bind="ctrl.collection.Name"></span>
+			</h2>
+		</div>
+	</page-header>
+	<page-header-right>
+		<div class='buttons'>
+			<button type='button' class='button' ng-click="ctrl.editCollection()">
+				<span class='glyphicon glyphicon-pencil'></span>
+				<span translate='button.edit'></span>
+			</button>
+			<button type='button' class='button' ng-click='ctrl.showAllCollections()'>
+				<span class='glyphicon glyphicon-remove'></span>
+				<span translate='button.close'></span>
+			</button>
+		</div>
+	</page-header-right>
+	<page-body-top>
+		<div>
+			<span class='glyphicon glyphicon-user'></span>
+			<span translate="collection.privacyPolicy.{{ctrl.collection.IsPublic ? 'public' : 'private'}}"></span>
+		</div>
+		<div>
+			<span class='glyphicon glyphicon-comment'></span>
+			<span translate="collection.wordsInfo" 
+				translate-value-words="{{::ctrl.collection.TotalWords}}" 
+				translate-value-known-words="{{::ctrl.collection.TotalKnownWords}}"
+			></span>
+		</div>
+	</page-body-top>
+	<page-body>
+		<div ng-if="ctrl.collection.TotalWords == 0">
+			<p translate="collection.noWords"></p>
+			<button type="button" class="button button-action red" 
+				ng-click="ctrl.addWord(ctrl.collection.Id, ctrl.collection.Name)">
+					<span class="glyphicon glyphicon-plus"></span>
+					<span translate="collection.addWord"></span>
+			</button>
+		</div>
+		<div class='full-height'  ng-if="ctrl.collection.TotalWords > 0">
+			<listable-data list="ctrl.collection.Words"
+				display-directive-name="word-tile"
+				refresh-data-action="ctrl.refreshCollection(true, true)"
+				display-directive-parameters="ctrl.parametersForWords"
+				filter-function="ctrl.wordsListFilter"
+				scrollable-body="true"
+				pagination="{maxSize: ctrl.listSize}"
+			>
+				<listable-data-header-right>
+					<button class='button button-action red one-line'
+							ng-disabled="ctrl.isRemovingWords()"
+							ng-if="ctrl.isAnyWordSelected()"
+							ng-click="ctrl.removeSelectedWords()"
+					>
+						<span class="glyphicon" 
+							ng-class="{'glyphicon-spin glyphicon-refresh' : ctrl.isRemovingSelected(),
+									   'glyphicon-remove' : !ctrl.isRemovingSelected()}">
+						</span>
+						<span translate="myLibrary.buttons.removeSelected" translate-value-count="{{ctrl.parametersForWords.selectedItems.length}}"></span>
+					</button>
+					
+					<button type="button" class="button button-action red" 
+						ng-click="ctrl.addWord(ctrl.collection.Id, ctrl.collection.Name)">
+							<span class="glyphicon glyphicon-plus"></span>
+							<span translate="collection.addWord"></span>
+					</button>
+				</listable-data-header-right>
+				<listable-data-empty-list>
+					<span translate="myLibrary.noCollectionsAfterFiltering"></span>
+				</listable-data-empty-list>
+			</listable-data>
+		</div>
+	</page-body>
+</page>

@@ -94,6 +94,11 @@
 	margin-top: 10px;
 }
 
+.form-horizontal .form-field .field-label.top{
+	text-align: left;
+	font-size: 11px;
+}
+
 /* Buttons */
 
 .button{
@@ -102,6 +107,7 @@
 	background: transparent;
 	margin: 5px 20px;
 	transition: 0.5s;
+	outline: none;
 }
 
 .button.one-line{
@@ -122,6 +128,7 @@
 .button:focus{
 	transition: 0.5s;
 	color: #b11919;
+	outline: none;
 }
 
 .button:last-child{

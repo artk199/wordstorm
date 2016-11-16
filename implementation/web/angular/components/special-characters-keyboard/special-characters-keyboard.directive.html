@@ -1,0 +1,33 @@
+<div class='special-characters-keyboard main' uib-dropdown dropdown-append-to-body auto-close="{{::ctrl.closingPolicy}}" is-open="ctrl.isOpen()">
+	<input type="input" class="form-control"
+		ng-model="ctrl.model" 
+		required="ctrl.isRequired" 
+		name="{{ctrl.name}}"
+		ng-attr-placeholder="ctrl.placeholder | translate"
+	/>
+	
+	<div class="special-characters-keyboard dropdown-menu" uib-dropdown-menu  aria-labelledby="btn-append-to-body" ng-class="ctrl.keyboardColor">
+		<ul class="colors">
+			<li ng-repeat="color in ::ctrl.keyboardColors" 
+				ng-class="::color"
+				ng-click="ctrl.changeKeysColor(color)"
+			>
+				<span class='glyphicon glyphicon-fire'></span>
+			</li>
+		</ul>
+		<ul>
+			<li ng-repeat="character in ::ctrl.englishCharacters" ng-click="ctrl.addCharacter(character)">
+				<span ng-bind="::character"></span>
+			</li>
+		</ul>
+		<ul>
+			<li ng-repeat="character in ::ctrl.polishCharacters" ng-click="ctrl.addCharacter(character)">
+				<span ng-bind="::character"></span>
+			</li>
+		</ul>
+	</div>
+
+	<button type="button" class="open-button button button-empty" uib-dropdown-toggle ng-if="ctrl.isWithButton()">
+		<span class="glyphicon glyphicon-folder-open"></span>
+	</button>
+</div>

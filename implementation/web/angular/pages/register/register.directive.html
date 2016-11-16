@@ -74,13 +74,13 @@
 							<button type="reset" class='button button-action'
 									ng-click = "ctrl.clearForm(registerForm)"
 									ng-disabled="!(ctrl.isFormFilled() || registerForm.email.$viewValue.length > 0) || ctrl.formSending"
-									translate="buttons.clear">
+									translate="button.clear">
 							</button>
 							<button type="submit" class='button button-action' 
 									ng-click="ctrl.register(registerForm)"
 									ng-disabled="registerForm.$invalid || !ctrl.isPasswordValid() || ctrl.formSending">
 									<span class='glyphicon glyphicon-refresh glyphicon-spin' ng-if="ctrl.formSending"></span>
-									<span translate="register.buttons.save"></span>
+									<span translate="register.button.save"></span>
 							</button>
 						</section>
 					</form>

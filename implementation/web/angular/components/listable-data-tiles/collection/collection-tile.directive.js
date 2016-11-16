@@ -58,6 +58,8 @@
 		ctrl.selectCollection = selectCollection;
 		ctrl.isCollectionSelected = isCollectionSelected;
 		
+		ctrl.canDisplayActionButtons = canDisplayActionButtons;
+		
 		/////////////////////
 		
 		function getProgress(){
@@ -125,6 +127,10 @@
 				return position >=0;
 			}
 			return false;
+		}
+		
+		function canDisplayActionButtons(){
+			return ctrl.parameters != null ? ctrl.parameters.readonly != true : true;
 		}
 		
 		// ===== Removing collection functions =====

@@ -4,7 +4,8 @@
 	
 	var ERRORS = {
 		RESPONSE: 422,
-		AUTHORIZATION: 401
+		AUTHORIZATION: 401,
+		NOT_FOUND: 404
 	};
 	
 	HttpInterceptor.$inject = ['$q', '$injector'];
@@ -47,6 +48,22 @@
 		    			
 		    			// Return not-null object to lower risk of undefined errors
 		    			return res || {};
+		    		break;
+		    		case ERRORS.NOT_FOUND:
+		    			if(!pages.isPageOpened('error')){
+	    					var error = {
+    				    		type: "Resource could not be found",
+    				    		status : res.status,
+    				    		statusText : res.statusText,
+    				    		url : res.config.url,
+    				    		method : res.config.method,
+    				    		headers : res.config.headers
+    				    	};
+    				    	
+    				    	pages.error(error);
+	    				}
+	    			
+				    	return {responseError: []};
 		    		break;
 	    			default: 
 	    				if(!pages.isPageOpened('error')){

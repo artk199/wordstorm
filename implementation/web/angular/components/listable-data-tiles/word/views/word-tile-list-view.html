@@ -1,0 +1,88 @@
+<div class="listed">
+	<div class='row vertical-middle user-action' ng-class="{'action-active' : ctrl.selected || !ctrl.isNormalMode()}">
+		<div class='col-xs-3 col-sm-3 col-md-1 col-lg-1'>
+			<div class='item-icon-container'>
+				<span class="glyphicon glyphicon-heart item-icon hide-on-hover"></span>
+				<input type="checkbox" ng-model="ctrl.selected"
+					ng-init="ctrl.selected = ctrl.isItemSelected()" 
+					ng-if="::(ctrl.parameters != null && ctrl.parameters.selectedItems)"
+					class="show-on-hover item-selector"
+					ng-click="ctrl.selectItem()"
+				/>
+			</div>
+		</div>
+		<div class='col-xs-9 col-sm-9 col-md-11 col-lg-11'>
+			<div class='row vertical-middle'>
+				<!-- Word data section -->
+				<section class='col-xs-5 col-sm-5 col-md-5 col-lg-5'>
+					<h3 class="item-title" ng-bind-html="ctrl.item.Word | highlight: ctrl.searchText"></h3>
+					<div>
+						<span class='glyphicon glyphicon-headphones'></span>
+						<span ng-bind="::ctrl.item.Pronunciation"></span>
+					</div>
+				</section>
+				<!-- Word additional info section -->
+				<section class='col-xs-4 col-sm-4 col-md-4 col-lg-4'>
+					<span ng-if="::ctrl.item.Tier">
+						<span class="glyphicon glyphicon-tag"></span>
+						<strong translate="myLibrary.word.tier"></strong>
+						<span ng-bind-html="ctrl.item.Tier | highlight: ctrl.searchText"></span>
+					</span>
+				</section>
+				<!-- Word actions section -->
+				<section class='col-xs-3 col-sm-3 col-md-3 col-lg-3'>
+					<div class='buttons text-right show-on-hover'>
+						<div ng-if="ctrl.isRemoveMode()" class='text-center'>
+							<h5 translate="button.remove.confirmAction"></h5>
+							<button class='button button-action'
+								ng-click="ctrl.switchToNormalMode()"
+								ng-disabled="ctrl.isCollectionRemoving()"
+							>
+								<span class='glyphicon glyphicon-chevron-left'></span>
+								<span translate="button.no"></span>
+							</button>
+							<button class='button button-action'
+								ng-click="ctrl.removeItem();"
+								ng-disabled="ctrl.isRemoving()"
+							>
+								<span class='glyphicon' 
+									ng-class="{'glyphicon-refresh glyphicon-spin' : ctrl.isRemoving(), 
+											   'glyphicon-ok' : !ctrl.isRemoving()}">
+								</span>
+								<span translate="button.yes"></span>
+							</button>
+						</div>
+						<span ng-if="ctrl.isNormalMode() || ctrl.isExpandedMode()">
+							<button type="button" class="button button-action" ng-click="ctrl.switchToRemoveMode()">
+								<span class="glyphicon glyphicon-remove"></span>
+							</button>
+							<button type="button" class="button button-action" ng-click="ctrl.switchToEditMode()">
+								<span class="glyphicon glyphicon-pencil"></span>
+							</button>
+							<button type="button" class="button button-action" 
+								ng-click="ctrl.switchExpandedMode()" ng-switch="ctrl.isExpandedMode()">
+								<span class="glyphicon glyphicon-eye-open" ng-switch-when="false"></span>
+								<span class="glyphicon glyphicon-eye-close" ng-switch-default></span>
+							</button>
+						</span>	
+					</div>		
+				</section>
+			</div>
+		</div>
+	</div>
+	<!-- Translations section -->
+	<section class="row" ng-if="ctrl.isExpandedMode()">
+		<div class='col-xs-3 col-sm-3 col-md-1 col-lg-1'>
+		</div>
+		<div class="col-xs-9 col-sm-9 col-md-11 col-lg-11">
+			<div class="translations">
+				<h3 translate="myLibrary.word.translations"></h3>
+				<ul>
+					<li class='translation' ng-repeat="translation in ::ctrl.item.Translations">
+						<span ng-bind-html="translation.Translation | highlight: ctrl.searchText"></span>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</section>
+</div>

@@ -20,6 +20,8 @@
 		
 		ctrl.goToHome = goToHomeState;
 		ctrl.displayDevMode = config.devMode == true;
+		ctrl.displaySearchBar = config.searchUrl != null;
+		ctrl.displayLanguageChange = getAvailableLanguages() != null && getAvailableLanguages().length > 1;
 		ctrl.getAvailableLanguages = getAvailableLanguages;
 		ctrl.isLoading = isLoading;
 	

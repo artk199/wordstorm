@@ -1,0 +1,100 @@
+<form class='form-horizontal full-height' name="addWordForm">
+	<page page-class='word-page' scrollable-body="true" is-loading="ctrl.isLoading()" disallow-not-logged="true">
+		<page-header>
+			<div class='link-tree'>
+				<h1 class='previous-link' ng-click="ctrl.showAllCollections()">
+					<span translate='myLibrary.title'></span>
+				</h1>
+				<h2 class='previous-link' ng-click="ctrl.showCollection()" ng-if="ctrl.getSimpleCollection().Name != null">
+					<span ng-bind="ctrl.getSimpleCollection().Name"></span>
+				</h2>
+				<h2 ng-switch="::ctrl.view">
+					<span translate='myLibrary.word.add.title' ng-switch-when="add"></span>
+					<span ng-bind="ctrl.word.Word" ng-switch-when="edit"></span>
+				</h2>
+			</div>
+		</page-header>
+		<page-header-right>
+			<div class='buttons'>
+				<button type='button' class='button' ng-click='ctrl.showCollection()'>
+					<span class='glyphicon glyphicon-remove'></span>
+					<span translate='button.close'></span>
+				</button>
+			</div>
+		</page-header-right>
+		<!-- Main word fields -->
+		<page-body-top>
+			<section class='container-fluid full-height main-fields'>
+				<div class='row full-height'>
+					<div class='col-xs-1 col-sm-1 col-md-3 col-lg-3 full-height'></div>
+					<div class='col-xs-10 col-sm-10 col-md-6 col-lg-6 full-height'>
+						<form-field name="Word" type="input" is-required="true"
+							placeholder="myLibrary.word.add.form.Word.placeholder"
+							label="myLibrary.word.add.form.Word"
+							model="ctrl.formData.Word"
+							form="addWordForm"
+							use-auto-focus="true"
+						></form-field>
+						
+						<form-field name="Pronunciation" type="specialCharacters" is-required="true"
+							form="addWordForm"
+							placeholder="myLibrary.word.add.form.Pronunciation.placeholder"
+							label="myLibrary.word.add.form.Pronunciation"
+							model="ctrl.formData.Pronunciation"
+						></form-field>
+					</div>
+					<div class='col-xs-1 col-sm-1 col-md-3 col-lg-3 full-height'></div>
+				</div>
+			</section>
+			
+		</page-body-top>
+		<page-body>
+			<div class='container-fluid full-height'>
+				<div class='row full-height'>
+					<div class='col-xs-1 col-sm-1 col-md-3 col-lg-3 full-height'></div>
+					<div class='col-xs-10 col-sm-10 col-md-6 col-lg-6 full-height'>
+						<!-- Translations list -->
+						<listable-data
+							list="ctrl.formData.Translations"
+							no-view-change="true"
+							scrollable-body="true"
+							view="list"
+							display-directive-name="translation-tile"
+							display-directive-parameters = "{form: addWordForm, list: ctrl.formData.Translations}"
+						>
+							<listable-data-header-right>
+								<button type="button" class="button button-action red" ng-click="ctrl.addEmptyTranslation()">
+									<span class='glyphicon glyphicon-plus'></span>
+									<span translate="myLibrary.word.add.form.addTranslation"></span>
+								</button>
+							</listable-data-header-right>
+							<listable-data-empty-list>
+								<span class="error" ng-if="ctrl.formData.Translations.length == 0"
+									translate="myLibrary.word.add.form.errors.noTranslations"
+								></span>
+							</listable-data-empty-list>
+						</listable-data>
+					</div>
+					<div class='col-xs-1 col-sm-1 col-md-3 col-lg-3 full-height'></div>
+				</div>
+			</div>	
+		</page-body>
+		<page-footer>
+			<section class='buttons text-center'>
+				<button type="button" class='button button-action'
+						ng-click = "ctrl.clearForm(addWordForm)"
+						ng-disabled="ctrl.isFormSending()"
+						translate="button.clear">
+				</button>
+				<button type="submit" class='button button-action' 
+						ng-click="ctrl.sendForm(addWordForm)"
+						ng-disabled="!ctrl.canSaveForm()"
+						ng-switch="::ctrl.view">
+						<span class='glyphicon glyphicon-refresh glyphicon-spin' ng-if="ctrl.isFormSending()"></span>
+						<span translate="button.create" ng-switch-when="add"></span>
+						<span translate="button.save" ng-switch-when="edit"></span>
+				</button>
+			</section>
+		</page-footer>
+	</page>
+</form>

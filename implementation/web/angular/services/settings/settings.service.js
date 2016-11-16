@@ -8,6 +8,10 @@
 			DEFAULT_LIST_TYPE : {
 				get: function(){return getSetting("defaultListType") || "grid"},
 				set: function(value){return storeSetting("defaultListType", value)}
+			},
+			DEFAULT_SPECIAL_CHARACTERS_COLOR: {
+				get: function(){return getSetting("defaultSpecialCharactersKeyboardColor") || "green"},
+				set: function(value){return storeSetting("defaultSpecialCharactersKeyboardColor", value)}
 			}
 		};
 		

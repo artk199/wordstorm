@@ -1,0 +1,63 @@
+<div class='grid user-action'>
+	<header>
+		<h1 ng-bind-html="ctrl.item.Word | highlight: ctrl.searchText"
+			uib-tooltip="{{::ctrl.item.Word}}"
+			tooltip-placement="bottom-left"
+		></h1>
+		<h2 ng-bind="::ctrl.item.Pronunciation"></h2>
+		<div class="badge" ng-if="::ctrl.item.Tier" 
+			uib-tooltip="{{'myLibrary.word.tier' | translate}}"
+			tooltip-placement="right"
+		>
+			<span ng-bind-html="ctrl.item.Tier | highlight: ctrl.searchText"></span>
+		</div>
+	</header>
+	<section class='translations'>
+		<ul>
+			<li class='translation' ng-repeat="translation in ::ctrl.item.Translations | limitTo: 3">
+				<span ng-bind-html="translation.Translation | highlight: ctrl.searchText"></span>
+			</li>
+		</ul>
+		
+		<span class="more-translations"
+			ng-show="::(ctrl.item.Translations.length > 3)" 
+			translate="myLibrary.word.translation.more"
+			translate-value-more="{{::(ctrl.item.Translations.length - 3)}}"
+		></span>
+	</section>
+	<section class="buttons justified-content show-on-hover">
+		<button type="button" class="button button-action" ng-click="ctrl.switchToEditMode()">
+			<span class="glyphicon glyphicon-pencil"></span>
+		</button>
+		
+		<button type="button" class="button button-action" ng-click="ctrl.switchToRemoveMode()">
+			<span class="glyphicon glyphicon-remove"></span>
+		</button>
+	</section>
+	
+	<section class='curtain' ng-if="ctrl.isRemoveMode()">
+		<header>
+			<h1 translate="button.remove.confirmAction"></h1>
+			
+			<div class='buttons justify-content'>
+				<button class='button button-action'
+					ng-click="ctrl.switchToNormalMode();$event.stopPropagation(); $event.preventDefault();"
+					ng-disabled="ctrl.isRemoving()"
+				>
+					<span class='glyphicon glyphicon-chevron-left'></span>
+					<span translate="button.no"></span>
+				</button>
+				<button class='button button-action'
+					ng-click="ctrl.removeItem(); $event.stopPropagation(); $event.preventDefault();"
+					ng-disabled="ctrl.isRemoving()"
+				>
+					<span class='glyphicon' 
+						ng-class="{'glyphicon-refresh glyphicon-spin' : ctrl.isRemoving(), 
+								   'glyphicon-ok' : !ctrl.isRemoving()}">
+					</span>
+					<span translate="button.yes"></span>
+				</button>
+			</div>
+		</header>
+	</section>
+</div>

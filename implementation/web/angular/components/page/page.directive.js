@@ -23,7 +23,8 @@
 	    		headerLeft: '?pageHeaderLeft',
 	    		headerRight: '?pageHeaderRight',
 	    		body: 'pageBody',
-	    		footer: '?pageFooter'
+	    		footer: '?pageFooter',
+	    		bodyTop: '?pageBodyTop'
 	    	}
 	    };
 	}

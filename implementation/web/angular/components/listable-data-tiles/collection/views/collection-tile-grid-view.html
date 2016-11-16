@@ -1,51 +1,55 @@
 <form name='collectionForm' class='form-horizontal'>
 	<div class="clickable card user-action" ng-click="ctrl.openCollection(ctrl.item)">
-		<header>
-			<h1 ng-if="!ctrl.isEditMode()" ng-bind-html="ctrl.item.Name | highlight: ctrl.searchText"></h1>
-			
-			<!-- Edit mode -->
-			<span ng-if="ctrl.isEditMode()">
-				<input ng-model="ctrl.formData.Name"
-					ng-attr-placeholder="{{'myLibrary.addNewCollection.form.collectionName.placeholder' | translate}}"
-					name="name"
-				/>
-				<button type="reset" class="button button-empty"
-					uib-tooltip="{{'button.cancel' | translate}}"
-					ng-disabled="ctrl.isCollectionEditing()"
-					ng-click="ctrl.switchToNormalMode();$event.stopPropagation(); $event.preventDefault();"
-				>
-					<span class='glyphicon glyphicon-remove'></span>
-				</button>
-				<button type="submit" class="button button-empty"
-					ng-disabled="ctrl.formData.Name.length == 0 || ctrl.isCollectionEditing() || !ctrl.hasCollectionChanged()"
-					ng-click="ctrl.editCollection();$event.stopPropagation(); $event.preventDefault();"
-				>
-					<span class='glyphicon glyphicon-ok'
-						ng-class="{'glyphicon-ok' : !ctrl.isCollectionEditing(),
-								   'glyphicon-refresh glyphicon-spin' : ctrl.isCollectionEditing()}"
-					></span>
-				</button>
-			</span>
-			
-			<!-- Normal mode -->
-			<span ng-if="!ctrl.isEditMode()">
-				<button  class="button button-empty edit-button show-on-hover"
-					ng-click="ctrl.openEditMode();"
-				>
-					<span class='glyphicon glyphicon-pencil'></span>
-				</button>
-				<button class='button button-empty change-picture-button show-on-hover'
-					ng-click="$event.stopPropagation();"
-				>
-					<span class='glyphicon glyphicon-picture'></span>
-				</button>
-				<button class="button button-empty remove-button show-on-hover"
-					ng-click="ctrl.openRemoveMode();"
-				>
-					<span class='glyphicon glyphicon-remove'></span>
-				</button>
-			</span>
-			
+		<header ng-style="{'background-image' : 'url(http://static.swiat-pogody.pl/img/web/bandeaux/pays/polska.jpg)'}">	
+			<div class='data-container' ng-switch="ctrl.isEditMode()" >
+				<!-- Normal mode -->
+				<span ng-switch-default>
+					<h1 ng-bind-html="ctrl.item.Name | highlight: ctrl.searchText"></h1>
+				
+					<span ng-if="ctrl.canDisplayActionButtons()">
+						<button  class="button button-empty edit-button show-on-hover"
+							ng-click="ctrl.openEditMode();"
+						>
+							<span class='glyphicon glyphicon-pencil'></span>
+						</button>
+						<button class='button button-empty change-picture-button show-on-hover'
+							ng-click="$event.stopPropagation();"
+						>
+							<span class='glyphicon glyphicon-picture'></span>
+						</button>
+						<button class="button button-empty remove-button show-on-hover"
+							ng-click="ctrl.openRemoveMode();"
+						>
+							<span class='glyphicon glyphicon-remove'></span>
+						</button>
+					</span>
+				</span>
+				
+				<!-- Edit mode -->
+				<span ng-switch-when="true">
+					<input ng-model="ctrl.formData.Name" auto-focus	use-auto-focus="true"			
+						ng-attr-placeholder="{{'myLibrary.addNewCollection.form.collectionName.placeholder' | translate}}"
+						name="name"
+					/>
+					<button type="reset" class="button button-empty"
+						uib-tooltip="{{'button.cancel' | translate}}"
+						ng-disabled="ctrl.isCollectionEditing()"
+						ng-click="ctrl.switchToNormalMode();$event.stopPropagation(); $event.preventDefault();"
+					>
+						<span class='glyphicon glyphicon-remove'></span>
+					</button>
+					<button type="submit" class="button button-empty"
+						ng-disabled="ctrl.formData.Name.length == 0 || ctrl.isCollectionEditing() || !ctrl.hasCollectionChanged()"
+						ng-click="ctrl.editCollection();$event.stopPropagation(); $event.preventDefault();"
+					>
+						<span class='glyphicon glyphicon-ok'
+							ng-class="{'glyphicon-ok' : !ctrl.isCollectionEditing(),
+									   'glyphicon-refresh glyphicon-spin' : ctrl.isCollectionEditing()}"
+						></span>
+					</button>
+				</span>
+			</div>	
+			<div class='curtain-container'></div>
 		</header>
 		
 		<!-- Delete mode -->
@@ -96,10 +100,11 @@
 						<input type="checkbox" ng-if="ctrl.isEditMode()" ng-model="ctrl.formData.IsPublic"/>
 					</span>
 					<div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
-						<span translate="myLibrary.collections.public"
+						<span translate="myLibrary.collections.privacyPolicy"></span>
+						<span ng-bind-html="'myLibrary.collections.public' | translate | highlight: ctrl.searchText"
 							ng-if="ctrl.isEditMode() ? ctrl.formData.IsPublic : ctrl.item.IsPublic">
 						</span>
-						<span translate="myLibrary.collections.private"
+						<span ng-bind-html="'myLibrary.collections.private' | translate | highlight: ctrl.searchText"
 							ng-if="ctrl.isEditMode() ? !ctrl.formData.IsPublic : !ctrl.item.IsPublic">
 						</span>
 					</div>

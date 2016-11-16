@@ -18,29 +18,16 @@
 		REMOVING_SELECTED: false
 	};
 	
-	var views = {
-		ALL_COLLECTIONS: "angular/pages/my-library/views/my-library-all-collections.html",
-		ADD_COLLECTION:  "angular/pages/my-library/views/my-library-add-collection.html"
-	};
-	
-	DirectiveController.$inject = ['$stateParams', 'rest', 'pages'];
-	function DirectiveController($stateParams, rest, pages){
+	DirectiveController.$inject = ['$stateParams', 'rest', 'pages', '$translate', 'config', 'alerts'];
+	function DirectiveController($stateParams, rest, pages, $translate, config, alerts){
 		var ctrl = this;
-		
-		ctrl.params = $stateParams;
-		ctrl.view = views.ALL_COLLECTIONS;
-		ctrl.addCollectionFormData = initAddCollectionFormData();
-		ctrl.formSending = false;
+
+		ctrl.listSize = config.maxItemsOnList;
 		
 		ctrl.collection = null;
 		ctrl.isLoading = isLoading;
 		
-		ctrl.addCollection = addCollection;
-		ctrl.showAllCollections = showAllCollections;
-		
-		ctrl.clearForm = clearForm;
-		ctrl.sendAddCollectionRequest = sendAddCollectionRequest;
-		
+		ctrl.addCollection = pages.myLibrary.addCollection;
 		ctrl.refreshCollectionsList = refreshCollectionsList;
 		ctrl.collectionListFilter = collectionListFilter;
 			
@@ -55,9 +42,7 @@
 		
 		//////////////////
 		function init(){
-			ctrl.view = views.ALL_COLLECTIONS;
 			refreshCollectionsList(null, null, true);
-			selectedCollections = [];
 		}
 		
 		function refreshCollectionsList(pageSize, pageNumber, useCache, forceReload){
@@ -99,14 +84,6 @@
 			return loadingData.COLLECTION_LIST;
 		}
 		
-		function addCollection(){
-			ctrl.view = views.ADD_COLLECTION;
-		}
-		
-		function showAllCollections(){
-			ctrl.view = views.ALL_COLLECTIONS;
-		}
-		
 		function collectionListFilter(item, searchText){
 			var text = clearText(searchText);
 			var keywords = text.split(" ");
@@ -124,6 +101,13 @@
 					continue;
 				}
 				
+				var itemPrivatePolicy = item.IsPublic;
+				var policy = itemPrivatePolicy ? clearText($translate.instant("myLibrary.collections.public")) 
+						: clearText($translate.instant("myLibrary.collections.private"));
+				if(policy.indexOf(keyword) >= 0){
+					continue;
+				}
+				
 				return false;
 			}
 			return true;
@@ -134,16 +118,15 @@
 		}
 		
 		function openCollection(collection){
-			pages.myLibrary.collection(collection.Id, collection.Name, collection);
+			pages.myLibrary.collection(collection.Id, collection.Name);
 		}
 		
+		// ===== Removing selected =====
 		function initListableDataEvents(){
 			return {
 				onViewChange: function(){ ctrl.parametersForCollectionsList.selectedCollections = []; }
 			}
 		}
-		
-		// ===== Removing selected =====
 		
 		function isRemovingSelected(){
 			return loadingData.REMOVING_SELECTED;
@@ -158,38 +141,17 @@
 			loadingData.REMOVING_SELECTED = true;
 			
 			rest.collection.removeList(selectedCollections).then(function(result){
+				if(result.Result){
+					alerts.addGlobalAlert({
+						title: 'messages.collections.remove.success',
+						titleParams: {collectionsCount: selectedCollections.length},
+						type: 'success'
+					});
+					ctrl.parametersForCollectionsList.selectedCollections.length = 0;
+				}
 				refreshCollectionsList(null, null, true, true);
 				loadingData.REMOVING_SELECTED = false;
 			});
-		}
-		
-		
-		// ===== Add collection functions =====
-		function initAddCollectionFormData(){
-			return {
-				Name: null,
-				IsPublic: false
-			};
-		}
-		
-		function clearForm(form){
-			form.$setPristine();
-			form.$setUntouched();
-			ctrl.addCollectionFormData = initAddCollectionFormData();
-		}
-		
-		function sendAddCollectionRequest(form){
-			ctrl.formSending = true;
-			
-			rest.collection.create([ctrl.addCollectionFormData]).then(function(result){
-				if(result.Result){
-					var collection = result.Result[0];
-					openCollection(collection);
-				}
-			});
-			
-			clearForm(form);
-			ctrl.formSending = false;
 		}
 	}
 }());

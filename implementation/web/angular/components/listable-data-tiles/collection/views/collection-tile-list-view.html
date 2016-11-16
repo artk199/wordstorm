@@ -2,11 +2,10 @@
 	<div class='row vertical-middle user-action' ng-class="{'action-active' : ctrl.selected || !ctrl.isNormalMode()}">
 		<div class='col-xs-3 col-sm-3 col-md-1 col-lg-1'>
 			<div class='item-icon-container'>
-				<img src="http://download.seaicons.com/download/i78370/iconka/meow/iconka-meow-cat-grumpy.ico" 
-					class="item-icon hide-on-hover" alt=""/>
+				<span class='glyphicon glyphicon-folder-open item-icon hide-on-hover'></span>
 				<input type="checkbox" ng-model="ctrl.selected"
 					ng-init="ctrl.selected = ctrl.isCollectionSelected()" 
-					ng-if="ctrl.parameters != null && ctrl.parameters.selectedCollections"
+					ng-if="::(ctrl.parameters != null && ctrl.parameters.selectedCollections)"
 					class="show-on-hover item-selector"
 					ng-click="ctrl.selectCollection()"
 				/>
@@ -18,27 +17,34 @@
 				<section class='col-xs-5 col-sm-5 col-md-5 col-lg-5 clickable' ng-click="ctrl.openCollection(ctrl.item)" 
 					ng-switch="ctrl.isEditMode()">
 					<div ng-switch-when="true">
-						<input ng-model="ctrl.formData.Name"
-							class='name-input'
-							ng-attr-placeholder="{{'myLibrary.addNewCollection.form.collectionName.placeholder' | translate}}"
+						<input ng-model="ctrl.formData.Name" 
+							use-auto-focus="true"
+							class='name-input' auto-focus
+							ng-attr-placeholder="{{::('myLibrary.addNewCollection.form.collectionName.placeholder' | translate)}}"
 							name="name"
 						/>
 						<div>
-							<input type="checkbox" ng-if="ctrl.isEditMode()" ng-model="ctrl.formData.IsPublic"/>
-							<span ng-if="ctrl.isEditMode() ? ctrl.formData.IsPublic : ctrl.item.IsPublic" 
-								translate="myLibrary.collections.public">
-							</span>
-							<span ng-if="ctrl.isEditMode() ? !ctrl.formData.IsPublic : !ctrl.item.IsPublic" 
-								translate="myLibrary.collections.private">
-							</span>
+							<input type="checkbox" ng-model="ctrl.formData.IsPublic"/>
+							<span translate="myLibrary.collections.privacyPolicy"></span>
+							<span ng-if="ctrl.item.IsPublic" 
+								ng-bind-html="'myLibrary.collections.public' | translate | highlight: ctrl.searchText"
+							></span>
+							<span ng-if="!ctrl.item.IsPublic"  
+								ng-bind-html="'myLibrary.collections.private' | translate | highlight: ctrl.searchText"
+							></span>
 						</div>
 					</div>
 					<div ng-switch-default>
 						<h3 class="item-title" ng-bind-html="ctrl.item.Name | highlight: ctrl.searchText"></h3>
 						<div>
-							<span class='glyphicon glyphicon-user' ng-if="!ctrl.isEditMode()"></span>
-							<span ng-if="ctrl.item.IsPublic" translate="myLibrary.collections.public"></span>
-							<span ng-if="!ctrl.item.IsPublic" translate="myLibrary.collections.private"></span>
+							<span class='glyphicon glyphicon-user'></span>
+							<span translate="myLibrary.collections.privacyPolicy"></span>
+							<span ng-if="ctrl.item.IsPublic" 
+								ng-bind-html="'myLibrary.collections.public' | translate | highlight: ctrl.searchText"
+							></span>
+							<span ng-if="!ctrl.item.IsPublic"  
+								ng-bind-html="'myLibrary.collections.private' | translate | highlight: ctrl.searchText"
+							></span>
 						</div>
 					</div>
 				</section>
@@ -56,14 +62,14 @@
 						<div ng-if="ctrl.isRemoveMode()" class='text-center'>
 							<h5 translate="button.remove.confirmAction"></h5>
 							<button class='button button-action'
-								ng-click="ctrl.switchToNormalMode();$event.stopPropagation(); $event.preventDefault();"
+								ng-click="ctrl.switchToNormalMode()"
 								ng-disabled="ctrl.isCollectionRemoving()"
 							>
 								<span class='glyphicon glyphicon-chevron-left'></span>
 								<span translate="button.no"></span>
 							</button>
 							<button class='button button-action'
-								ng-click="ctrl.removeCollection(); $event.stopPropagation(); $event.preventDefault();"
+								ng-click="ctrl.removeCollection()"
 								ng-disabled="ctrl.isCollectionRemoving()"
 							>
 								<span class='glyphicon' 
@@ -92,7 +98,7 @@
 								></span>
 							</button>
 						</span>
-						<span ng-if="ctrl.isNormalMode()">
+						<span ng-if="ctrl.isNormalMode() && ctrl.canDisplayActionButtons()">
 							<button class="button button-action" ng-click="ctrl.openEditMode();">
 								<span class='glyphicon glyphicon-pencil'></span>
 							</button>

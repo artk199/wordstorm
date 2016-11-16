@@ -1,35 +1,43 @@
 <div class='listable-data vertical-grid' ng-class="{'list-view' : ctrl.isListMode(), 'grid-view' : ctrl.isGridMode()}">
 	<header>
-		<div class="btn-group">
-		  <button type="button" class="btn button" 
-		  	ng-click="ctrl.switchToViewMode('list')"
-		  	ng-class="{'active' : ctrl.isListMode()}"
-		  >
-		  	<span class='glyphicon glyphicon-th-list'></span>
-		  </button>
-		  <button type="button" class="btn button" 
-		  	ng-click="ctrl.switchToViewMode('grid')"
-		  	ng-class="{'active' : ctrl.isGridMode()}"
-		  >
-		  	<span class='glyphicon glyphicon-th'></span>
-		  </button>
-		  <button type="button" class="btn button" ng-if="ctrl.refreshDataAction" ng-click="ctrl.refreshDataAction()">
-		  	<span class='glyphicon glyphicon-refresh'></span>
-		  </button>
-		</div>
+		<section class="left-section">
+			<span ng-if="!ctrl.noViewChange">			
+			 	<button type="button" class="btn button" 
+			  		ng-click="ctrl.switchToViewMode('list')"
+			  		ng-class="{'active' : ctrl.isListMode()}"
+			  	>
+			  		<span class='glyphicon glyphicon-th-list'></span>
+			  	</button>
+			  	<button type="button" class="btn button" ng-if="!ctrl.noViewChange"
+			  		ng-click="ctrl.switchToViewMode('grid')"
+			  		ng-class="{'active' : ctrl.isGridMode()}"
+			  	>
+			  		<span class='glyphicon glyphicon-th'></span>
+			  	</button>
+		 	</span>
+		  	<button type="button" class="btn button" ng-if="ctrl.refreshDataAction != null" ng-click="ctrl.refreshDataAction()">
+		  		<span class='glyphicon glyphicon-refresh'></span>
+		  	</button>
+		  	<span>
+			  	<button type="button" class="btn button" ng-if="ctrl.filterFunction" ng-click="ctrl.switchSearchMode()">
+					<span class='glyphicon glyphicon-search'></span>
+				</button>
+				<div class='search-bar with-remove-option' ng-class="{'opened' : ctrl.isSearchModeOn()}">
+					<input class="dummy-input" ng-if="!ctrl.isSearchModeOn()" />
+					<input auto-focus ng-model="ctrl.searchText" ng-if="ctrl.isSearchModeOn()" 
+						ng-change="ctrl.refreshPagination()"
+						use-auto-focus="true"
+						ng-attr-placeholder="{{'listableData.searchPlaceholder' | translate}}"/>
+					<span class='glyphicon glyphicon-remove remove-option' ng-click="ctrl.switchSearchMode()"></span>
+				</div>
+		  	</span>
+		</section>
 		<section class='right-section'>
-			<div class='search-bar with-remove-option' ng-if="ctrl.isSearchModeOn()">
-				<span class='glyphicon glyphicon-search'></span>
-				<input auto-focus ng-model="ctrl.searchText" ng-attr-placeholder="{{'listableData.searchPlaceholder' | translate}}"/>
-				<span class='glyphicon glyphicon-remove remove-option' ng-click="ctrl.switchSearchMode()"></span>
-			</div>
-			<button type="button" class="btn button" ng-if="!ctrl.isSearchModeOn()" ng-click="ctrl.switchSearchMode()">
-				<span class='glyphicon glyphicon-search'></span>
-				<span translate="button.search"></span>
-			</button>
 			<div ng-transclude="headerRight"></div>
 		</section>
 	</header>
+	
+	<div class="empty-list" ng-if="ctrl.filteredList.length == 0" ng-transclude="listEmpty"></div>
 	
 	<div class='list rest-height' ng-if="!ctrl.scrollableBody">
 		<ng-include src="'angular/components/listable-data/listable-data-list-part.html'"></ng-include>
@@ -39,5 +47,16 @@
 		<div class="list">
 			<ng-include src="'angular/components/listable-data/listable-data-list-part.html'"></ng-include>
 		</div>
-	</perfect-scrollbar> 
+	</perfect-scrollbar>
+	
+	<section class="pagination" ng-if="ctrl.pagination != null && ctrl.groupField == null && (ctrl.filteredList.length / ctrl.getMaxListSize() > 1)">
+		<ul uib-pagination 
+			total-items="ctrl.filteredList.length"
+			items-per-page="ctrl.getMaxListSize()"
+			ng-model="ctrl.listCurrentPage"
+			boundary-links="false"
+			direction-links="false"
+			force-ellipses="true"
+		></ul>
+	</section>
 </div>

@@ -22,6 +22,7 @@
 		ctrl.isPageOpened = pages.isPageOpened;
 		ctrl.isPersonLogged = userPanelService.isPersonLogged;
 		ctrl.openMyLibrary = pages.myLibrary.allCollections;
+		ctrl.openPublicLibrary = pages.publicLibrary.main;
 		
 		////////////////////////
 		

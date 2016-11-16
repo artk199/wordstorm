@@ -1,0 +1,78 @@
+.special-characters-keyboard.main{
+	position: relative;
+}
+
+.special-characters-keyboard.main .open-button{
+    position: absolute;
+    right: -30px;
+    top: 1px;
+}
+
+/* Keyboard */
+
+.special-characters-keyboard.dropdown-menu{
+    background: #323338;
+    border: 1px solid #292a2f;
+	width: 430px;
+    border-radius: 5px;
+}
+
+.special-characters-keyboard.dropdown-menu ul{
+	display: block;
+	width: 100%;
+	clear: both;
+}
+
+.special-characters-keyboard.dropdown-menu ul li{
+    display: inline-block;
+    width: 35px;
+    height: 35px;
+    line-height: 33px;
+    text-align: center;
+    font-size: 20px;
+    border: 1px solid #1f1f21;
+    margin: 2px;
+    transition: 0.3s;
+}
+
+.special-characters-keyboard.dropdown-menu ul li:hover{
+    box-shadow: 0 0 10px rgba(0,0,0,0.6);
+    background: rgba(0, 0, 0, 0.26);
+    cursor: pointer;
+}
+
+.special-characters-keyboard.dropdown-menu.green ul li,
+.special-characters-keyboard.dropdown-menu .colors .green{
+    color: #05ff1a;	
+}
+
+.special-characters-keyboard.dropdown-menu.green  ul li:hover span,
+.special-characters-keyboard.dropdown-menu .colors .green:hover span{
+	text-shadow: 0 0 10px #05ff1a;
+}
+
+
+.special-characters-keyboard.dropdown-menu.blue ul li,
+.special-characters-keyboard.dropdown-menu .colors .blue{
+	color: #2cddf1;
+}
+
+.special-characters-keyboard.dropdown-menu.blue  ul li:hover span,
+.special-characters-keyboard.dropdown-menu .colors .blue:hover span{
+	text-shadow: 0 0 10px #2cddf1;
+}
+
+.special-characters-keyboard.dropdown-menu.orange ul li,
+.special-characters-keyboard.dropdown-menu .colors .orange{
+	color: #ffa700;
+}
+
+.special-characters-keyboard.dropdown-menu.orange  ul li:hover span,
+.special-characters-keyboard.dropdown-menu .colors .orange:hover span{
+	text-shadow: 0 0 10px #ffa700;
+}
+
+.special-characters-keyboard.dropdown-menu .colors li{
+    font-size: 14px;
+    line-height: 35px;
+}

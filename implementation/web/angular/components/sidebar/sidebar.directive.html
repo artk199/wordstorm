@@ -2,6 +2,18 @@
 	<user-panel open="ctrl.sidebarOpened"></user-panel>
 	<ul>
 		<li class="expandable"
+			ng-if="!ctrl.isPersonLogged() && !ctrl.sidebarOpened"
+		>
+			<a href='#' ng-click="ctrl.open()">
+				<span class='inline-children'>
+					<span class="glyphicon glyphicon-user"></span>
+					<span>
+						<span class='option-title' translate="userPanel.form.title"></span>
+					</span>
+				</span>
+			</a>
+		</li>
+		<li class="expandable"
 			ng-if="ctrl.isPersonLogged()"
 			ng-class="{'active' : ctrl.isPageOpened('myLibrary')}"
 		>
@@ -11,6 +23,20 @@
 					<span>
 						<span class='option-title' translate="myLibrary.linkName"></span>
 						<span class='option-subtitle' translate="myLibrary.linkInfo" ng-if="ctrl.sidebarOpened"></span>
+					</span>
+				</span>
+			</a>
+		</li>
+		<li class="expandable"
+			ng-if="ctrl.isPersonLogged()"
+			ng-class="{'active' : ctrl.isPageOpened('publicLibrary')}"
+		>
+			<a href='#' ng-click="ctrl.openPublicLibrary()">
+				<span class='inline-children'>
+					<span class="glyphicon glyphicon-bookmark"></span>
+					<span>
+						<span class='option-title' translate="publicLibrary.link.title"></span>
+						<span class='option-subtitle' translate="publicLibrary.link.subtitle" ng-if="ctrl.sidebarOpened"></span>
 					</span>
 				</span>
 			</a>

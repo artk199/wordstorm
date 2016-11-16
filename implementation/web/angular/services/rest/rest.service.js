@@ -13,7 +13,8 @@
 		service.user = {
 			login: loginUser,
 			isLogged: isUserLogged,
-			logout: logoutUser
+			logout: logoutUser,
+			profile: loadUserData
 		};
 		
 		service.collection = {
@@ -22,7 +23,19 @@
 			get: getCollection,
 			remove: removeCollection,
 			removeList: removeListOfCollections,
-			edit: editCollection
+			edit: editCollection,
+			getPublic: getPublicCollections
+		};
+		
+		service.word = {
+			create: createWord,
+			remove: removeWord,
+			get: getWord,
+			edit: editWord
+		};
+		
+		service.common = {
+			partOfSpeech: getPartOfSpeechEnum
 		};
 		
 		//////////////////////////////
@@ -44,6 +57,10 @@
 		
 		function isUserLogged(){
 			return restConfig.createGetPromise("User/Token");
+		}
+		
+		function loadUserData(){
+			return restCache.get("userCache", "User/Profile", null, null, true);
 		}
 		
 		// Current user collection functions
@@ -74,6 +91,39 @@
 		function editCollection(collectionData){
 			restCache.clearCache("collectionsCache");
 			return restConfig.createPutPromise("Collection", collectionData);
+		}
+		
+		function getPublicCollections(pageSize, pageNumber, useCache, forceReload){
+			return restCache.get("publicCollections", "Collection/Public", null, null, useCache, forceReload);
+		}
+		
+		// Words functions
+		
+		function createWord(collectionId, data){
+			restCache.clearCache("wordsCache");
+			restCache.clearCache("collectionsCache");
+			return restConfig.createPostPromise("Word/" + collectionId, data);
+		}
+		
+		function removeWord(wordsId){
+			restCache.clearCache("wordsCache");
+			restCache.clearCache("collectionsCache");
+			return restConfig.createDeletePromise("Word", wordsId);
+		}
+		
+		function getWord(wordId, useCache, forceReload){
+			return restCache.get("wordsCache", "Word/" + wordId, null, null, useCache, forceReload);
+		}
+		
+		function editWord(words){
+			restCache.clearCache("wordsCache");
+			restCache.clearCache("collectionsCache");
+			return restConfig.createPutPromise("Word", words);
+		}
+		
+		// Common functions 
+		function getPartOfSpeechEnum(){
+			return restCache.get("commonCache", "Common/PartOfSpeech", null, null, true);
 		}
 	}
 }());

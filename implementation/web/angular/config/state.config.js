@@ -6,19 +6,37 @@
 	StateConfiguration.$inject = ['$stateProvider', '$urlRouterProvider'];
 	function StateConfiguration($stateProvider, $urlRouterProvider){
 		$urlRouterProvider.otherwise('/home');	
-		
+	
 		addState("home", "/home", "<main-page></main-page>");
 		addState("register", "/register", "<register-page></register-page>");
 		addState("error", "/error", "<error-page></error-page>", {
 			error: null
 		});
-		addState("my-library", "/my-library", "<my-library-page></my-library-page>");
-		addState("collection", "/collection/{groupName}/{groupId}", "<collection-page></collection-page>", {
-			groupId: null,
-			groupName: null,
-			collectionObj: null
+		addState("myLibrary", "/my-library", "<my-library-page></my-library-page>");
+		addState("publicLibrary", "/public-library", "<public-library-page></public-library-page>");
+
+		addState("collection", "/collection/{collectionName}/{collectionId}", "<collection-page></collection-page>", {
+			collectionId: null,
+			collectionName: null
 		});
-		addState("authError", "/authorization-error", "<authorization-error-page></authorization-error-page>");
+		addState("addCollection", "/collection/add", "<collection-page view='add'></collection-page>");
+		addState("editCollection", "/collection/edit/{collectionName}/{collectionId}", "<collection-page view='edit'></collection-page>", {
+			collectionId: null,
+			collectionName: null
+		});
+		addState("authError", "/authorization-error", "<authorization-error-page></authorization-error-page>");	
+		addState("word", "/word/{word}/{wordId}", "<word-page></word-page>", {
+			word: null,
+			wordId: null
+		});
+		addState("addWord", "/word/add/{collectionName}/{collectionId}", "<word-page view='add'></word-page>", {
+			collectionId: null,
+			collectionName: null
+		});
+		addState("editWord", "/word/edit/{word}/{wordId}", "<word-page view='edit'></word-page>", {
+			word: null,
+			wordId: null
+		});
 		
 		///////////////////////////
 		
