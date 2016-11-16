@@ -11,6 +11,7 @@ public class Word {
 
     String id;
     String transcription;
+    String word;
     int partOfSpeech;
     int inflection;
     int difficultyLevel;
@@ -28,6 +29,14 @@ public class Word {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getWord() {
+        return word;
+    }
+
+    public void setWord(String word) {
+        this.word = word;
     }
 
     public String getTranscription() {

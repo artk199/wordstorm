@@ -27,9 +27,12 @@
         <activity
             android:name=".activities.StartActivity"
             android:label="@string/title_activity_start"
-            android:theme="@style/AppTheme.NoActionBar"
-            />
-        <activity android:name=".activities.RegisterActivity"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".activities.RegisterActivity" />
+        <activity
+            android:name=".activities.CollectionDetailsActivity"
+            android:label="@string/title_activity_collection_details"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

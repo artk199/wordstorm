@@ -13,10 +13,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +23,6 @@ import java.util.List;
 import pl.bialateam.wordstorm.R;
 import pl.bialateam.wordstorm.activities.start.CollectionListAdapter;
 import pl.bialateam.wordstorm.authentication.Authentication;
-import pl.bialateam.wordstorm.authentication.AuthenticationProvider;
 import pl.bialateam.wordstorm.network.CollectionEndpoint;
 import pl.bialateam.wordstorm.pojo.Collection;
 
@@ -59,7 +57,18 @@ public class StartActivity extends AppCompatActivity
         adapter = new CollectionListAdapter(this,new ArrayList());
         ListView collectionListView = (ListView) findViewById(R.id.collection_list_view);
         collectionListView.setAdapter(adapter);
+        collectionListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
+            @Override
+            public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
+                Intent intent = new Intent(StartActivity.this,CollectionDetailsActivity.class);
+                Collection o = adapter.getItem(position);
+                Bundle b = new Bundle();
+                b.putSerializable("collection", o);
+                intent.putExtras(b);
+                startActivity(intent);
+            }
+        });
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.content_start);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
                                                     @Override

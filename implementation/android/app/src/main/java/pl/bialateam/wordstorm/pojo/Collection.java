@@ -1,14 +1,15 @@
 package pl.bialateam.wordstorm.pojo;
 
+import java.io.Serializable;
+
 /**
  * Created by Artur on 03.11.2016.
  */
 
-public class Collection {
+public class Collection implements Serializable {
 
     String id;
-    //TODO: Remove to cos;
-    String name = "test";
+    String name;
     boolean isPublic;
     int difficultLevel;
     Category category;

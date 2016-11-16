@@ -29,9 +29,8 @@ public class AuthenticationProvider {
     public boolean registerAndAuthenticate(String username, String password) {
         Log.d(TAG,"Registring user: " + username);
         AuthenticationEndpoint authenticationEndpoint = new AuthenticationEndpoint();
-        authenticationEndpoint.register(username,password);
-        //TODO: parse response etc.
-        if(true){
+        boolean authenticationResponse = authenticationEndpoint.register(username,password);
+        if(authenticationResponse){
             return authenticate(username,password);
         }
         return false;

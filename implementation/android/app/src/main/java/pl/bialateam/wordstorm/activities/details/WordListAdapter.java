@@ -1,4 +1,4 @@
-package pl.bialateam.wordstorm.activities.start;
+package pl.bialateam.wordstorm.activities.details;
 
 import android.app.Activity;
 import android.content.Context;
@@ -14,21 +14,22 @@ import java.util.List;
 
 import pl.bialateam.wordstorm.R;
 import pl.bialateam.wordstorm.pojo.Collection;
+import pl.bialateam.wordstorm.pojo.Word;
 
 /**
  * Created by Artur on 11.11.2016.
  */
 
-public class CollectionListAdapter extends ArrayAdapter<Collection> {
+public class WordListAdapter extends ArrayAdapter<Word> {
 
     Context context;
     int resource;
-    List<Collection> data = null;
+    List<Word> data = null;
 
-    public CollectionListAdapter(Context context, List objects) {
-        super(context, R.layout.collection_row, objects);
+    public WordListAdapter(Context context, List objects) {
+        super(context, R.layout.word_row, objects);
         this.context = context;
-        this.resource = R.layout.collection_row;
+        this.resource = R.layout.word_row;
         this.data = objects;
     }
 
@@ -36,26 +37,26 @@ public class CollectionListAdapter extends ArrayAdapter<Collection> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View view = convertView;
-        CollectionHolder collectionHolder = null;
+        WordHolder collectionHolder = null;
         if(view == null){
             LayoutInflater inflater = ((Activity) context).getLayoutInflater();
             view = inflater.inflate(resource,parent,false);
-            collectionHolder = new CollectionHolder();
+            collectionHolder = new WordHolder();
             collectionHolder.image = (ImageView) view.findViewById(R.id.collection_image);
-            collectionHolder.title = (TextView) view.findViewById(R.id.collection_title);
+            collectionHolder.title = (TextView) view.findViewById(R.id.word_title);
 
             view.setTag(collectionHolder);
         }else{
-            collectionHolder = (CollectionHolder) view.getTag();
+            collectionHolder = (WordHolder) view.getTag();
         }
 
-        Collection collection = data.get(position);
-        collectionHolder.title.setText(collection.getName());
+        Word collection = data.get(position);
+        collectionHolder.title.setText(collection.getWord());
 
         return view;
     }
 
-    class CollectionHolder{
+    class WordHolder{
 
         ImageView image;
         TextView title;

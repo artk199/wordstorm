@@ -1,14 +1,15 @@
 package pl.bialateam.wordstorm.network;
 
+import android.accounts.AuthenticatorException;
 import android.util.Log;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
+import com.android.volley.Response;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.RequestFuture;
-import com.google.gson.JsonObject;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
@@ -40,6 +41,8 @@ public class Endpoint {
 
         JSONObject jsonObject = null;
 
+        int status;
+
         String url = baseURL + urlPostfix;
         Log.d(TAG,"Wołanie: " + url);
 
@@ -55,6 +58,14 @@ public class Endpoint {
                     headers.put("Authorization", "bearer " + authentication.getToken());
                 }
                 return headers;
+            }
+
+            @Override
+            protected Response<JSONObject> parseNetworkResponse(NetworkResponse response) {
+                if(response.statusCode != 200){
+                    return null;
+                }
+                return super.parseNetworkResponse(response);
             }
         };
 
