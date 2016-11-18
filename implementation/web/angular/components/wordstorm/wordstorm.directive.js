@@ -17,6 +17,7 @@
 	function DirectiveController(pages, config, userPanelService){
 		var ctrl = this;
 		var checkingPersonLogged = false;
+		ctrl.ngModelOptions = null;
 		
 		ctrl.goToHome = goToHomeState;
 		ctrl.displayDevMode = config.devMode == true;
@@ -30,12 +31,19 @@
 		///////////////////////////
 		
 		function init(){
+			ctrl.ngModelOptions = initNgModelOptions();
+			
 			checkingPersonLogged = true;
 			userPanelService.checkPersonLogged().then(function(){
 				checkingPersonLogged = false;
 			});
 		}
 		
+		function initNgModelOptions(){
+			return { 
+				debounce : config.defaultDebounceTimeInMs
+			};
+		}
 		function isLoading(){
 			return checkingPersonLogged;
 		}

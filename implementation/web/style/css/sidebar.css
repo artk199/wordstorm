@@ -41,7 +41,7 @@
 }
 
 #sidebar ul li a:hover, #sidebar ul li a:active{
-	background: #fba502;
+	background: #da2127;
 	transition: 0.5s;
 }
 
@@ -80,7 +80,7 @@
 }
 
 #sidebar ul li.active a{
-	background: #fba502;
+	background: #ca3c41;
 }
 
 #sidebar ul li.active::after{
@@ -88,7 +88,7 @@
   	height: 0; 
  	border-top: 20px solid transparent;
   	border-bottom: 20px solid transparent;
-  	border-left: 20px solid #fba502;
+  	border-left: 20px solid #ca3c41;
   	position: absolute;
   	right: -20px;
   	top: 25%;
@@ -97,11 +97,11 @@
 }
 
 #sidebar ul li.active:hover a{
-	background: #fb9902;
+	background: #ca3c41;
 }
 
 #sidebar ul li.active:hover::after{
-	border-left: 20px solid #fb9902;
+	border-left: 20px solid #ca3c41;
 	transition: 0.5s;
 }
 
@@ -228,4 +228,25 @@
 #sidebar .logged-person-icon img{
 	max-width: 100%;
 	max-height: 100%;
+}
+
+/* Background of sidebar */
+#sidebar-background{
+	height: 100%;
+	width: 100%;
+	display: block;
+	left: 0;
+	top: 0;
+    z-index: 9;
+    transition: 0.5s;
+    position: absolute;
+    padding-top: 70px;
+}
+
+#sidebar-background::before{
+	content: "";
+	display: block;
+	height: 100%;
+	width: 100%;
+	background: rgba(0,0,0,0.7);
 }

@@ -50,9 +50,14 @@
 				display-directive-parameters="ctrl.parametersForWords"
 				filter-function="ctrl.wordsListFilter"
 				scrollable-body="true"
-				pagination="{maxSize: ctrl.listSize}"
+				events="ctrl.listableDataEvents"
 			>
 				<listable-data-header-right>
+					<button class="button button-action red" ng-click="ctrl.openLearning(ctrl.collection.Id, ctrl.collection.Name)"
+					>
+						<span class="glyphicon glyphicon-education"></span>
+						<span translate="myLibrary.collection.playLearn"></span>
+					</button>
 					<button class='button button-action red one-line'
 							ng-disabled="ctrl.isRemovingWords()"
 							ng-if="ctrl.isAnyWordSelected()"

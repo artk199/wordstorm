@@ -1,10 +1,13 @@
 <div id="sidebar" ng-class="{'opened' : ctrl.sidebarOpened}">
-	<user-panel open="ctrl.sidebarOpened"></user-panel>
+	<user-panel open="ctrl.sidebarOpened" 
+		close-sidebar="ctrl.closeSidebar();"
+		open-sidebar="ctrl.openSidebar();"
+	></user-panel>
 	<ul>
 		<li class="expandable"
 			ng-if="!ctrl.isPersonLogged() && !ctrl.sidebarOpened"
 		>
-			<a href='#' ng-click="ctrl.open()">
+			<a href='#' ng-click="ctrl.toggleSidebar()">
 				<span class='inline-children'>
 					<span class="glyphicon glyphicon-user"></span>
 					<span>
@@ -14,10 +17,23 @@
 			</a>
 		</li>
 		<li class="expandable"
+			ng-if="!ctrl.isPersonLogged()"
+			ng-class="{'active' : ctrl.isPageOpened('register')}"
+		>
+			<a href='#' ng-click="ctrl.openRegisterPage();ctrl.closeSidebar();">
+				<span class='inline-children'>
+					<span class="glyphicon glyphicon-heart-empty"></span>
+					<span>
+						<span class='option-title' translate="register.link.title"></span>
+					</span>
+				</span>
+			</a>
+		</li>
+		<li class="expandable"
 			ng-if="ctrl.isPersonLogged()"
 			ng-class="{'active' : ctrl.isPageOpened('myLibrary')}"
 		>
-			<a href='#' ng-click="ctrl.openMyLibrary()">
+			<a href='#' ng-click="ctrl.openMyLibrary();ctrl.closeSidebar();">
 				<span class='inline-children'>
 					<span class="glyphicon glyphicon-book"></span>
 					<span>
@@ -31,7 +47,7 @@
 			ng-if="ctrl.isPersonLogged()"
 			ng-class="{'active' : ctrl.isPageOpened('publicLibrary')}"
 		>
-			<a href='#' ng-click="ctrl.openPublicLibrary()">
+			<a href='#' ng-click="ctrl.openPublicLibrary();ctrl.closeSidebar();">
 				<span class='inline-children'>
 					<span class="glyphicon glyphicon-bookmark"></span>
 					<span>
@@ -44,9 +60,10 @@
 	</ul>
 	<ul class="bottom">
 		<li>
-			<a ng-click="ctrl.open()">
+			<a ng-click="ctrl.toggleSidebar()">
 				<span class="glyphicon glyphicon-chevron-right"></span>
 			</a>
 		</li>
 	</ul>
 </div>
+<div id="sidebar-background" ng-if="ctrl.sidebarOpened" ng-click="ctrl.closeSidebar()"></div>

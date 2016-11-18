@@ -44,27 +44,6 @@
 			</div>
 		</div>
 	</div>
-	<div ng-switch-when="select">
-		<label class="control-label"
-			ng-class="::ctrl.getColumSizeForLabel()"
-			for="{{ctrl.name}}" translate="{{::ctrl.label}}"></label>
-		<div ng-class="::ctrl.getColumSizeForInput()">
-			<select class="form-control" 
-				ng-model="ctrl.model" ng-options="ctrl.selectOptions"
-				name="{{ctrl.name}}" ng-required="ctrl.isRequired"
-			></select>
-			<div class='field-errors'>
-				<span translate="userPanel.form.error.emptyField"
-					ng-if="ctrl.isRequired && ctrl.form[ctrl.name].$touched && ctrl.form[ctrl.name].$invalid"
-				></span>
-				<div ng-transclude="errors"></div>
-			</div>
-		</div>
-		<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-			<span class='glyphicon glyphicon glyphicon-question-sign form-field-tooltip' 
-				ng-if="::(ctrl.tooltip != null)" uib-tooltip="{{ctrl.tooltip | translate}}"></span>
-		</div>
-	</div>
 	<div ng-switch-when="own">
 		<label class="control-label"
 			ng-class="::ctrl.getColumSizeForLabel()"

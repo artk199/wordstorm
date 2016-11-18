@@ -19,8 +19,7 @@
 	    		view: '@',
 	    		noViewChange: '=',
 	    		scrollableBody: '=',
-	    		events: '=',
-	    		pagination: '='
+	    		events: '='
 	    	},
 	    	transclude:{
 	    		listEmpty: '?listableDataEmptyList',
@@ -34,12 +33,13 @@
 		GRID: "grid"
 	};
 	
-	DirectiveController.$inject = ['settings'];
-	function DirectiveController(settings){
+	DirectiveController.$inject = ['settings', 'config'];
+	function DirectiveController(settings, config){
 		var ctrl = this;
 		var searchMode = false;
 		
 		ctrl.viewMode = ctrl.view != null ? ctrl.view : getDefaultListView();
+		ctrl.pagination = null;
 		
 		ctrl.isSearchModeOn = isSearchModeOn;
 		ctrl.switchSearchMode = switchSearchMode;
@@ -57,16 +57,25 @@
 		ctrl.getListStartItem = getListStartItem;
 		ctrl.refreshPagination = refreshPagination;
 		
+		ctrl.getAvailablePaginations = getAvailablePaginations;
+		ctrl.updatePagination = updatePagination;
+		
 		init();
 		
 		/////////////////////////
 		
 		function init(){
 			refreshPagination();
+			ctrl.pagination = settings.DEFAULT_LIST_PAGINATION.get();
 		}
 		
 		function refreshPagination(){
 			ctrl.listCurrentPage = 1;
+		}
+		
+		function updatePagination(){
+			refreshPagination();
+			settings.DEFAULT_LIST_PAGINATION.set(ctrl.pagination);
 		}
 		
 		function isSearchModeOn(){
@@ -117,19 +126,19 @@
 		}
 		
 		function getMaxListSize(){	
-			var result = ctrl.list.length;
-			if(ctrl.pagination != null && ctrl.pagination.maxSize != null){
-				result = ctrl.pagination.maxSize;
-			}
-			return result;
+			return ctrl.pagination || ctrl.list.length;
 		}
 		
 		function getListStartItem(){
 			var result = null;
-			if(ctrl.pagination != null && ctrl.pagination.maxSize != null){
-				result = (ctrl.listCurrentPage - 1) * ctrl.pagination.maxSize;
+			if(ctrl.pagination != null){
+				result = (ctrl.listCurrentPage - 1) * ctrl.pagination;
 			}
 			return result;
+		}
+		
+		function getAvailablePaginations(){
+			return config.paginationSizes;
 		}
 	}
 }());

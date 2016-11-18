@@ -16,7 +16,8 @@
 	    		bodyClass: '@',
 	    		isLoading: '=',
 	    		scrollableBody: '=',
-	    		disallowNotLogged: '='
+	    		disallowNotLogged: '=',
+	    		disallowLogged: '='
 	    	},
 	    	transclude: {
 	    		header: '?pageHeader',
@@ -46,6 +47,14 @@
 					var isLogged = userPanelService.isPersonLogged();
 					if(!isLogged){
 						pages.authError();
+					}
+				});
+			}
+			else if(ctrl.disallowLogged){
+				userPanelService.checkPersonLogged().then(function(){
+					var isLogged = userPanelService.isPersonLogged();
+					if(isLogged){
+						pages.home();
 					}
 				});
 			}

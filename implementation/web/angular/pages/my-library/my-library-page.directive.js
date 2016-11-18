@@ -22,8 +22,6 @@
 	function DirectiveController($stateParams, rest, pages, $translate, config, alerts){
 		var ctrl = this;
 
-		ctrl.listSize = config.maxItemsOnList;
-		
 		ctrl.collection = null;
 		ctrl.isLoading = isLoading;
 		

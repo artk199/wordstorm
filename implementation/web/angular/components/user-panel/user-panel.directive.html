@@ -1,4 +1,4 @@
-<div class="logged-person-icon" ng-if="!ctrl.open && ctrl.isPersonLogged()">
+<div class="logged-person-icon clickable" ng-if="!ctrl.open && ctrl.isPersonLogged()" ng-click="ctrl.openSidebar()">
 	<img src='images/user-panel/default-avatar.png' alt='' title=''/>
 </div>
 <div class='user-data' ng-if="ctrl.open">

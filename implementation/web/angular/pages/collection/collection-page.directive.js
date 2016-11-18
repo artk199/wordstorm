@@ -18,7 +18,8 @@
 	var views = {
 		"add": "angular/pages/collection/views/collection-page-form.html",
 		"edit": "angular/pages/collection/views/collection-page-form.html",
-		"list": "angular/pages/collection/views/collection-page-words-list.html"
+		"list": "angular/pages/collection/views/collection-page-words-list.html",
+		"preview" : "angular/pages/collection/views/collection-page-preview.html"
 	};
 	
 	var modes = {
@@ -37,15 +38,16 @@
 		ctrl.selectedView = null;
 		ctrl.collection = null;
 		ctrl.parametersForWords = null;
-		ctrl.listSize = config.maxItemsOnList;
 		ctrl.addCollectionFormData = null;
 		
 		ctrl.showAllCollections = pages.myLibrary.allCollections;
+		ctrl.showPublicLibrary = pages.publicLibrary.main;
 		ctrl.isLoading = isLoading;
 		ctrl.addWord = pages.word.add;
 		ctrl.showCollection = showCollection;
 		ctrl.refreshCollection = refreshCollection;
 		ctrl.wordsListFilter = wordsListFilter;
+		ctrl.listableDataEvents = null;
 		
 		ctrl.isAnyWordSelected = isAnyWordSelected;
 		ctrl.removeSelectedWords = removeSelectedWords;
@@ -57,6 +59,7 @@
 		ctrl.hasChanged = hasChanged;
 		
 		ctrl.editCollection = editCollection;
+		ctrl.openLearning = pages.learning.main;
 		
 		init();
 		
@@ -75,6 +78,7 @@
 					}
 					else{
 						ctrl.parametersForWords = initParametersForWords();
+						ctrl.listableDataEvents = initListableDataEvents();
 					}
 				});
 			}
@@ -112,6 +116,12 @@
 			return {
 				removeItem: silentlyRemoveItem,
 				selectedItems: []
+			}
+		}
+		
+		function initListableDataEvents(){
+			return {
+				onViewChange: function(){ ctrl.parametersForWords.selectedItems = []; }
 			}
 		}
 		

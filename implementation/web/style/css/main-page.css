@@ -1,0 +1,128 @@
+.main-page{
+	transition: 0.4s;
+	background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+/* Video view */
+.main-page.video{
+	background-image: url('https://pace.oregonstate.edu/sites/default/files/styles/course_banner_large/public/images/course/cover/elearning-video-chat.jpg?itok=EO3ZiX9L');	
+}
+
+.main-page.video .youtube-video{
+	margin-top: 10%;
+	width: 70%;
+	height: 30%;
+	margin: 0 auto;
+}
+
+.main-page.video h1{
+	font-family: 'Crete Round', serif;
+    font-size: 70px;
+    margin-top: 10%;
+    color: #fff;
+    margin-bottom: 0;
+}
+
+.main-page.video h2{
+	margin-top: 0;
+    margin-bottom: 5%;
+	font-family: 'Crete Round', serif;
+    font-size: 20px;
+    font-style: italic;
+    color: #fff;
+}
+
+/* Another view */
+.main-page.another{
+	background-image: url('http://www.americancollegespain.com/pagina/341/are-you-studying-the-right-way-%7C-the-ame.jpg');	
+}
+
+/* Options */
+.main-page .options{
+	position: absolute!important;
+	bottom: 0;
+	width: 100%;
+}
+
+.main-page .options .option{
+	opacity: 0.1;
+	background: rgba(255,255,255,0.6);
+	transition: 0.5s;
+	text-align: center;
+	cursor: pointer;
+	position: relative;
+}
+
+.main-page:hover .options .option{
+	opacity: 0.8;
+}
+
+.main-page .options .option.active, .main-page .options .option.active:hover{
+	transition: 0.5s;
+	background: #fff;
+	opacity: 1;
+}
+
+.main-page .options .option.active::before{
+	content: "";
+	display: block;
+	position: absolute;
+	top: -45px;
+	left: 30%;
+	width: 0; 
+ 	height: 0; 
+  	border-left: 45px solid transparent;
+  	border-right: 45px solid transparent;
+  	border-bottom: 45px solid rgba(255,255,255,0);
+  	transition: 0.5s;
+}
+
+.main-page .options .option.active::before{
+	border-bottom: 45px solid rgba(255,255,255,1);
+	transition: 0.5s;
+}
+
+.main-page .options .option:hover{
+	transition: 0.5s;
+	background: rgba(255,255,255,0.95);
+}
+
+.main-page .options .option .option-icon{
+	max-height: 50px;
+	margin: 5% 0;
+}
+/* Main page 
+.main-page .text{
+	padding: 20% 10%;
+	text-align: left;
+	color: #fff;
+}
+
+.main-page .text h3{
+	font-size: 50px;
+}
+
+.main-page .text p{
+	font-size: 20px;
+}
+*/
+/* Social panel */
+.social-panel > a{
+	text-decoration: none;
+}
+
+.social-panel > a > *{
+	background: rgba(255,255,255,0.8);
+	transition: 0.5s;
+	height: 40px;
+	width: 40px;
+	display: inline;
+	margin-right: 10px;
+}
+
+.social-panel .facebook:hover{
+	box-shadow: 0px 0px 10px #007dff;
+    transition: 0.5s;
+}

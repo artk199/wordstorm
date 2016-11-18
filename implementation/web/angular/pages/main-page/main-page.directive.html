@@ -1,5 +1,7 @@
-<page page-class='main-page' background-image="{{ctrl.getBackgroundImage()}}">
+<page page-class='main-page {{ctrl.currentView.name}}' scrollable-body="true">
 	<page-body>
+		<div class='full-height' ng-include src="ctrl.currentView.template"></div>
+	<!-- 
 		<div class='social-panel'>
 			<a href='#'>
 				<img class='facebook' src="http://kultowyevent.pl/images/facebook_icon.png" alt="" ng-attr-title="{{'mainPage.facebook.popover' | translate}}"/>
@@ -29,6 +31,22 @@
 					<img src='images/main-page/speaking.png' alt='' title='' class='option-icon'/>
 				</div>
 			</div>
-		</div>
+		</div> -->
 	</page-body>
+	<page-footer>
+		<div class='container-fluid options'>
+			<div class="row">
+				<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 option"
+					ng-class="{'active' : ctrl.isVideoView()}"
+					ng-click="ctrl.openVideoView()">
+					<img src='images/main-page/speaking.png' alt='' title='' class='option-icon'/>
+				</div>
+				<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 option" 
+					ng-class="{'active' : ctrl.isAnotherView()}"
+					ng-click="ctrl.openAnotherView()">
+					<img src='images/main-page/speaking.png' alt='' title='' class='option-icon'/>
+				</div>
+			</div>
+		</div>
+	</page-footer>
 </page>

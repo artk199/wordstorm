@@ -31,6 +31,8 @@
 		"add" : "angular/pages/word/views/word-page-form-view.html"
 	};
 	
+	var TRANSLATE_PREFIX = "enums.partOfSpeech.";
+	
 	DirectiveController.$inject = ['$stateParams', 'pages', 'rest'];
 	function DirectiveController($stateParams, pages, rest){
 		var ctrl = this;
@@ -67,6 +69,7 @@
 			}
 			else if(isAddingMode()){
 				initFormView();
+				//addEmptyTranslation();
 			}
 		}
 		
@@ -180,6 +183,10 @@
 			return result;
 		}
 		
+		function clearParthOfSpeech(partOfSpeech){
+			return partOfSpeech.slice(TRANSLATE_PREFIX.length);
+		}
+		
 		function canSaveForm(){
 			var initialFormData = initFormData();
 			var result = false;
@@ -196,6 +203,11 @@
 		}
 		
 		function sendForm(form){
+			// TODO: Refactor this
+			for(var i = 0; i < ctrl.formData.Translations.length; i++){
+				var translation = ctrl.formData.Translations[i];
+				translation.PartOfSpeech = clearParthOfSpeech(translation.PartOfSpeech);
+			}
 			if(isAddingMode()){
 				createWord();
 			}

@@ -1,12 +1,11 @@
 <form name='collectionForm' class='form-horizontal'>
 	<div class='row vertical-middle user-action' ng-class="{'action-active' : ctrl.selected || !ctrl.isNormalMode()}">
 		<div class='col-xs-3 col-sm-3 col-md-1 col-lg-1'>
-			<div class='item-icon-container'>
-				<span class='glyphicon glyphicon-folder-open item-icon hide-on-hover'></span>
+			<div class='item-icon-container empty'>
 				<input type="checkbox" ng-model="ctrl.selected"
 					ng-init="ctrl.selected = ctrl.isCollectionSelected()" 
 					ng-if="::(ctrl.parameters != null && ctrl.parameters.selectedCollections)"
-					class="show-on-hover item-selector"
+					class="item-selector"
 					ng-click="ctrl.selectCollection()"
 				/>
 			</div>
@@ -99,6 +98,9 @@
 							</button>
 						</span>
 						<span ng-if="ctrl.isNormalMode() && ctrl.canDisplayActionButtons()">
+							<button class="button button-action" ng-click="ctrl.openLearning(ctrl.item.Id, ctrl.item.Name)">
+								<span class="glyphicon glyphicon-education"></span>
+							</button>
 							<button class="button button-action" ng-click="ctrl.openEditMode();">
 								<span class='glyphicon glyphicon-pencil'></span>
 							</button>

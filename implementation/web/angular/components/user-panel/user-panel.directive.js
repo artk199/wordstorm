@@ -10,7 +10,9 @@
 	    	controllerAs: 'ctrl',
 	    	bindToController: true,
 	    	scope: {
-	    		open: '='
+	    		open: '=',
+	    		closeSidebar: '&',
+	    		openSidebar: '&'
 	    	}
 	    };
 	}
@@ -42,10 +44,8 @@
 		
 		///////////////////////////
 		
-		function init(){
-			refreshIsPersonLogged().then(function(){
-				refreshUserData();
-			});
+		function init(){	
+			refreshIsPersonLogged();
 		}
 		
 		function isPersonLogged(){
@@ -55,7 +55,12 @@
 		function refreshIsPersonLogged(){
 			isPersonLoggedLoading = true;
 			return userPanelService.checkPersonLogged().then(function(){
-				ctrl.view = userPanelService.isPersonLogged() ? views.LOGGED_IN : views.LOG_IN_FORM;
+				var personLogged = userPanelService.isPersonLogged();
+				// Automatically download user data if he is logged
+				if(personLogged){
+					refreshUserData();
+				}
+				ctrl.view = personLogged ? views.LOGGED_IN : views.LOG_IN_FORM;
 				isPersonLoggedLoading = false;
 			});
 		}
@@ -81,7 +86,10 @@
 					ctrl.errors = {WrongUsernameOrPassword : true};
 				}
 				else{
-					ctrl.view = views.LOGGED_IN;
+					refreshUserData().then(function(){
+						ctrl.view = views.LOGGED_IN;
+						handleSidebar();
+					});
 				}
 
 				ctrl.loggingInProcess = false;
@@ -92,7 +100,14 @@
 			userPanelService.logPersonOut().then(function(){
 				ctrl.view = views.LOG_IN_FORM;
 				pages.home();
+				handleSidebar();
 			});
+		}
+		
+		function handleSidebar(){
+			if(ctrl.closeSidebar){
+				ctrl.closeSidebar();
+			}
 		}
 	}
 }());

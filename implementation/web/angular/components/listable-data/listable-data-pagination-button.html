@@ -1,0 +1,8 @@
+<ul>
+	<li ng-repeat="option in ::ctrl.getAvailablePaginations()">
+		<label>
+			<input type="radio" ng-model="ctrl.pagination" ng-value="::option" ng-change="ctrl.updatePagination()">
+			<span ng-bind="::option"></span>
+		</label>
+	</li>
+</div>

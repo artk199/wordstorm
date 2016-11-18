@@ -59,6 +59,7 @@
 		ctrl.isCollectionSelected = isCollectionSelected;
 		
 		ctrl.canDisplayActionButtons = canDisplayActionButtons;
+		ctrl.openLearning = pages.learning.main;
 		
 		/////////////////////
 		
@@ -71,7 +72,12 @@
 		
 		function openCollection(collection){
 			if(mode == null){
-				pages.myLibrary.collection(collection.Id, collection.Name, collection);
+				if(ctrl.parameters != null && ctrl.parameters.readonly){
+					pages.myLibrary.collectionPreview(collection.Id, collection.Name, collection);	
+				}
+				else{
+					pages.myLibrary.collection(collection.Id, collection.Name, collection);
+				}
 			}
 		}
 		

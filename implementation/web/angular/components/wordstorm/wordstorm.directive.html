@@ -11,7 +11,7 @@
 		<div class='left inline-children'>
 			<div class="logo inline-children clickable" ng-click="ctrl.goToHome()">
 				<img src='style/img/logo_simple.png' alt='Word Storm Logo' title='Word Storm'/>
-				<h1>Word Storm</h1>
+				<h1 translate="application.title"></h1>
 			</div>
 		</div>
 		<div class='right inline-children'>
@@ -23,7 +23,7 @@
 	</section>
 </header>
 <sidebar></sidebar>
-<div id='page-body'>
+<div id='page-body' ng-model-options="::ctrl.ngModelOptions">
 	<alerts group="global-alerts" overflowing="true"></alerts>
 	<spinner spinner-class="fancy" ng-if="ctrl.isLoading()"></spinner>
 	<div ng-if="!ctrl.isLoading()" class='ui-view-container' ui-view></div>

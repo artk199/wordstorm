@@ -1,0 +1,65 @@
+/* Word card */
+.word-card{
+	background: #fff;
+	border: 1px solid #ccc;
+}
+
+.word-card header .light{
+	background: #e6e6e6;
+	padding: 6px 5%;
+}
+
+.word-card .card-body{
+	padding: 0 5%;
+}
+
+.word-card .card-body .word-main-data{
+	text-align: center;
+	justify-content: center;
+}
+
+.word-card .card-body .word-main-data h1,
+.word-card .card-body .word-main-data h2{
+	font-style: italic;
+	margin: 0;
+	color: #808080;
+}
+
+.word-card .card-body .word-main-data h1{
+	margin-bottom: 5px;
+	font-size: 35px;
+}
+
+.word-card .card-body .word-main-data h2{
+	font-size: 20px;
+}
+
+.word-card .card-body .word-translations{
+	padding: 0 0 3%;
+}
+
+.word-card .card-body .translations-list .part-of-speech{
+	font-style: italic;
+    font-weight: bold;
+    color: #aaa;
+    font-size: 15px;
+    padding: 0;
+    margin: 4% 0 1%;
+}
+
+.word-card .card-body .translations-list ul{
+    color: #808080;
+    font-size: 20px;
+}
+
+/* Learning view */
+.learning-page .progress-information{
+	padding-top: 20px;
+}
+
+.learning-page .bordered{
+    background: #fff;
+    border: #ccc 1px solid;
+    padding: 3% 5%;
+    margin-top: 15px;
+}

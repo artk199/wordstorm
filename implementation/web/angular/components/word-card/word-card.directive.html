@@ -1,0 +1,35 @@
+<section class="word-card clickable vertical-grid" ng-click="ctrl.switchToAnotherView()">
+	<header class="justified-content">
+		<section class="light left-section">
+			<span ng-bind="ctrl.word.Collection.Name"></span>
+		</section>
+		<section class="light right-section">
+			<strong translate="application.title"></strong>
+		</section>
+	</header>
+	<perfect-scrollbar class="rest-height scroller" wheel-propagation="false">
+		<section class="card-body full-height" ng-switch="ctrl.selectedView">
+			<div class="word-main-data centered-content full-height" ng-switch-default>
+				<span>
+					<h1 ng-bind="ctrl.word.Word"></h1>
+					<h2 class="in-slashes" ng-bind="ctrl.word.Pronunciation"></h2>
+				</span>
+			</div>
+			<div class="word-translations" ng-switch-when="translation">
+				<div>
+					<p ng-if="!ctrl.word.Translations.length" translate="myLibrary.wordCard.noTranslations"></p>
+					<div class="translations-list" ng-repeat="(partOfSpeech, translations) in ctrl.word.Translations | groupBy: 'PartOfSpeech'">
+						<h3 class="part-of-speech">
+							<span translate="enums.partOfSpeech.{{partOfSpeech}}"></span>
+						</h3>
+						<ul>
+							<li ng-repeat="translation in translations">
+								<span ng-bind="translation.Translation"></span>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</section>
+	</perfect-scrollbar>
+</section>

@@ -1,12 +1,11 @@
 <div class="listed">
 	<div class='row vertical-middle user-action' ng-class="{'action-active' : ctrl.selected || !ctrl.isNormalMode()}">
 		<div class='col-xs-3 col-sm-3 col-md-1 col-lg-1'>
-			<div class='item-icon-container'>
-				<span class="glyphicon glyphicon-heart item-icon hide-on-hover"></span>
+			<div class='item-icon-container empty'>
 				<input type="checkbox" ng-model="ctrl.selected"
 					ng-init="ctrl.selected = ctrl.isItemSelected()" 
 					ng-if="::(ctrl.parameters != null && ctrl.parameters.selectedItems)"
-					class="show-on-hover item-selector"
+					class="item-selector"
 					ng-click="ctrl.selectItem()"
 				/>
 			</div>

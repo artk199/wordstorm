@@ -2,8 +2,8 @@
 	angular.module("wordStormApp.services")
 	.service("pages", Service);
 	
-	Service.$inject = ['$state', 'restCache'];
-	function Service($state, restCache){
+	Service.$inject = ['$state', 'restCache', '$translate'];
+	function Service($state, restCache, $translate){
 		var service = this;
 		
 		service.home = function(params){
@@ -32,6 +32,12 @@
 			},
 			collection : function(collectionId, collectionName){
 				$state.go("collection", {
+					collectionId: collectionId,
+					collectionName: parseUrlParameter(collectionName)
+				});
+			},
+			collectionPreview : function(collectionId, collectionName){
+				$state.go("collectionPreview", {
 					collectionId: collectionId,
 					collectionName: parseUrlParameter(collectionName)
 				});
@@ -71,8 +77,27 @@
 			}
 		};
 		
+		service.learning = {
+			main: function(collectionId, collectionName){
+				$state.go("learning", {
+					collectionId: collectionId,
+					collectionName: parseUrlParameter(collectionName)
+				});
+			}
+		};
+		
 		service.isPageOpened = function(stateName){
 			return $state.is(stateName);
+		};
+		
+		service.getCurrentPagetitle = function(){
+			var title = $state.params.title;
+			var result = $translate.instant("application.title");
+			
+			if(title){
+				result = $translate.instant(title) + " - " + result;
+			}
+			return result;
 		};
 		
 		////////////////////

@@ -3,6 +3,15 @@
   <head>
   	<base href='/WordStorm/'/>
   	
+  	<!-- Meta-data -->
+	<title ng-bind="pages.getCurrentPagetitle()">Word Storm</title>
+	<meta name="author" content="Dorian Krefft">
+	<meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
+	<meta name='description' content='' />
+	<meta name='keywords' content='' />
+	<link rel="shortcut icon" type="image/png" href="style/img/icon.png"/>
+	<!-- TODO: <meta name="viewport" content="width=device-width, initial-scale=1">  -->
+	
   	<!-- Libs -->
   	<link href="libs/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
   	<script src="libs/jquery-2.2.4.min.js"></script>
@@ -13,34 +22,35 @@
 	<script src="libs/angular/angular-ui-bootstrap.js"></script> 
 	<script src="libs/angular/angular-ui-router.min.js"></script> 
 	<script src="libs/angular/angular-cookies.min.js"></script> 
-	<script src="libs/angular/angular-filter.min.js"></script> 
-	<script src="libs/progressbar.min.js"></script> 
-
+	<script src="libs/angular/angular-filter.min.js"></script>
+	<script src="libs/progressbar.min.js"></script>
 	<script src="angular/modules/translate/translate.js"></script>
-	
 	<link rel="stylesheet" href="angular/modules/perfect-scrollbar/perfect-scrollbar.min.css" />
 	<script src="angular/modules/perfect-scrollbar/perfect-scrollbar.min.js"></script>
 	<script src="angular/modules/perfect-scrollbar/perfect-scrollbar.with-mousewheel.min.js"></script>
 	<script src="angular/modules/perfect-scrollbar/angular-perfect-scrollbar.js"></script>
 
-	<!-- Wordstorm Angular App -->
-    <script src="angular/app.js"></script>
-
-	<!-- WS Services -->
+	<!-- Wordstorm Angular App !-->
+	<!-- Minified version -->
+	
+    <script src="wordstorm.min.js"></script>
+	<link href="wordstorm.min.css" rel="stylesheet"/>
+	
+	<!-- Normal version 
+	<script src="angular/app.js"></script>
+	
 	<script src="angular/services/rest/rest.service.js"></script> 
 	<script src="angular/services/rest/rest-cache.service.js"></script> 
 	<script src="angular/services/rest/rest-config.service.js"></script> 
 	<script src="angular/services/rest/rest-mock.service.js"></script> 
 	<script src="angular/services/pages/pages.service.js"></script> 
 	<script src="angular/services/cookies/cookies.service.js"></script> 
-	<script src="angular/services/settings/settings.service.js"></script> 
+	<script src="angular/services/settings/settings.service.js"></script>
 	
-	<!-- WS Config -->
 	<script src="angular/config/state.config.js"></script> 
 	<script src="angular/config/exception-handler.config.js"></script> 
 	<script src="angular/config/httpInterceptor.config.js"></script> 
 	
-	<!-- WS Components -->
 	<script src="angular/components/spinner/spinner.directive.js"></script> 
 	<script src="angular/components/wordstorm/wordstorm.directive.js"></script> 
 	<script src="angular/components/sidebar/sidebar.directive.js"></script> 
@@ -61,12 +71,12 @@
 	<script src="angular/components/auto-focus/auto-focus.directive.js"></script> 
 	<script src="angular/components/special-characters-keyboard/special-characters-keyboard.directive.js"></script> 
 	<script src="angular/components/listable-data-tiles/word/word-tile.directive.js"></script>
-	<script src="angular/components/word-search/word-search.directive.js"></script> 
+	<script src="angular/components/word-search/word-search.directive.js"></script>
+	<script src="angular/components/word-card/word-card.directive.js"></script>
+	<script src="angular/components/locale/locale.directive.js"></script>
 	
-	<!-- WS Filters -->
 	<script src="angular/filters/highlight/highlight.filter.js"></script> 
 	
-	<!-- WS Pages -->
 	<script src="angular/pages/main-page/main-page.directive.js"></script> 
 	<script src="angular/pages/register/register.directive.js"></script> 
 	<script src="angular/pages/error/error-page.directive.js"></script> 
@@ -75,17 +85,8 @@
 	<script src="angular/pages/authorization-error/authorization-error-page.directive.js"></script> 
 	<script src="angular/pages/word/word-page.directive.js"></script> 
 	<script src="angular/pages/public-library/public-library-page.directive.js"></script> 
-		
-	<!-- Meta-data -->
-	<title>Word Storm</title>
-	<meta name="author" content="Dorian Krefft">
-	<meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
-	<meta name='description' content='' />
-	<meta name='keywords' content='' />
-	<link rel="shortcut icon" type="image/png" href="style/img/icon.png"/>
-	<!-- TODO: <meta name="viewport" content="width=device-width, initial-scale=1">  -->
+	<script src="angular/pages/learning/learning-page.directive.js"></script> 
 	
-	<!-- Page style - In release version, move it to one file -->
 	<link href="style/css/main.css" rel="stylesheet"/>
 	<link href="style/css/actions.css" rel="stylesheet"/>
 	<link href="style/css/dev-panel.css" rel="stylesheet"/>
@@ -100,7 +101,10 @@
 	<link href="style/css/listable-data.css" rel="stylesheet"/>
 	<link href="style/css/progress-bar.css" rel="stylesheet"/>
 	<link href="style/css/special-characters-keyboard.css" rel="stylesheet"/>	
-	<link href="style/css/words.css" rel="stylesheet"/>	
+	<link href="style/css/words.css" rel="stylesheet"/>
+	<link href="style/css/word-card.css" rel="stylesheet"/>
+	<link href="style/css/fonts.css" rel="stylesheet"/>
+	<link href="style/css/main-page.css" rel="stylesheet"/>	 -->
   </head>
   <body>
 	<word-storm></word-storm>

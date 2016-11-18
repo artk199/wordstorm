@@ -123,6 +123,11 @@
 		 }
 	}]);
 	
+	// Config root scope
+	app.run(['$rootScope', 'pages', function($rootScope, pages) {
+		$rootScope.pages = pages;
+	}]);
+	
 	// --------- DEFINE MODULES USED IN APPLICATION ---------
 	angular.module('wordStormApp.services', []);
 	angular.module('wordStormApp.filters', []);

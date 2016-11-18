@@ -9,6 +9,8 @@
 		"english" : ["\u00E6","\u0259","\u026A","\u028A","\u0254","\u0251","\u014B","\u0283","\u02A7","\u03B8","\u00F0","\u0292","\u02A4","\u028C"],
 		"polish" : ["ą","ć","ę","ł","ń","ó","ś","ź","ż"]
 	},
-	"maxItemsOnList" : 10,
-	"searchUrl" : "https://www.diki.pl/"
+	"paginationSizes" : [1,5,10,15],
+	"defaultPaginationSize" : 10,
+	"searchUrl" : "https://www.diki.pl/",
+	"defaultDebounceTimeInMs": 100
 }

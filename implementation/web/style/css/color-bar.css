@@ -4,6 +4,14 @@
 	height: 5px;
 }
 
+.color-bar.gray{
+	background: #e6e6e6;
+}
+
+.color-bar.bigger{
+	height: 15px;
+}
+
 .color-bar > *{
 	float: left;
 	height: inherit;

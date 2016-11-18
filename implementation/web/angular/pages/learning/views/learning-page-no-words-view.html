@@ -1,0 +1,34 @@
+<page page-class='learning-page' disallow-not-logged="true" is-loading="ctrl.isLoading()" scrollable-body="true" body-class='container-fluid'>
+	<page-header>
+		<div class='link-tree'>
+			<h1 class='previous-link' ng-click="ctrl.showAllCollections()">
+				<span translate='myLibrary.title'></span>
+			</h1>
+			<h2 class='previous-link' ng-if="::ctrl.collection.Name" ng-click="ctrl.openCollection(ctrl.collection.Id, ctrl.collection.Name)">
+				<span ng-bind="::ctrl.collection.Name"></span>
+			</h2>
+			<h2>
+				<span translate="myLibrary.learning.title"></span>
+			</h2>
+		</div>
+	</page-header>
+	<page-header-right>
+		<div class='buttons'>
+			<button type='button' class='button' ng-click='ctrl.showAllCollections()'>
+				<span class='glyphicon glyphicon-remove'></span>
+				<span translate='button.close'></span>
+			</button>
+		</div>
+	</page-header-right>
+	<page-body>
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1"></div>
+				<div class="col-xs-11 col-sm-11 col-md-5 col-lg-5">
+					<h1 translate="myLibrary.learning.noWords"></h1>
+				</div>
+				<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1"></div>
+			</div>
+		</div>
+	</page-body>
+</page>

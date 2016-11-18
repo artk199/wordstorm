@@ -31,6 +31,13 @@
 					<span class='glyphicon glyphicon-remove remove-option' ng-click="ctrl.switchSearchMode()"></span>
 				</div>
 		  	</span>
+		  	<button type="button" class="btn button" ng-if="::(ctrl.getAvailablePaginations().length > 1)"
+		  		popover-placement='right-top' popover-class="listable-data selecting-page-size"
+		  		popover-append-to-body="true" popover-trigger="focus"
+		  		uib-popover-template="'angular/components/listable-data/listable-data-pagination-button.html'">
+		  		<span class='glyphicon glyphicon-filter'></span>
+		  	</button>
+		  	
 		</section>
 		<section class='right-section'>
 			<div ng-transclude="headerRight"></div>
@@ -57,6 +64,8 @@
 			boundary-links="false"
 			direction-links="false"
 			force-ellipses="true"
+			rotate="true"
+			max-size="8"
 		></ul>
 	</section>
 </div>
