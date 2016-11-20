@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="pl.bialateam.wordstorm">
 
+    <uses-sdk android:minSdkVersion="15" android:targetSdkVersion="24" />
+
     <!-- To auto-complete the email text field in the login form with the user's emails -->
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
@@ -32,7 +34,12 @@
         <activity
             android:name=".activities.CollectionDetailsActivity"
             android:label="@string/title_activity_collection_details"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activities.CardGameActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/title_activity_card_game"
+            android:theme="@style/FullscreenTheme"></activity>
     </application>
 
 </manifest>

@@ -28,4 +28,11 @@
     <string name="nav_logout">Logout</string>
     <string name="nav_sync">Sync</string>
     <string name="title_activity_collection_details">CollectionDetailsActivity</string>
+
+    <string name="title_activity_card_game">CardGameActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

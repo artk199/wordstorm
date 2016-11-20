@@ -1,5 +1,6 @@
 package pl.bialateam.wordstorm.pojo;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -7,12 +8,13 @@ import java.util.List;
  * Created by Artur on 03.11.2016.
  */
 
-public class Word {
+public class Word implements Serializable {
 
     String id;
     String transcription;
+    String pronunciation;
     String word;
-    int partOfSpeech;
+    String partOfSpeech;
     int inflection;
     int difficultyLevel;
     boolean dictionaryStatus;
@@ -20,8 +22,7 @@ public class Word {
     boolean isKnown;
     Date creationDateTime;
     List<Sentence> sentences;
-    //TODO: Czy to napewno obiekt baseWord;
-    Word baseWord;
+    List<Translation> translations;
 
     public String getId() {
         return id;
@@ -47,11 +48,27 @@ public class Word {
         this.transcription = transcription;
     }
 
-    public int getPartOfSpeech() {
+    public String getPartOfSpeech() {
         return partOfSpeech;
     }
 
-    public void setPartOfSpeech(int partOfSpeech) {
+    public List<Translation> getTranslations() {
+        return translations;
+    }
+
+    public String getPronunciation() {
+        return pronunciation;
+    }
+
+    public void setPronunciation(String pronunciation) {
+        this.pronunciation = pronunciation;
+    }
+
+    public void setTranslations(List<Translation> translations) {
+        this.translations = translations;
+    }
+
+    public void setPartOfSpeech(String partOfSpeech) {
         this.partOfSpeech = partOfSpeech;
     }
 
@@ -111,11 +128,4 @@ public class Word {
         this.sentences = sentences;
     }
 
-    public Word getBaseWord() {
-        return baseWord;
-    }
-
-    public void setBaseWord(Word baseWord) {
-        this.baseWord = baseWord;
-    }
 }

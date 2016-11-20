@@ -42,6 +42,7 @@ public class StartActivity extends AppCompatActivity
         setContentView(R.layout.activity_start);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        setTitle("");
 
         /**
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);

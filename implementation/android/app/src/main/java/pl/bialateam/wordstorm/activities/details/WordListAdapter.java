@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import pl.bialateam.wordstorm.R;
@@ -24,9 +25,9 @@ public class WordListAdapter extends ArrayAdapter<Word> {
 
     Context context;
     int resource;
-    List<Word> data = null;
+    private ArrayList<Word> data = null;
 
-    public WordListAdapter(Context context, List objects) {
+    public WordListAdapter(Context context, ArrayList objects) {
         super(context, R.layout.word_row, objects);
         this.context = context;
         this.resource = R.layout.word_row;
@@ -54,6 +55,14 @@ public class WordListAdapter extends ArrayAdapter<Word> {
         collectionHolder.title.setText(collection.getWord());
 
         return view;
+    }
+
+    public ArrayList<Word> getData() {
+        return data;
+    }
+
+    public void setData(ArrayList<Word> data) {
+        this.data = data;
     }
 
     class WordHolder{

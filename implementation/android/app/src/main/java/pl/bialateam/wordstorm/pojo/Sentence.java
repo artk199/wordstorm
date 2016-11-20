@@ -1,10 +1,12 @@
 package pl.bialateam.wordstorm.pojo;
 
+import java.io.Serializable;
+
 /**
  * Created by Artur on 03.11.2016.
  */
 
-public class Sentence {
+public class Sentence implements Serializable {
 
     String id;
     String origin;
