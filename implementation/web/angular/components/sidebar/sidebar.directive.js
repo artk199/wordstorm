@@ -26,6 +26,7 @@
 		ctrl.openMyLibrary = pages.myLibrary.allCollections;
 		ctrl.openPublicLibrary = pages.publicLibrary.main;
 		ctrl.openRegisterPage = pages.register;
+		ctrl.openUploadFilePage = pages.uploadFile;
 		
 		////////////////////////
 		

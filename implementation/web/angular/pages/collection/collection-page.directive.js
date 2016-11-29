@@ -25,7 +25,8 @@
 	var modes = {
 		ADD : "add",
 		EDIT: "edit",
-		LIST: "list"
+		LIST: "list",
+		PREVIEW: "preview"
 	};
 	
 	DirectiveController.$inject = ['$stateParams', 'pages', 'rest', 'config', 'alerts'];
@@ -33,6 +34,9 @@
 		var ctrl = this;
 		var collectionLoading = false;
 		var wordsRemoving = false;
+		var currentTier = null;
+		var activeTiers = null;
+		
 		ctrl.formSending = false;
 		
 		ctrl.selectedView = null;
@@ -61,6 +65,12 @@
 		ctrl.editCollection = editCollection;
 		ctrl.openLearning = pages.learning.main;
 		
+		ctrl.getCurrentTier = getCurrentTier;
+		ctrl.getTiersList = getTiersList;
+		ctrl.reduceWordsToTier = reduceWordsToTier;
+		ctrl.changeCurrentTier = changeCurrentTier;
+		ctrl.isTierActive = isTierActive;
+		
 		init();
 		
 		//////////////////////
@@ -79,6 +89,10 @@
 					else{
 						ctrl.parametersForWords = initParametersForWords();
 						ctrl.listableDataEvents = initListableDataEvents();
+						
+						if(ctrl.view != modes.PREVIEW){
+							initTiersSettings();
+						}
 					}
 				});
 			}
@@ -112,6 +126,22 @@
 		}
 		
 		// ===== Displaying list of words ===== 
+		function initTiersSettings(){
+			activeTiers = [];
+			
+			var words = ctrl.collection.Words;
+			
+			for(var i = 0; i < words.length; i++){
+				if(words[i].Tier != null && activeTiers.indexOf(words[i].Tier) < 0){
+					activeTiers.push(words[i].Tier);
+				}
+			}
+			
+			if(activeTiers.length > 0){
+				currentTier = activeTiers[0];
+			}
+		}
+		
 		function initParametersForWords(){
 			return {
 				removeItem: silentlyRemoveItem,
@@ -139,6 +169,32 @@
 			return rest.collection.get($stateParams.collectionId, true, true);
 		}
 		
+		function getCurrentTier(){
+			return currentTier;
+		}
+		
+		function getTiersList(){
+			return [0,1,2,3,4];
+		}
+		
+		function changeCurrentTier(tier){
+			if(isTierActive(tier)){
+				currentTier = tier;
+			}
+		}
+		
+		function isTierActive(tier){
+			return activeTiers.indexOf(tier) >= 0;
+		}
+		
+		function reduceWordsToTier(item){
+			var result = false;
+			if(item.Tier == getCurrentTier()){
+				result = true;
+			}
+			return result;
+		}
+		
 		function wordsListFilter(item, searchText){
 			var text = clearText(searchText);
 			var keywords = text.split(" ");
@@ -148,11 +204,6 @@
 				
 				var word = clearText(item.Word);
 				if(word.indexOf(keyword) >= 0){
-					continue;
-				}
-				
-				var tier = item.Tier;
-				if(keyword == tier){
 					continue;
 				}
 				

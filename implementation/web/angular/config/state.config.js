@@ -48,11 +48,13 @@
 			word: null,
 			wordId: null
 		});
-		addState("learning", "/learning/{collectionName}/{collectionId}", "<learning-page></learning-page>", {
+		addState("learning", "/learning/{collectionName}/{collectionId}/{tier}", "<learning-page></learning-page>", {
 			title: "myLibrary.learning.pageTitle",
 			collectionName: null,
-			collectionId: null
+			collectionId: null,
+			tier: null
 		});
+		addState("uploadFile", "/upload-file", "<upload-file-page></upload-file-page>", {title: "uploadFile.pageTitle"});
 		
 		///////////////////////////
 		

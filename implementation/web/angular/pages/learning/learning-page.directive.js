@@ -15,7 +15,9 @@
 	
 	var loadingData = {
 		COLLECTION: false,
-		INITIALIZING: false
+		INITIALIZING: false,
+		WORD_KNOWN: false,
+		WORD_UNKNOWN: false
 	};
 	
 	var stats = {
@@ -39,6 +41,7 @@
 		ctrl.words = null;
 		ctrl.currentWord = null;
 		ctrl.currentView = null;
+		ctrl.wordsTier = $stateParams.tier;
 		
 		ctrl.showAllCollections = pages.myLibrary.allCollections;
 		ctrl.openCollection = pages.myLibrary.collection;
@@ -50,6 +53,9 @@
 		ctrl.getResults = getResults;
 		ctrl.restartLearning = restartLearning;
 		ctrl.results = null;
+		
+		ctrl.isKnownWordLoading = isKnownWordLoading;
+		ctrl.isUnknownWordLoading = isUnknownWordLoading;
 		
 		init();
 		
@@ -99,6 +105,14 @@
 			return loadingData.COLLECTION || loadingData.INITIALIZING;
 		}
 		
+		function isKnownWordLoading(){
+			return loadingData.WORD_KNOWN;
+		}
+		
+		function isUnknownWordLoading(){
+			return loadingData.WORD_UNKNOWN;
+		}
+		
 		function getProgressForKnownWords(){
 			var result = 0;
 			if(ctrl.words != null && stats.knownWords != null){
@@ -134,17 +148,34 @@
 		}
 		
 		function markWordAsKnown(){
-			ctrl.currentWord.__isUnknown = false;
-			stats.knownWords.push(ctrl.currentWord);
-			addOrderToStats(ctrl.currentWord, true);
-			handleNextWord();
+			loadingData.WORD_KNOWN = true;
+			
+			rest.word.isKnown(ctrl.currentWord.Id, true).then(function(result){
+				if(result.Result){
+					ctrl.currentWord.__isUnknown = false;
+					stats.knownWords.push(ctrl.currentWord);
+					addOrderToStats(ctrl.currentWord, true);
+					
+					handleNextWord();
+				}
+				
+				loadingData.WORD_KNOWN = false;
+			});
 		}
 		
 		function markWordAsUnknown(){
-			ctrl.currentWord.__isUnknown = true;
-			stats.unknownWords.push(ctrl.currentWord);
-			addOrderToStats(ctrl.currentWord, false);
-			handleNextWord();
+			loadingData.WORD_UNKNOWN = true;
+			
+			rest.word.isKnown(ctrl.currentWord.Id, false).then(function(result){
+				if(result.Result){
+					ctrl.currentWord.__isUnknown = true;
+					stats.unknownWords.push(ctrl.currentWord);
+					addOrderToStats(ctrl.currentWord, false);
+					handleNextWord();
+				}
+				
+				loadingData.WORD_UNKNOWN = false;
+			});
 		}
 		
 		function addOrderToStats(item, answer){
@@ -181,6 +212,7 @@
 				goodAnswers: stats.knownWords.length,
 				wrongAnswers: stats.unknownWords.length,
 				wrongWords: stats.unknownWords,
+				tier: ctrl.wordsTier,
 				combo: findLongestCombo()
 			};
 		}

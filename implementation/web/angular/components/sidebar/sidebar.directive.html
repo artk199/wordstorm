@@ -57,6 +57,20 @@
 				</span>
 			</a>
 		</li>
+		<li class="expandable"
+			ng-if="ctrl.isPersonLogged()"
+			ng-class="{'active' : ctrl.isPageOpened('uploadFile')}"
+		>
+			<a href='#' ng-click="ctrl.openUploadFilePage();ctrl.closeSidebar();">
+				<span class='inline-children'>
+					<span class="glyphicon glyphicon-cloud-upload"></span>
+					<span>
+						<span class='option-title' translate="uploadFile.link.title"></span>
+						<span class='option-subtitle' translate="uploadFile.link.subtitle" ng-if="ctrl.sidebarOpened"></span>
+					</span>
+				</span>
+			</a>
+		</li>
 	</ul>
 	<ul class="bottom">
 		<li>

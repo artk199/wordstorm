@@ -24,8 +24,8 @@
 		}
 	};
 	
-	DirectiveController.$inject = ['userPanelService'];
-	function DirectiveController(userPanelService){
+	DirectiveController.$inject = ['userPanelService', 'pages'];
+	function DirectiveController(userPanelService, pages){
 		var ctrl = this;
 		
 		ctrl.currentView = null;
@@ -40,7 +40,12 @@
 		//////////////////////////////
 		
 		function init(){
-			ctrl.currentView = views.VIDEO;
+			if(userPanelService.isPersonLogged()){
+				pages.myLibrary.allCollections();
+			}
+			else{
+				ctrl.currentView = views.VIDEO;
+			}
 		}
 		
 		function openVideoView(){

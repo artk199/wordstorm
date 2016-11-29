@@ -57,6 +57,7 @@
 	font-size: 14px;
 }
 
+
 .listable-data > header .search-bar.opened{
     max-width: 100%;
 	padding-left: 10px;
@@ -162,6 +163,9 @@
 }
 
 /* Empty list */
+.listable-data > .empty-list{
+	padding: 10px 30px;
+}
 
 .listable-data > .empty-list + div div .list::before{
 	width: 0;
@@ -178,7 +182,7 @@
 .listable-data .list::before{
     content: "";
 	background: linear-gradient(124deg, #2582f7,#0c168a);
-    width: 2px;
+    width: 0;
     height: 100%;
     top: 0;
     left: 20px;
@@ -320,11 +324,18 @@
 	margin: 10px 5px;
     width: 260px;
     transition: 0.3s;
+    overflow: hidden;
 }
 
 .listable-data.grid-view .list .item .card{
 	background: #fff;
+    height: 275px;
 	position: relative;
+}
+
+.listable-data.grid-view .list .item .card.tier-0{
+	background-color: rgb(185, 58, 70);
+	color: #fff;
 }
 
 .listable-data.grid-view .list .item .card > header{
@@ -386,10 +397,17 @@
 	background: rgba(255,255,255,0.5);
 }
 
-.listable-data.grid-view .list .item .card > header .edit-button{
+.listable-data.grid-view .list .item .card > header .edit-button,
+.listable-data.grid-view .list .item .card > header .save-button{
     position: absolute;
     top: 10px;
     right: 10px;
+}
+
+.listable-data.grid-view .list .item .card > header .cancel-button{
+	position: absolute;
+    top: 10px;
+    right: 50px;
 }
 
 .listable-data.grid-view .list .item .card > header .change-picture-button{
@@ -401,6 +419,12 @@
 .listable-data.grid-view .list .item .card > header .remove-button{
 	position: absolute;
 	bottom: 10px;
+	left: 10px;
+}
+
+.listable-data.grid-view .list .item .card > header .learning-button{
+	position: absolute;
+	top: 10px;
 	left: 10px;
 }
 
@@ -429,9 +453,10 @@
 }
 
 .listable-data.grid-view .list .item .card > .card-body .progress-bar{
-    margin-top: -65px;
-    margin-bottom: 20px;
-    width: 120px;
+	margin-top: -50px;
+    margin-bottom: 10px;
+    width: 95px;
+    color: #000;
 }
 
 .listable-data.grid-view .list .item .card > .card-body  .progress-bar > .content h3{
@@ -441,6 +466,19 @@
 .listable-data.grid-view .list .item .card > .card-body  .progress-bar > .content .small{
 	display: inline-block;
     margin-left: -8px;
+}
+
+.listable-data.grid-view .list .item .card > .card-body .card-data h1{
+    font-size: 15px;
+    margin: 0;
+    height: 50px;
+    max-height: 50px;
+    font-weight: bold;
+}
+
+.listable-data.grid-view .list .item .card > .card-body .card-data input[type='input']{
+	margin-bottom:23px;
+	color: #000;
 }
 
 .listable-data.grid-view .list .item .card > .card-body .card-data .glyphicon::before{
@@ -470,4 +508,42 @@
 	font-size: 20px;
     margin-top: 25%;
     margin-bottom: 25%;
+}
+
+.listable-data.grid-view .list .item .add-item{
+	border: 1px solid #ccc;
+	height: 275px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	cursor: pointer;
+}
+
+.listable-data.grid-view .list .item .add-item .icon-holder{
+	border-radius: 50%;
+	background: #b33737;
+	height: 100px;
+	width: 100px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+    font-size: 30px;
+    color: #f5f5f5;	
+    transition: 0.4s;
+}
+
+.listable-data.grid-view .list .item .add-item:hover .icon-holder{
+	background: #dc1717;
+}
+
+.listable-data.grid-view .list .item .add-item .icon-holder .glyphicon{
+    top: -1px;
+    left: 1px;
+}
+
+.listable-data.grid-view .list .item .add-item h5{
+    font-size: 25px;
+    font-weight: bold;
+    margin: 10px 0;
+    color: #808080;
 }

@@ -1,0 +1,37 @@
+.upload-file .upload-action{
+    border: 1px solid #ccc;
+    background: #fff;
+    padding: 5% 10%;
+    transition: 0.3s;
+    text-align: center;
+}
+
+.upload-file .upload-action.error{
+	border-color: #da2127;
+}
+
+.upload-file .upload-action .manual-input{
+	width: 100%;
+}
+
+.upload-file .upload-action .manual-input textarea{
+	padding: 10px;
+	background: #fff;
+}
+
+.upload-file .upload-action h3{
+	margin: 25px 0;
+	display: block;
+	padding: 0;
+}
+
+.upload-file .upload-action .progress{
+	border-radius: 0;
+	background: #404a53;
+}
+
+.upload-file .upload-action .progress .progress-bar{
+	width: 100%;
+	height: 100%;
+	background-color: #404a53;
+}

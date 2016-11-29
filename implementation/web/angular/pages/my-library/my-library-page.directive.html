@@ -3,44 +3,22 @@
 		<h1 translate='myLibrary.title'></h1>
 	</page-header>
 	<page-body>
-		<div class="full-height" ng-if="ctrl.collection.length == 0">
-			<p translate="myLibrary.noAddedCollectionsAvailable"></p>
-			
-			<div class='buttons'>
-				<button type="button" class="button button-action static" 
-					translate="myLibrary.buttons.addNewCollection" 
-					ng-click="ctrl.addCollection()"></button>
-			</div>
-		</div>
-		<div class="full-height" ng-if="ctrl.collection.length > 0">
+		<div class="full-height">
 			<listable-data list="ctrl.collection"
 				refresh-data-action="ctrl.refreshCollectionsList(null, null, true, true)"
 				display-directive-name="collection-tile"
 				display-directive-parameters = "ctrl.parametersForCollectionsList"
 				filter-function="ctrl.collectionListFilter"
 				scrollable-body="true"
+				no-view-change="true"
+				view="grid"
+				no-buttons="true"
 				events="ctrl.listableDataEvents"
+				add-element="{{::ctrl.collectionAddElement}}"
 			>
-				<listable-data-header-right>
-					<button class='button button-action red one-line'
-						ng-disabled="ctrl.isRemovingSelected()"
-						ng-if="ctrl.isAnyCollectionSelected()"
-						ng-click="ctrl.removeSelectedCollections()"
-					>
-						<span class="glyphicon" 
-							ng-class="{'glyphicon-spin glyphicon-refresh' : ctrl.isRemovingSelected(),
-									   'glyphicon-remove' : !ctrl.isRemovingSelected()}">
-						</span>
-						<span translate="myLibrary.buttons.removeSelected" translate-value-count="{{ctrl.parametersForCollectionsList.selectedCollections.length}}"></span>
-					</button>
-					
-					<button type="button" class="button button-action red" 
-						translate="myLibrary.buttons.addNewCollection" 
-						ng-click="ctrl.addCollection()">
-					</button>
-				</listable-data-header-right>
 				<listable-data-empty-list>
-					<span translate="myLibrary.noCollectionsAfterFiltering"></span>
+					<span ng-if="ctrl.collection.length > 0" translate="myLibrary.noCollectionsAfterFiltering"></span>
+					<p ng-if="ctrl.collection.length == 0"  translate="myLibrary.noAddedCollectionsAvailable"></p>
 				</listable-data-empty-list>
 			</listable-data>
 		</div>

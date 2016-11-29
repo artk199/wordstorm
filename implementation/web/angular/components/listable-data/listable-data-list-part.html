@@ -9,10 +9,16 @@
 	</div>
 </div>
 <div class='group' ng-if="ctrl.groupField == null">
+	<div class='list-item' ng-if="::(ctrl.addElement == 'first')">
+		<compile-html html="{{::ctrl.createControlDirective()}}"></compile-html>
+	</div>
 	<div class='list-item' 
 		ng-repeat="item in (ctrl.filteredList = (ctrl.list | filter: ctrl.filterItems)
 			| limitTo: ctrl.getMaxListSize() : ctrl.getListStartItem())"
 	>
 		<compile-html html="{{::ctrl.createDirectiveForItem()}}"></compile-html>
+	</div>
+	<div class='list-item' ng-if="::(ctrl.addElement == 'last')">
+		<compile-html html="{{::ctrl.createControlDirective()}}"></compile-html>
 	</div>
 </div>

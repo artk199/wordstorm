@@ -78,12 +78,17 @@
 		};
 		
 		service.learning = {
-			main: function(collectionId, collectionName){
+			main: function(collectionId, collectionName, tier){
 				$state.go("learning", {
 					collectionId: collectionId,
-					collectionName: parseUrlParameter(collectionName)
+					collectionName: parseUrlParameter(collectionName),
+					tier: tier
 				});
 			}
+		};
+		
+		service.uploadFile = function(){
+			$state.go("uploadFile");
 		};
 		
 		service.isPageOpened = function(stateName){

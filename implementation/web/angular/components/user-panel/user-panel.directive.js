@@ -89,6 +89,7 @@
 					refreshUserData().then(function(){
 						ctrl.view = views.LOGGED_IN;
 						handleSidebar();
+						pages.myLibrary.allCollections();
 					});
 				}
 
@@ -99,8 +100,8 @@
 		function logPersonOut(){
 			userPanelService.logPersonOut().then(function(){
 				ctrl.view = views.LOG_IN_FORM;
-				pages.home();
 				handleSidebar();
+				pages.home();
 			});
 		}
 		

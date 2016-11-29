@@ -69,7 +69,7 @@
 			}
 			else if(isAddingMode()){
 				initFormView();
-				//addEmptyTranslation();
+				addEmptyTranslation();
 			}
 		}
 		

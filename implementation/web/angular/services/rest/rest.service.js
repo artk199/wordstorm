@@ -31,7 +31,8 @@
 			create: createWord,
 			remove: removeWord,
 			get: getWord,
-			edit: editWord
+			edit: editWord,
+			isKnown: isWordKnown
 		};
 		
 		service.common = {
@@ -119,6 +120,12 @@
 			restCache.clearCache("wordsCache");
 			restCache.clearCache("collectionsCache");
 			return restConfig.createPutPromise("Word", words);
+		}
+		
+		function isWordKnown(wordId, isKnown){
+			restCache.clearCache("wordsCache");
+			restCache.clearCache("collectionsCache");
+			return restConfig.createPostPromise("Word/Tier", [{Id: wordId, IsKnown: isKnown}]);
 		}
 		
 		// Common functions 

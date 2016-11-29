@@ -26,3 +26,11 @@
 	content: ",";
 	padding-right: 5px;
 }
+
+.in-parenthesis::before{
+	content:"(";
+}
+
+.in-parenthesis::after{
+	content:")";
+}

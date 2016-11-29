@@ -5,8 +5,7 @@ html{
 
 body{
 	height: 100%;
-	padding: 70px 0 0 70px;
-	background: #404a53;
+	background: #325879;
 }
 
 /* Elementy ogólne */
@@ -23,6 +22,10 @@ body{
 
 .full-height{
 	height: 100%;
+}
+
+.full-width{
+	width: 100%;
 }
 
 .vertical-grid{
@@ -357,6 +360,10 @@ body{
     align-items: center;
 }
 
+.vertical-middle > .top{
+	align-self: baseline;
+}
+
 .justified-content{
 	display: flex;
 	justify-content: space-between;
@@ -369,4 +376,33 @@ body{
 
 .highlighted{
 	color: #ffbe00;
+}
+
+.big-round-button{
+    text-align: center;
+}
+
+.big-round-button .button.button-action{
+	vertical-align: middle;
+	display: inline-block;
+	padding: 0;
+    margin: 10px 0;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+}
+
+.big-round-button .button.button-action.big{
+    width: 120px;
+    height: 120px;
+    margin: 0 10px;	
+}
+
+.big-round-button .button.button-action.big .glyphicon{
+	font-size: 50px;
+}
+
+.big-round-button .button.button-action .glyphicon{
+    font-size: 23px;
+    left: 1px;
 }

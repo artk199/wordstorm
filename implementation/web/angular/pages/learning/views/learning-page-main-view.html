@@ -9,6 +9,8 @@
 			</h2>
 			<h2>
 				<span translate="myLibrary.learning.title"></span>
+				<small class="in-parenthesis" translate= "myLibrary.learning.tier" 
+					ng-if="ctrl.wordsTier" translate-value-tier="{{::ctrl.wordsTier}}"></small>
 			</h2>
 		</div>
 	</page-header>
@@ -26,15 +28,15 @@
 				<div class="col-xs-1 col-sm-1 col-md-2 col-lg-2"></div>
 				<div class="col-xs-10 col-sm-10 col-md-8 col-lg-8">
 					<section class="top-buttons justified-content">
-						<button type="button" class="button button-action"
+						<button type="button" class="button button-action" ng-disabled="ctrl.isKnownWordLoading() || ctrl.isUnknownWordLoading()"
 							ng-click="ctrl.markWordAsKnown()">
-							<span class="glyphicon glyphicon-star"></span>
+							<span class="glyphicon" ng-class="ctrl.isKnownWordLoading() ? 'glyphicon-spin glyphicon-refresh' : 'glyphicon-star'"></span>
 							<span translate="myLibrary.learning.buttons.knowThis"></span>
 						</button>
 						
-						<button type="button" class="button button-action"
+						<button type="button" class="button button-action" ng-disabled="ctrl.isKnownWordLoading() || ctrl.isUnknownWordLoading()"
 							ng-click="ctrl.markWordAsUnknown()">
-							<span class="glyphicon glyphicon-retweet"></span>
+							<span class="glyphicon" ng-class="ctrl.isUnknownWordLoading() ? 'glyphicon-spin glyphicon-refresh' : 'glyphicon-retweet'"></span>
 							<span translate="myLibrary.learning.buttons.dontKnowThis"></span>
 						</button>
 						

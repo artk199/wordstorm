@@ -2,5 +2,7 @@
 	"errors.EmailIsNotFree" : "Wprowadzony adres e-mail jest już zajęty.",
 	"errors.PasswordFormatIsInvalid" : "Hasło nie spełnia wymagań polityki haseł. {{policyRules}}",
 	"errors.WrongUsernameOrPassword" : "Wprowadzona nazwa użytkownika albo hasło nie jest poprawne.",
-	"errors.EmailAddressFormatIsInvalid" : "Podany adres e-mail jest nieprawidłowy"
+	"errors.EmailAddressFormatIsInvalid" : "Podany adres e-mail jest nieprawidłowy",
+	"errors.FileExtensionInvalid" : "Rozszerzenie pliku jest nieprawidłowe! Dozwolone rozszerzenia: {{extensions}}",
+	"errors.FileSizeTooLarge" : "Rozmiar pliku jest zbyt duży. Maksymalny rozmiar pliku wynosi {{fileSize}} MB."
 }

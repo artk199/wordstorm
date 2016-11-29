@@ -1,6 +1,6 @@
 <div class='listable-data vertical-grid' ng-class="{'list-view' : ctrl.isListMode(), 'grid-view' : ctrl.isGridMode()}">
-	<header>
-		<section class="left-section">
+	<header ng-switch="ctrl.noButtons" ng-if="ctrl.list && ctrl.list.length">
+		<section class="left-section" ng-switch-default>
 			<span ng-if="!ctrl.noViewChange">			
 			 	<button type="button" class="btn button" 
 			  		ng-click="ctrl.switchToViewMode('list')"
@@ -39,6 +39,15 @@
 		  	</button>
 		  	
 		</section>
+		<section class="left-section" ng-switch-when="true">
+			<div class='search-bar with-remove-option opened' ng-if="::ctrl.noSearch != true">
+				<input auto-focus ng-model="ctrl.searchText"
+					ng-change="ctrl.refreshPagination()"
+					use-auto-focus="true"
+					ng-attr-placeholder="{{'listableData.searchPlaceholder' | translate}}"/>
+			</div>
+		</section>
+		
 		<section class='right-section'>
 			<div ng-transclude="headerRight"></div>
 		</section>

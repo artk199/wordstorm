@@ -18,7 +18,6 @@
 			<div class='buttons'>
 				<button type='button' class='button' ng-click='ctrl.showCollection()'>
 					<span class='glyphicon glyphicon-remove'></span>
-					<span translate='button.close'></span>
 				</button>
 			</div>
 		</page-header-right>
@@ -33,7 +32,7 @@
 							label="myLibrary.word.add.form.Word"
 							model="ctrl.formData.Word"
 							form="addWordForm"
-							use-auto-focus="true"
+							use-auto-focus="ctrl.formData.Translations.length == 0"
 						></form-field>
 						
 						<form-field name="Pronunciation" type="specialCharacters" is-required="true"
@@ -59,6 +58,8 @@
 							no-view-change="true"
 							scrollable-body="true"
 							view="list"
+							no-buttons="true"
+							no-search="true"
 							display-directive-name="translation-tile"
 							display-directive-parameters = "{form: addWordForm, list: ctrl.formData.Translations}"
 						>

@@ -2,7 +2,7 @@
 	"restApi" : "http://wordstormapi.azurewebsites.net/api/",
 	"allowedLanguages" : ["pl"],
 	"defaultLanguage" : "pl",
-	"devMode" : true,
+	"devMode" : false,
 	"html5Mode" : true,
 	"defaultAlertsDisplayTimeInSec" : 10,
 	"specialCharacters" : {
@@ -12,5 +12,8 @@
 	"paginationSizes" : [1,5,10,15],
 	"defaultPaginationSize" : 10,
 	"searchUrl" : "https://www.diki.pl/",
-	"defaultDebounceTimeInMs": 100
+	"defaultDebounceTimeInMs": 100,
+	"uploadFileExtensions" : ["txt", "pdf", "docx", "doc"],
+	"uploadFileMaxSizeInMb" : 0.1,
+	"collectionAddElement" : "last"
 }

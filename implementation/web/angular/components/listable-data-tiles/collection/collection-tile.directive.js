@@ -13,7 +13,8 @@
 	    		item: '=',
 	    		parameters: '=',
 	    		searchText: '=',
-	    		mode: '='
+	    		mode: '=',
+	    		controlItem: '@'
 	    	}
 	    };
 	}
@@ -57,11 +58,20 @@
 		ctrl.hasCollectionChanged = hasChollectionChangedByEdit;
 		ctrl.selectCollection = selectCollection;
 		ctrl.isCollectionSelected = isCollectionSelected;
+		ctrl.playLearningMode = pages.learning.main;
 		
 		ctrl.canDisplayActionButtons = canDisplayActionButtons;
 		ctrl.openLearning = pages.learning.main;
 		
+		ctrl.addCollection = addCollection;
+		
 		/////////////////////
+		
+		function addCollection(){
+			if(ctrl.parameters && ctrl.parameters.addCollection){
+				ctrl.parameters.addCollection();
+			}
+		}
 		
 		function getProgress(){
 			var result = ctrl.item.TotalWords > 0 ?

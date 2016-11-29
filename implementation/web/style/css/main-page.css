@@ -10,11 +10,9 @@
 	background-image: url('https://pace.oregonstate.edu/sites/default/files/styles/course_banner_large/public/images/course/cover/elearning-video-chat.jpg?itok=EO3ZiX9L');	
 }
 
-.main-page.video .youtube-video{
-	margin-top: 10%;
-	width: 70%;
-	height: 30%;
-	margin: 0 auto;
+.main-page .youtube-video{
+	width: 100%;
+	height: 400px;
 }
 
 .main-page.video h1{
@@ -25,13 +23,24 @@
     margin-bottom: 0;
 }
 
-.main-page.video h2{
+.main-page.video .application-info h2{
 	margin-top: 0;
     margin-bottom: 5%;
 	font-family: 'Crete Round', serif;
     font-size: 20px;
     font-style: italic;
     color: #fff;
+}
+
+.main-page .main-panel{
+	margin-top: 10%;
+}
+
+.main-page .main-panel form{
+	background: #fff;
+	border: 1px solid #ccc;
+	padding: 5%;
+	color: #000;
 }
 
 /* Another view */
@@ -92,6 +101,14 @@
 .main-page .options .option .option-icon{
 	max-height: 50px;
 	margin: 5% 0;
+}
+
+.main-page h2{
+	margin: 0 0 25px 0;
+}
+
+.main-page .application-info h1{
+	margin-top: 15%;
 }
 /* Main page 
 .main-page .text{

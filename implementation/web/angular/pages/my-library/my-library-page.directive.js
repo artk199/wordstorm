@@ -24,8 +24,8 @@
 
 		ctrl.collection = null;
 		ctrl.isLoading = isLoading;
+		ctrl.collectionAddElement = config.collectionAddElement;
 		
-		ctrl.addCollection = pages.myLibrary.addCollection;
 		ctrl.refreshCollectionsList = refreshCollectionsList;
 		ctrl.collectionListFilter = collectionListFilter;
 			
@@ -57,7 +57,8 @@
 			return {
 				removeCollection: silentRemoveCollection,
 				editCollection: silentEditCollection,
-				selectedCollections: []
+				selectedCollections: [],
+				addCollection: pages.myLibrary.addCollection
 			}
 		}
 		

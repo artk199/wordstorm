@@ -57,6 +57,7 @@
 						</header>
 						
 						<ul>
+							<li ng-if="ctrl.wordsTier" translate="myLibrary.learning.results.tier" translate-values="::ctrl.results"></li>
 							<li translate="myLibrary.learning.results.goodAnswers" translate-values="::ctrl.results"></li>
 							<li translate="myLibrary.learning.results.longestCombo" translate-values="::ctrl.results"></li>
 						</ul>

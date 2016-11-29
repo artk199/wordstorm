@@ -15,7 +15,7 @@
 				label-position="top"
 			></form-field>
 		</div>
-		<div class="col-xs-10 col-sm-10 col-md-4 col-lg-4">
+		<div class="col-xs-10 col-sm-10 col-md-4 col-lg-4 top">
 			<form-field type="own"
 				label="myLibrary.word.add.form.partOfSpeech"
 				form="ctrl.parameters.form"
@@ -30,7 +30,8 @@
 			</form-field>
 		</div>
 		<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 text-right">
-			<button type="button" class="button button-action" ng-click="ctrl.removeTranslation()">
+			<button type="button" class="button button-action" ng-click="ctrl.removeTranslation()"
+				ng-if="ctrl.parameters.list.length > 1">
 				<span class="glyphicon glyphicon-remove"></span>
 				<span translate="button.remove"></span>
 			</button>
