@@ -10,7 +10,7 @@
 			<h2>
 				<span translate="myLibrary.learning.title"></span>
 				<small class="in-parenthesis" translate= "myLibrary.learning.tier" 
-					ng-if="ctrl.wordsTier" translate-value-tier="{{::ctrl.wordsTier}}"></small>
+					ng-if="ctrl.wordsTier != null" translate-value-tier="{{::(ctrl.wordsTier+1)}}"></small>
 			</h2>
 		</div>
 	</page-header>

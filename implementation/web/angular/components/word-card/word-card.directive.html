@@ -12,7 +12,7 @@
 			<div class="word-main-data centered-content full-height" ng-switch-default>
 				<span>
 					<h1 ng-bind="ctrl.word.Word"></h1>
-					<h2 class="in-slashes" ng-bind="ctrl.word.Pronunciation"></h2>
+					<h2 ng-if="ctrl.word.Pronunciation" class="in-slashes" ng-bind="ctrl.word.Pronunciation"></h2>
 				</span>
 			</div>
 			<div class="word-translations" ng-switch-when="translation">

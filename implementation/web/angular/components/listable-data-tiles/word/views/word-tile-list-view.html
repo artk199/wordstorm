@@ -13,12 +13,12 @@
 		<div class='col-xs-9 col-sm-9 col-md-11 col-lg-11 inline-children'>
 			<!-- Word data section -->
 			<h3 class="item-title" ng-bind-html="ctrl.item.Word | highlight: ctrl.searchText"></h3>
-			<div>
+			<div ng-if="ctrl.item.Pronunciation">
 				<span class='glyphicon glyphicon-headphones'></span>
 				<span ng-bind="::ctrl.item.Pronunciation"></span>
 			</div>
 			
-			<div class='buttons show-on-hover'>
+			<div class='buttons show-on-hover with-left-space'>
 				<div ng-if="ctrl.isRemoveMode()" class='text-center'>
 					<h5 translate="button.remove.confirmAction"></h5>
 					<button class='button button-action'
@@ -62,11 +62,17 @@
 		<div class="col-xs-9 col-sm-9 col-md-11 col-lg-11">
 			<div class="translations">
 				<h3 translate="myLibrary.word.translations"></h3>
-				<ul>
-					<li class='translation' ng-repeat="translation in ::ctrl.item.Translations">
-						<span ng-bind-html="translation.Translation | highlight: ctrl.searchText"></span>
-					</li>
-				</ul>
+				<section class="row">
+					<div class="translation col-xs-12 col-sm-6 col-md-4 col-lg-4"
+						 ng-repeat="(partOfSpeech, translations) in ::ctrl.item.Translations | groupBy: 'PartOfSpeech'">
+						<h4 ng-bind="::(('enums.partOfSpeech.' + partOfSpeech) | translate)"></h4>
+						<ul>
+							<li ng-repeat="translation in ::translations">
+								<span ng-bind="::translation.Translation"></span>
+							</li>
+						</ul>
+					</div>
+				</section>
 			</div>
 		</div>
 	</section>

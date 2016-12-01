@@ -1,0 +1,63 @@
+<page page-class="upload-file" scrollable-body="true" disallow-not-logged="true">
+	<page-header>
+		<div class='link-tree'>
+			<h1 class='previous-link' ng-click="ctrl.showAllCollections()">
+				<span translate='myLibrary.title'></span>
+			</h1>
+			<h2 class='previous-link' ng-click="ctrl.cancelCreation()">
+				<span translate='uploadFile.title'></span>
+			</h2>
+			<h2 translate='uploadFile.results.title'></h2>
+		</div>
+	</page-header>
+	<page-body-top ng-if="::(ctrl.wordsList != null && ctrl.wordsList.length > 0)">
+		<section class="description">
+			<form class="form-horizontal" name="uploadForm">
+				<form-field name="name" type="input" is-required="true"
+					placeholder="myLibrary.addNewCollection.form.collectionName.placeholder"
+					label="myLibrary.addNewCollection.form.collectionName"
+					use-auto-focus="true"
+					model="ctrl.collection.Name"
+					form="uploadForm"
+				>
+				</form-field>
+			</form>
+			<p translate="uploadFile.results.info"></p>
+		</section>
+	</page-body-top>
+	<page-body>
+		<div class="full-height found-words">
+			<listable-data list="ctrl.wordsList"
+				display-directive-name="upload-file-tile"
+				display-directive-parameters = "ctrl.parametersForCollectionsList"
+				scrollable-body="true"
+				no-view-change="true"
+				no-search="true"
+				view="list"
+				no-buttons="true"
+			>
+				<listable-data-empty-list>
+					<p translate="myLibrary.noAddedCollectionsAvailable"></p>
+				</listable-data-empty-list>
+			</listable-data>
+		</div>
+	</page-body>
+	<page-footer ng-if="::(ctrl.wordsList != null && ctrl.wordsList.length > 0)">
+		<div class="buttons text-center main-buttons">
+			<button type="button" class="static button button-action"
+					ng-disabled="ctrl.isCollectionCreating()"
+					ng-click="ctrl.cancelCreation()"
+				>
+				<span translate="uploadFile.results.buttons.cancel"></span>
+			</button>
+			
+			<button type="button" class="static button button-action"
+				ng-disabled="!ctrl.collection.Name || ctrl.isCollectionCreating()"
+				ng-click="ctrl.createCollection()"
+			>
+				<span ng-if="ctrl.isCollectionCreating()" class="glyphicon glyphicon-refresh glyphicon-spin"></span>
+				<span translate="uploadFile.results.buttons.addCollection"></span>
+			</button>
+		</div>
+	</page-footer>
+</page>

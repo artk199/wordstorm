@@ -41,7 +41,7 @@
 		ctrl.words = null;
 		ctrl.currentWord = null;
 		ctrl.currentView = null;
-		ctrl.wordsTier = $stateParams.tier;
+		ctrl.wordsTier = $stateParams.tier != null ? parseInt($stateParams.tier) : null;
 		
 		ctrl.showAllCollections = pages.myLibrary.allCollections;
 		ctrl.openCollection = pages.myLibrary.collection;
@@ -86,11 +86,27 @@
 			return rest.collection.get(collectionId).then(function(result){
 				if(result.Result){
 					ctrl.collection = result.Result;
-					ctrl.words = result.Result.Words;
+					
+					ctrl.words = filterWords(result.Result.Words, ctrl.wordsTier);
 				}
 				
 				loadingData.COLLECTION = false;
 			});
+		}
+		
+		function filterWords(list, tier){
+			var result = [];
+			if(tier != null){
+				for(var i = 0; i < list.length; i++){
+					if(list[i].Tier == tier){
+						result.push(list[i]);
+					}
+				}
+			}
+			else{
+				result = list;
+			}
+			return result;
 		}
 		
 		function initStatistics(){
@@ -212,7 +228,7 @@
 				goodAnswers: stats.knownWords.length,
 				wrongAnswers: stats.unknownWords.length,
 				wrongWords: stats.unknownWords,
-				tier: ctrl.wordsTier,
+				tier: ctrl.wordsTier+1,
 				combo: findLongestCombo()
 			};
 		}

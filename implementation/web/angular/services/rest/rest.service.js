@@ -39,6 +39,10 @@
 			partOfSpeech: getPartOfSpeechEnum
 		};
 		
+		service.upload = {
+			text: uploadText
+		};
+		
 		//////////////////////////////
 		
 		// Register user functions
@@ -131,6 +135,12 @@
 		// Common functions 
 		function getPartOfSpeechEnum(){
 			return restCache.get("commonCache", "Common/PartOfSpeech", null, null, true);
+		}
+		
+		// File upload functions
+		function uploadText(text){
+			var params = { headers : {'Content-Type' : 'text/plain'}};
+			return restConfig.createPostPromise("File/Text", text, params, false, true);
 		}
 	}
 }());

@@ -30,20 +30,24 @@
 	}
 	
 	var views = {
-		INPUT: "angular/pages/upload-file/views/upload-file-input-view.html"
+		INPUT: "angular/pages/upload-file/views/upload-file-input-view.html",
+		CHOOSE: "angular/pages/upload-file/views/upload-file-choose-view.html"
 	};
 	
 	var loadingData = {
-		SENDING: false	
+		SENDING: false,
+		CREATING: false
 	};
 	
-	DirectiveController.$inject = ['rest', 'alerts', "config", "$scope", "pages"];
-	function DirectiveController(rest, alerts, config, $scope, pages){
+	DirectiveController.$inject = ['rest', 'alerts', "config", "$scope", "pages", "$timeout"];
+	function DirectiveController(rest, alerts, config, $scope, pages, $timeout){
 		var ctrl = this;
 		
 		ctrl.manualInputSelected = false;
 		ctrl.errors = null;
 		ctrl.view = null;
+		ctrl.wordsList = null;
+		ctrl.collection = null;
 		
 		ctrl.uploadFile = uploadFile;
 		ctrl.sendManualInput = sendManualInput;
@@ -52,6 +56,10 @@
 		ctrl.hasError = hasError;
 		ctrl.isDataSending = isDataSending;
 		ctrl.showAllCollections = pages.myLibrary.allCollections;
+		
+		ctrl.isCollectionCreating = isCollectionCreating;
+		ctrl.createCollection = createCollection;
+		ctrl.cancelCreation = cancelCreation;
 		
 		init();
 		
@@ -77,12 +85,26 @@
 		function uploadFile(file){
 			if(validateFile(file)){
 				loadingData.SENDING = true;
+				
+				$timeout(function(){
+					loadingData.SENDING = false;
+					ctrl.view = views.CHOOSE;
+				}, 2000);
 			}
 			$scope.$apply();
 		}
 		
 		function sendManualInput(text){
 			loadingData.SENDING = true;
+			
+			rest.upload.text(text).then(function(data){	
+				if(data.Result){
+					ctrl.wordsList = data.Result;
+				}
+				
+				loadingData.SENDING = false;
+				ctrl.view = views.CHOOSE;
+			});
 		}
 		
 		function validateFile(file){
@@ -131,6 +153,35 @@
 		
 		function isDataSending(){
 			return loadingData.SENDING;
+		}
+		
+		// Creating collection
+		
+		function isCollectionCreating(){
+			return loadingData.CREATING;
+		}
+		
+		function createCollection(){
+			loadingData.CREATING = true;
+			
+			// First, create collection
+			rest.collection.create([ctrl.collection]).then(function(data){
+				if(data.Result){
+					var collection = data.Result[0];
+					
+					// After collection is created, create words for it
+					rest.word.create(collection.Id, ctrl.wordsList).then(function(result){
+						if(result.Result){
+							pages.myLibrary.collection(collection.Id, collection.Name);
+						}
+						loadingData.CREATING = false;
+					});
+				}
+			});
+		}
+		
+		function cancelCreation(){
+			init();
 		}
 	}
 }());

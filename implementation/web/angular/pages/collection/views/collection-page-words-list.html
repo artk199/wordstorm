@@ -45,7 +45,7 @@
 							<li ng-repeat="tier in ::ctrl.getTiersList()" ng-click="ctrl.changeCurrentTier(tier)"
 								ng-class="{'active' : tier == ctrl.getCurrentTier(), 'disabled' : !ctrl.isTierActive(tier)}"
 							>
-								<span ng-bind="::tier"></span>
+								<span ng-bind="::(tier+1)"></span>
 							</li>
 							
 							<li ng-click="ctrl.changeCurrentTier(5)"
