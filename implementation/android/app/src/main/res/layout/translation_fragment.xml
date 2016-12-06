@@ -7,26 +7,26 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <TextView
-        android:id="@+id/word"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:keepScreenOn="true"
-        android:text="graduate"
-        android:textColor="@color/colorPrimary"
-        android:textSize="50sp"
-        android:textStyle="bold|italic" />
-
-    <TextView
-        android:id="@+id/pronunciation"
+        android:id="@+id/translation_type"
         android:layout_width="match_parent"
-        android:layout_height="76dp"
-        android:gravity="center"
+        android:layout_height="wrap_content"
+        android:gravity="left"
         android:keepScreenOn="true"
-        android:text="/grædʒeət/"
+        android:layout_marginLeft="30dp"
+        android:text="rzeczownik"
         android:textColor="@android:color/darker_gray"
         android:textSize="25sp"
         android:textStyle="bold"
         tools:textStyle="italic" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+        android:keepScreenOn="true"
+        android:layout_marginLeft="30dp"
+        android:text=" - magistrant"
+        android:textColor="@color/colorPrimary"
+        android:textSize="28sp"
+        />
 
 </LinearLayout>

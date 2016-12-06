@@ -30,6 +30,7 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+        getSupportActionBar().hide();
 
         mRegisterLoginView = (EditText) findViewById(R.id.registerLoginText);
         mRegisterPasswordView = (EditText) findViewById(R.id.registerPassword);

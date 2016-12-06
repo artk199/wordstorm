@@ -35,4 +35,8 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="search_title">Szukaj</string>
+    <string name="search_hint">Szukaj</string>
+    <string name="title_activity_temp">TempActivity</string>
+    <string name="section_format">Hello World from section: %1$d</string>
 </resources>

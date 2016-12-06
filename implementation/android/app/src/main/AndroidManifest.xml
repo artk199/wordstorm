@@ -2,13 +2,19 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="pl.bialateam.wordstorm">
 
-    <uses-sdk android:minSdkVersion="15" android:targetSdkVersion="24" />
+    <uses-sdk
+        android:minSdkVersion="15"
+        android:targetSdkVersion="24" />
 
     <!-- To auto-complete the email text field in the login form with the user's emails -->
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.INTERNET" />
+
+    <android:uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <android:uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <android:uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:name=".activities.StormApplication"
@@ -19,7 +25,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".activities.LoginActivity"
-            android:label="@string/title_activity_login">
+            android:theme="@style/AppTheme.LoginAndRegister">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -29,17 +35,26 @@
         <activity
             android:name=".activities.StartActivity"
             android:label="@string/title_activity_start"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".activities.RegisterActivity" />
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@xml/searchable" />
+        </activity>
+        <activity
+            android:name=".activities.RegisterActivity"
+            android:theme="@style/AppTheme.LoginAndRegister" />
         <activity
             android:name=".activities.CollectionDetailsActivity"
             android:label="@string/title_activity_collection_details"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activities.CardGameActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_card_game"
-            android:theme="@style/FullscreenTheme"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

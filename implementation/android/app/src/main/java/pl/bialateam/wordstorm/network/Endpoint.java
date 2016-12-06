@@ -27,7 +27,7 @@ public class Endpoint {
 
     private static final String TAG = "Endpoint";
 
-    public static final String baseURL = "http://wordstormapi.azurewebsites.net/api/";
+        public static final String baseURL = "http://wordstormapi.azurewebsites.net/api/";
 
     JSONObject doPost(String urlPostfix,JSONObject params){
         return doRequest(Request.Method.POST,urlPostfix,params);

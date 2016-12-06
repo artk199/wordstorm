@@ -128,4 +128,13 @@ public class Word implements Serializable {
         this.sentences = sentences;
     }
 
+    @Override
+    public String toString() {
+        return "Word{" +
+                "id='" + id + '\'' +
+                ", word='" + word + '\'' +
+                ", tier=" + tier +
+                ", isKnown=" + isKnown +
+                '}';
+    }
 }

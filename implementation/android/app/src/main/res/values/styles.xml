@@ -8,6 +8,25 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="AppTheme.LoginAndRegister">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@android:color/holo_blue_light</item>
+        <item name="colorAccent">@android:color/background_light</item>
+        <item name="android:colorBackground">@android:color/holo_blue_light</item>
+        <item name="android:textColor">@android:color/background_light</item>
+        <item name="buttonStyle">@android:style/Widget.Material.Button.Colored</item>
+    </style>
+
+    <style name="TextLabel">
+        <!-- Hint color and label color in FALSE state -->
+        <item name="android:textColorHint">@android:color/background_light</item>
+        <item name="android:textSize">20sp</item>
+        <!-- Label color in TRUE state and bar color FALSE and TRUE State -->
+        <item name="colorAccent">@android:color/background_light</item>
+        <item name="colorControlNormal">@android:color/background_light</item>
+        <item name="colorControlActivated">@android:color/background_light</item>
+    </style>
+
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
