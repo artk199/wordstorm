@@ -1,0 +1,6 @@
+<form ng-submit="ctrl.findWord()" >
+	<div class='search-bar'>
+		<span class='glyphicon glyphicon-search' ng-click="ctrl.findWord()"></span>
+		<input ng-model="ctrl.word" ng-attr-placeholder="{{'navbar.search.placeholder' | translate}}"/>
+	</div>
+</form>

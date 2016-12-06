@@ -10,7 +10,9 @@
 	    	controllerAs: 'ctrl',
 	    	bindToController: true,
 	    	scope: {
-	    		open: '='
+	    		open: '=',
+	    		closeSidebar: '&',
+	    		openSidebar: '&'
 	    	}
 	    };
 	}
@@ -24,6 +26,7 @@
 	function DirectiveController(userPanelService, pages){
 		var ctrl = this;
 		var isPersonLoggedLoading = false;
+		var isUserDataLoading = false;
 		
 		ctrl.view = views.LOG_IN_FORM;
 		
@@ -35,12 +38,13 @@
 		ctrl.logOut = logPersonOut;
 		ctrl.isPersonLogged = isPersonLogged;
 		ctrl.goToRegisterPage = pages.register;
+		ctrl.userData = null;
 		
 		init();
 		
 		///////////////////////////
 		
-		function init(){
+		function init(){	
 			refreshIsPersonLogged();
 		}
 		
@@ -50,14 +54,27 @@
 		
 		function refreshIsPersonLogged(){
 			isPersonLoggedLoading = true;
-			userPanelService.checkPersonLogged().then(function(){
-				ctrl.view = userPanelService.isPersonLogged() ? views.LOGGED_IN : views.LOG_IN_FORM;
+			return userPanelService.checkPersonLogged().then(function(){
+				var personLogged = userPanelService.isPersonLogged();
+				// Automatically download user data if he is logged
+				if(personLogged){
+					refreshUserData();
+				}
+				ctrl.view = personLogged ? views.LOGGED_IN : views.LOG_IN_FORM;
 				isPersonLoggedLoading = false;
 			});
 		}
 		
+		function refreshUserData(){
+			isUserDataLoading = true;
+			return userPanelService.loadPersonData().then(function(data){
+				ctrl.userData = data;
+				isUserDataLoading = false;
+			});
+		}
+		
 		function isLoading(){
-			return isPersonLoggedLoading;
+			return isPersonLoggedLoading || isUserDataLoading;
 		}
 		
 		function logPersonIn(email, password){
@@ -69,7 +86,11 @@
 					ctrl.errors = {WrongUsernameOrPassword : true};
 				}
 				else{
-					ctrl.view = views.LOGGED_IN;
+					refreshUserData().then(function(){
+						ctrl.view = views.LOGGED_IN;
+						handleSidebar();
+						pages.myLibrary.allCollections();
+					});
 				}
 
 				ctrl.loggingInProcess = false;
@@ -79,8 +100,15 @@
 		function logPersonOut(){
 			userPanelService.logPersonOut().then(function(){
 				ctrl.view = views.LOG_IN_FORM;
+				handleSidebar();
 				pages.home();
 			});
+		}
+		
+		function handleSidebar(){
+			if(ctrl.closeSidebar){
+				ctrl.closeSidebar();
+			}
 		}
 	}
 }());

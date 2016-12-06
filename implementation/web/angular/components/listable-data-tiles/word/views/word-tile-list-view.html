@@ -1,0 +1,79 @@
+<div class="listed">
+	<div class='row vertical-middle user-action' ng-class="{'action-active' : ctrl.selected || !ctrl.isNormalMode()}">
+		<div class='col-xs-3 col-sm-3 col-md-1 col-lg-1'>
+			<div class='item-icon-container empty'>
+				<input type="checkbox" ng-model="ctrl.selected"
+					ng-init="ctrl.selected = ctrl.isItemSelected()" 
+					ng-if="::(ctrl.parameters != null && ctrl.parameters.selectedItems)"
+					class="item-selector"
+					ng-click="ctrl.selectItem()"
+				/>
+			</div>
+		</div>
+		<div class='col-xs-9 col-sm-9 col-md-11 col-lg-11 inline-children'>
+			<!-- Word data section -->
+			<h3 class="item-title" ng-bind-html="ctrl.item.Word | highlight: ctrl.searchText"></h3>
+			<div ng-if="ctrl.item.Pronunciation">
+				<span class='glyphicon glyphicon-headphones'></span>
+				<span ng-bind="::ctrl.item.Pronunciation"></span>
+			</div>
+			
+			<div class='buttons show-on-hover with-left-space'>
+				<div ng-if="ctrl.isRemoveMode()" class='text-center'>
+					<h5 translate="button.remove.confirmAction"></h5>
+					<button class='button button-action'
+						ng-click="ctrl.switchToNormalMode()"
+						ng-disabled="ctrl.isCollectionRemoving()"
+					>
+						<span class='glyphicon glyphicon-chevron-left'></span>
+						<span translate="button.no"></span>
+					</button>
+					<button class='button button-action'
+						ng-click="ctrl.removeItem();"
+						ng-disabled="ctrl.isRemoving()"
+					>
+						<span class='glyphicon' 
+							ng-class="{'glyphicon-refresh glyphicon-spin' : ctrl.isRemoving(), 
+									   'glyphicon-ok' : !ctrl.isRemoving()}">
+						</span>
+						<span translate="button.yes"></span>
+					</button>
+				</div>
+				<span ng-if="ctrl.isNormalMode() || ctrl.isExpandedMode()">
+					<button type="button" class="button button-action" ng-click="ctrl.switchToRemoveMode()">
+						<span class="glyphicon glyphicon-remove"></span>
+					</button>
+					<button type="button" class="button button-action" ng-click="ctrl.switchToEditMode()">
+						<span class="glyphicon glyphicon-pencil"></span>
+					</button>
+					<button type="button" class="button button-action" 
+						ng-click="ctrl.switchExpandedMode()" ng-switch="ctrl.isExpandedMode()">
+						<span class="glyphicon glyphicon-eye-open" ng-switch-when="false"></span>
+						<span class="glyphicon glyphicon-eye-close" ng-switch-default></span>
+					</button>
+				</span>	
+			</div>	
+		</div>
+	</div>
+	<!-- Translations section -->
+	<section class="row" ng-if="ctrl.isExpandedMode()">
+		<div class='col-xs-3 col-sm-3 col-md-1 col-lg-1'>
+		</div>
+		<div class="col-xs-9 col-sm-9 col-md-11 col-lg-11">
+			<div class="translations">
+				<h3 translate="myLibrary.word.translations"></h3>
+				<section class="row">
+					<div class="translation col-xs-12 col-sm-6 col-md-4 col-lg-4"
+						 ng-repeat="(partOfSpeech, translations) in ::ctrl.item.Translations | groupBy: 'PartOfSpeech'">
+						<h4 ng-bind="::(('enums.partOfSpeech.' + partOfSpeech) | translate)"></h4>
+						<ul>
+							<li ng-repeat="translation in ::translations">
+								<span ng-bind="::translation.Translation"></span>
+							</li>
+						</ul>
+					</div>
+				</section>
+			</div>
+		</div>
+	</section>
+</div>

@@ -1,14 +1,10 @@
 <div class="logged-in inline-children">
 	<div class='avatar-holder'>
-		<img src='https://lh3.googleusercontent.com/-VQBSw3yhZxs/AAAAAAAAAAI/AAAAAAAAAAA/LMalBd2T8WM/s120-c/photo.jpg' alt='' title=''/>
+		<img src='images/user-panel/default-avatar.png' alt='' title=''/>
 	</div>
 	<div class='info'>
-		<h3>Nazwa użytkownika</h3>
+		<h3 ng-bind="::ctrl.userData.Email"></h3>
 		<div class='actions inline-children'>
-			<a href='#' class="action">
-				<span class='glyphicon glyphicon-user'></span>
-				<span translate="userPanel.editProfile"></span>
-			</a>
 			<a href='#' class="action" ng-click="ctrl.logOut()">
 				<span class='glyphicon glyphicon-lock'></span>
 				<span translate="userPanel.logout"></span>

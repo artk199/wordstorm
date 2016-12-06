@@ -16,14 +16,16 @@
 	    		bodyClass: '@',
 	    		isLoading: '=',
 	    		scrollableBody: '=',
-	    		disallowNotLogged: '='
+	    		disallowNotLogged: '=',
+	    		disallowLogged: '='
 	    	},
 	    	transclude: {
 	    		header: '?pageHeader',
 	    		headerLeft: '?pageHeaderLeft',
 	    		headerRight: '?pageHeaderRight',
 	    		body: 'pageBody',
-	    		footer: '?pageFooter'
+	    		footer: '?pageFooter',
+	    		bodyTop: '?pageBodyTop'
 	    	}
 	    };
 	}
@@ -45,6 +47,14 @@
 					var isLogged = userPanelService.isPersonLogged();
 					if(!isLogged){
 						pages.authError();
+					}
+				});
+			}
+			else if(ctrl.disallowLogged){
+				userPanelService.checkPersonLogged().then(function(){
+					var isLogged = userPanelService.isPersonLogged();
+					if(isLogged){
+						pages.home();
 					}
 				});
 			}

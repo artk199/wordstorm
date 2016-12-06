@@ -27,8 +27,8 @@
 			});
 		}
 		
-		function createPostPromise(url, data, parameters, skipDefaultParameters){
-			return $http.post(config.restApi + url, angular.toJson(data), 
+		function createPostPromise(url, data, parameters, skipDefaultParameters, skipJson){
+			return $http.post(config.restApi + url, skipJson ? data : angular.toJson(data), 
 					skipDefaultParameters != true ? addStandardHeaders(parameters) : parameters);
 		}
 		

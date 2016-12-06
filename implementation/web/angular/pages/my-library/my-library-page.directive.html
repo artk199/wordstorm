@@ -1,1 +1,26 @@
-<div class='full-height' ng-include src="ctrl.view"></div>		
+<page scrollable-body="true" is-loading="ctrl.isLoading()" disallow-not-logged="true">
+	<page-header>
+		<h1 translate='myLibrary.title'></h1>
+	</page-header>
+	<page-body>
+		<div class="full-height">
+			<listable-data list="ctrl.collection"
+				refresh-data-action="ctrl.refreshCollectionsList(null, null, true, true)"
+				display-directive-name="collection-tile"
+				display-directive-parameters = "ctrl.parametersForCollectionsList"
+				filter-function="ctrl.collectionListFilter"
+				scrollable-body="true"
+				no-view-change="true"
+				view="grid"
+				no-buttons="true"
+				events="ctrl.listableDataEvents"
+				add-element="{{::ctrl.collectionAddElement}}"
+			>
+				<listable-data-empty-list>
+					<span ng-if="ctrl.collection.length > 0" translate="myLibrary.noCollectionsAfterFiltering"></span>
+					<p ng-if="ctrl.collection.length == 0"  translate="myLibrary.noAddedCollectionsAvailable"></p>
+				</listable-data-empty-list>
+			</listable-data>
+		</div>
+	</page-body>
+</page>

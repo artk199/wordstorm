@@ -1,7 +1,45 @@
-<div class="logged-person-icon" ng-if="!ctrl.open && ctrl.isPersonLogged()">
-	<img src='https://lh3.googleusercontent.com/-VQBSw3yhZxs/AAAAAAAAAAI/AAAAAAAAAAA/LMalBd2T8WM/s120-c/photo.jpg' alt='' title=''/>
-</div>
-<div class='user-data' ng-if="ctrl.open">
+<div class='user-data'>
 	<spinner ng-if="ctrl.isLoading()"></spinner>
-	<ng-include src="ctrl.view" ng-if="!ctrl.isLoading()"></ng-include>
+	
+	<span ng-if="!ctrl.isLoading()">
+		<form name="loginForm" class="login-form form-horizontal"
+			ng-class="{'has-error' : !loginForm.email.$touched && !loginForm.password.$touched && ctrl.errorOnLogging}">			
+				<h2 translate="userPanel.form.title"></h2>
+				
+				<span class="error" translate="errors.WrongUsernameOrPassword" ng-if="ctrl.errors.WrongUsernameOrPassword"></span>
+			
+				<form-field name="email" type="email" is-required="true"
+					placeholder="userPanel.form.email.placeholder"
+					label="userPanel.form.email"
+					label-position="none"
+					model="email"
+					use-auto-focus="true"
+					error-occured="ctrl.errors.WrongUsernameOrPassword"
+				>
+					<field-errors>
+						<span translate="userPanel.form.error.wrongEmailAddress"
+							ng-if="loginForm.email.$touched && loginForm.email.$invalid && !loginForm.email.$error.required">
+						</span>
+					</field-errors>
+				</form-field>
+				
+				<form-field name="password" type="password" is-required="true"
+					placeholder="userPanel.form.password.placeholder"
+					label="register.labels.password"
+					model="password"
+					label-position="none"
+					error-occured="ctrl.errors.WrongUsernameOrPassword"
+				>
+				</form-field>
+			
+				<section class="buttons text-left">
+					<button type="submit" class='button button-action'
+						ng-click="ctrl.logIn(email, password); loginForm.email.$touched = false; loginForm.password.$touched = false;"
+						ng-disabled="loginForm.email.$invalid || loginForm.password.$invalid || ctrl.loggingInProcess">
+						<span class='glyphicon glyphicon-refresh glyphicon-spin'ng-if="ctrl.loggingInProcess"></span> 
+						<span translate="userPanel.form.buttons.password.logIn"></span>
+					</button>
+				</section>
+			</form>
+	</span>
 </div>

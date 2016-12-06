@@ -2,8 +2,8 @@
 	angular.module("wordStormApp.services")
 	.service("pages", Service);
 	
-	Service.$inject = ['$state', 'restCache'];
-	function Service($state, restCache){
+	Service.$inject = ['$state', 'restCache', '$translate'];
+	function Service($state, restCache, $translate){
 		var service = this;
 		
 		service.home = function(params){
@@ -28,22 +28,86 @@
 		
 		service.myLibrary = {
 			allCollections : function(){
-				$state.go("my-library");
+				$state.go("myLibrary");
 			},
-			collection : function(groupId, groupName, collectionObj){
+			collection : function(collectionId, collectionName){
 				$state.go("collection", {
-					groupId: groupId,
-					groupName: paresUrlParameter(groupName),
-					collectionObj: collectionObj
+					collectionId: collectionId,
+					collectionName: parseUrlParameter(collectionName)
+				});
+			},
+			collectionPreview : function(collectionId, collectionName){
+				$state.go("collectionPreview", {
+					collectionId: collectionId,
+					collectionName: parseUrlParameter(collectionName)
+				});
+			},
+			addCollection: function(){
+				$state.go("addCollection");
+			},
+			editCollection : function(collectionId, collectionName){
+				$state.go("editCollection", {
+					collectionId: collectionId,
+					collectionName: parseUrlParameter(collectionName)
+				});
+			},
+		};
+		
+		service.publicLibrary = {
+			main: function(){	
+				$state.go("publicLibrary");
+			}
+		};
+		
+		service.word = {
+			show: function(wordId, word){
+				$state.go("word", {word: word, wordId: wordId});
+			},
+			add: function(collectionId, collectionName){
+				$state.go("addWord", {
+					collectionId: collectionId, 
+					collectionName: parseUrlParameter(collectionName)
+				});
+			},
+			edit: function(wordId, word){
+				$state.go("editWord", {
+					word: parseUrlParameter(word), 
+					wordId: wordId
 				});
 			}
+		};
+		
+		service.learning = {
+			main: function(collectionId, collectionName, tier){
+				$state.go("learning", {
+					collectionId: collectionId,
+					collectionName: parseUrlParameter(collectionName),
+					tier: tier
+				});
+			}
+		};
+		
+		service.uploadFile = function(){
+			$state.go("uploadFile");
 		};
 		
 		service.isPageOpened = function(stateName){
 			return $state.is(stateName);
 		};
 		
-		function paresUrlParameter(parameter){
+		service.getCurrentPagetitle = function(){
+			var title = $state.params.title;
+			var result = $translate.instant("application.title");
+			
+			if(title){
+				result = $translate.instant(title) + " - " + result;
+			}
+			return result;
+		};
+		
+		////////////////////
+		
+		function parseUrlParameter(parameter){
 			var result = null;
 			if(parameter){
 				result = parameter.toString().toLowerCase().replace(/\s+/g, "-");

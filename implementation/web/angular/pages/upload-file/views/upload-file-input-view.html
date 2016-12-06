@@ -1,0 +1,61 @@
+<page page-class="upload-file" scrollable-body="true" disallow-not-logged="true">
+	<page-header>
+		<div class='link-tree'>
+			<h1 class='previous-link' ng-click="ctrl.showAllCollections()">
+				<span translate='myLibrary.title'></span>
+			</h1>
+			<h2 translate='uploadFile.title'></h2>
+		</div>
+	</page-header>
+	<page-body>
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-xs-1 col-sm-1 col-md-2 col-lg-3"></div>
+				<div class="col-xs-10 col-sm-10 col-md-8 col-lg-6">
+					<div class="upload-action" ng-class="{'error' : ctrl.hasError()}" ng-switch="ctrl.isDataSending()">
+						<!-- Form with data to send -->
+						<form class="form-horizontal" enctype="multipart/form-data" ng-switch-default>
+							<section class="field-errors">
+								<strong ng-if="ctrl.errors.FileExtensionInvalid" translate="errors.FileExtensionInvalid" 
+									translate-value-extensions="{{::ctrl.getAllowedFileExtensions()}}"></strong>
+								<strong ng-if="ctrl.errors.FileSizeTooLarge" translate="errors.FileSizeTooLarge"
+									translate-value-file-size="{{::ctrl.getAllowedMaxSize()}}"></strong>
+							</section>
+							
+							<section class="manual-input">
+								<strong translate="uploadFile.manualInput"></strong>
+								<textarea ng-model="manualInput" rows="10" required
+									ng-attr-placeholder="{{'uploadFile.manualInput.placeholder' | translate}}"></textarea>
+									
+								<button type="button" class="button button-action"
+									ng-disabled="!manualInput || !manualInput.length"
+									ng-click="ctrl.sendManualInput(manualInput)"
+								>
+									<span translate="uploadFile.manualInput.button.send"></span>
+								</button>	
+							</section>
+							
+							<h3 translate="uploadFile.pickChoice"></h3>
+							
+							<input class="hidden-input" id="file-upload-input" type="file" 
+								upload-file-model change-function="ctrl.uploadFile"/>
+							<label for="file-upload-input" class="button button-action label-as-button">
+								<span translate="uploadFile.buttons.upload"></span>
+							</label>
+						</form>
+						<!-- Progress when data is sending -->
+						<div ng-switch-when="true">
+							<h3 translate="uploadFile.manualInput.dataIsSending"></h3>
+							<div class="progress">
+								<div class="progress-bar progress-bar-striped active from-bootstrap">
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-xs-1 col-sm-1 col-md-2 col-lg-3"></div>
+			</div>
+		</div>
+		
+		
+	</page-body>
+</page>

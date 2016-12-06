@@ -1,0 +1,31 @@
+<div class="upload-position container-fluid" ng-class="{'known' : ctrl.item.IsKnown}">
+	<div class="row">
+		<div class="col-xs-12 col-sm-12 col-md-1 col-lg-1">
+			<div class="buttons">
+				<label class="toggle-button">
+					<input type="checkbox" ng-model="ctrl.item.IsKnown"/>
+					<span class="slider"></span>
+				</label>
+				<span class="word-known-label" translate="uploadFile.results.words.{{ctrl.item.IsKnown ? 'known' :  'unknown'}}"></span>
+			</div>
+		</div>
+		<div class="col-xs-12 col-sm-12 col-md-11 col-lg-11">
+			<div class="main-data">
+				<h2 ng-bind="::ctrl.item.Word"></h2>
+				<h3 ng-if="::ctrl.item.Pronunciation" class="in-slashes" ng-bind="::ctrl.item.Pronunciation"></h3>
+			</div>
+		
+			<section class="translations row">
+				<div class="translation col-xs-12 col-sm-6 col-md-4 col-lg-4"
+					 ng-repeat="(partOfSpeech, translations) in ::ctrl.item.Translations | groupBy: 'PartOfSpeech'">
+					<h4 ng-bind="::(('enums.partOfSpeech.' + partOfSpeech) | translate)"></h4>
+					<ul>
+						<li ng-repeat="translation in ::translations">
+							<span ng-bind="::translation.Translation"></span>
+						</li>
+					</ul>
+				</div>
+			</section>
+		</div>
+	</div>
+</div>

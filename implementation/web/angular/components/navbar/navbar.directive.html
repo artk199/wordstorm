@@ -1,0 +1,61 @@
+<header id="main-header">
+	<div class='color-bar'>
+		<span class='red'></span>
+		<span class='pink'></span>
+		<span class='green'></span>
+		<span class='orange'></span>
+		<span class='violet'></span>
+		<span class='blue'></span>
+	</div>
+	
+	<div class="container-fluid">
+   		<section class="row centered-content">
+   			<div class="col-xs-2 col-sm-2 col-md-4 col-lg-4 text-left">
+	   			<div class="hidden-xs hidden-sm logo inline-children" ng-click="ctrl.goToHome()">
+					<span class="clickable" ng-click="ctrl.openHomePage()">
+						<img src='style/img/logo_simple.png' alt='Word Storm Logo' title='Word Storm'/>
+						<h1 translate="application.title"></h1>
+					</span>
+				</div>
+				
+				<div class="text-left hidden-md hidden-lg logo inline-children">
+					<img src='style/img/logo_simple.png' alt='Word Storm Logo' title='Word Storm' class="clickable" ng-click="ctrl.openHomePage()"/>
+				</div>	
+  			</div>
+  			<div class="hidden-xs hidden-sm col-md-3 col-lg-3 text-center">
+  				<word-search ng-if="::ctrl.displaySearchBar"></word-search>
+  			</div>
+  			<div class="col-xs-12 col-sm-12 col-md-5 col-lg-5 text-right inline-children">
+  				<button class="button button-action" type="button" ng-click="ctrl.openUploadFile()"  ng-if="ctrl.isPersonLogged()">
+  					<span translate="navbar.uploadFile"></span>
+  				</button>
+  				
+  				<section ng-if="ctrl.isPersonLogged()">
+  					<span uib-dropdown>
+						<img class="user-icon clickable" src="images/user-panel/default-avatar.png" alt=""
+						 	uib-dropdown-toggle
+						/>
+						<ul class="dropdown-menu" uib-dropdown-menu aria-labelledby="simple-dropdown">
+							<li ng-if="ctrl.isLoading()">
+								<spinner></spinner>
+							</li>			
+					        <li class="user-name" ng-if="!ctrl.isLoading()">
+					        	<span class="glyphicon glyphicon-user"></span>
+					        	<span  ng-bind="::ctrl.userData.Email"></span>
+					        </li>
+					        <li class="clickable dark" ng-if="!ctrl.isLoading()" ng-click="ctrl.logout()">
+					        	<span class="glyphicon glyphicon-off"></span>
+					        	<span translate="userPanel.logout"></span>
+					        </li>
+				      	</ul>
+					</span>
+				</section>
+ 			</div>
+   		</section>
+
+		<ul class="main-menu" ng-if="ctrl.isPersonLogged()">
+			<li ng-class="{'active' : ctrl.isMyLibraryOpened()}" ng-click="ctrl.openMyLibrary()">Twoje</li>
+			<li ng-class="{'active' : ctrl.isPublicLibraryOpened()}" ng-click="ctrl.openPublicLibrary()">Publiczne</li>
+		</ul>
+ 	</div>
+</header>

@@ -13,7 +13,8 @@
 	    		item: '=',
 	    		parameters: '=',
 	    		searchText: '=',
-	    		mode: '='
+	    		mode: '=',
+	    		controlItem: '@'
 	    	}
 	    };
 	}
@@ -57,8 +58,20 @@
 		ctrl.hasCollectionChanged = hasChollectionChangedByEdit;
 		ctrl.selectCollection = selectCollection;
 		ctrl.isCollectionSelected = isCollectionSelected;
+		ctrl.playLearningMode = pages.learning.main;
+		
+		ctrl.canDisplayActionButtons = canDisplayActionButtons;
+		ctrl.openLearning = pages.learning.main;
+		
+		ctrl.addCollection = addCollection;
 		
 		/////////////////////
+		
+		function addCollection(){
+			if(ctrl.parameters && ctrl.parameters.addCollection){
+				ctrl.parameters.addCollection();
+			}
+		}
 		
 		function getProgress(){
 			var result = ctrl.item.TotalWords > 0 ?
@@ -69,7 +82,12 @@
 		
 		function openCollection(collection){
 			if(mode == null){
-				pages.myLibrary.collection(collection.Id, collection.Name, collection);
+				if(ctrl.parameters != null && ctrl.parameters.readonly){
+					pages.myLibrary.collectionPreview(collection.Id, collection.Name, collection);	
+				}
+				else{
+					pages.myLibrary.collection(collection.Id, collection.Name, collection);
+				}
 			}
 		}
 		
@@ -125,6 +143,10 @@
 				return position >=0;
 			}
 			return false;
+		}
+		
+		function canDisplayActionButtons(){
+			return ctrl.parameters != null ? ctrl.parameters.readonly != true : true;
 		}
 		
 		// ===== Removing collection functions =====

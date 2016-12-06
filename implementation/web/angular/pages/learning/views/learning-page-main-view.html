@@ -1,0 +1,66 @@
+<page page-class='learning-page' disallow-not-logged="true" is-loading="ctrl.isLoading()" scrollable-body="true" body-class='container-fluid'>
+	<page-header>
+		<div class='link-tree'>
+			<h1 class='previous-link' ng-click="ctrl.showAllCollections()">
+				<span translate='myLibrary.title'></span>
+			</h1>
+			<h2 class='previous-link' ng-if="::ctrl.collection.Name" ng-click="ctrl.openCollection(ctrl.collection.Id, ctrl.collection.Name)">
+				<span ng-bind="::ctrl.collection.Name"></span>
+			</h2>
+			<h2>
+				<span translate="myLibrary.learning.title"></span>
+				<small class="in-parenthesis" translate= "myLibrary.learning.tier" 
+					ng-if="ctrl.wordsTier != null" translate-value-tier="{{::(ctrl.wordsTier+1)}}"></small>
+			</h2>
+		</div>
+	</page-header>
+	<page-header-right>
+		<div class='buttons'>
+			<button type='button' class='button' ng-click='ctrl.showAllCollections()'>
+				<span class='glyphicon glyphicon-remove'></span>
+				<span translate='button.close'></span>
+			</button>
+		</div>
+	</page-header-right>
+	<page-body-top>
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-xs-1 col-sm-1 col-md-2 col-lg-2"></div>
+				<div class="col-xs-10 col-sm-10 col-md-8 col-lg-8">
+					<section class="top-buttons justified-content">
+						<button type="button" class="button button-action" ng-disabled="ctrl.isKnownWordLoading() || ctrl.isUnknownWordLoading()"
+							ng-click="ctrl.markWordAsKnown()">
+							<span class="glyphicon" ng-class="ctrl.isKnownWordLoading() ? 'glyphicon-spin glyphicon-refresh' : 'glyphicon-star'"></span>
+							<span translate="myLibrary.learning.buttons.knowThis"></span>
+						</button>
+						
+						<button type="button" class="button button-action" ng-disabled="ctrl.isKnownWordLoading() || ctrl.isUnknownWordLoading()"
+							ng-click="ctrl.markWordAsUnknown()">
+							<span class="glyphicon" ng-class="ctrl.isUnknownWordLoading() ? 'glyphicon-spin glyphicon-refresh' : 'glyphicon-retweet'"></span>
+							<span translate="myLibrary.learning.buttons.dontKnowThis"></span>
+						</button>
+						
+					</section>
+				</div>
+				<div class="col-xs-1 col-sm-1 col-md-2 col-lg-2"></div>
+			</div>
+		</div>
+	</page-body-top>
+	<page-body>
+		<div class="row full-height">
+			<div class="col-xs-1 col-sm-1 col-md-2 col-lg-2"></div>
+			<div class="col-xs-10 col-sm-10 col-md-8 col-lg-8 full-height">
+				<word-card word="ctrl.currentWord"></word-card>
+			</div>
+			<div class="col-xs-1 col-sm-1 col-md-2 col-lg-2"></div>
+		</div>
+	</page-body>
+	<page-footer>
+		<section class="progress-information">
+			<div class="bigger gray color-bar">
+				<span class="color green" ng-style="{'width' : ctrl.getProgressForKnownWords() + '%'}"></span>
+				<span class="color red" ng-style="{'width' : ctrl.getProgressForUnknownWords() + '%'}"></span>
+			 </div>
+		</section>
+	</page-footer>
+</page>

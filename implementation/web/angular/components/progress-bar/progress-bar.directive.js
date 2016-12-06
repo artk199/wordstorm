@@ -44,9 +44,9 @@
 			var color = getProgressBarColor();
 			bar = new ProgressBar.Circle(container, {
 				  color: 'transparent',
-				  trailColor: '#eee',
+				  trailColor: '#ccc',
 				  fill: ctrl.background,
-				  trailWidth: 1,
+				  trailWidth: 2,
 				  duration: 3000,
 				  easing: 'bounce',
 				  strokeWidth: 3,

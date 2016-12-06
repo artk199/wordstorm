@@ -1,7 +1,73 @@
+/* Header */
 .listable-data > header{
 	display: flex;
 	justify-content: space-between;
-	padding: 0 20px 5px;
+	padding: 0 20px 10px;
+}
+
+.listable-data > header > *{
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.listable-data > header > .left-section{
+	font-size: 0;
+}
+
+.listable-data > header > .left-section .button{
+	margin-left: 1px;
+}
+
+/* Paginations button */
+
+.listable-data.selecting-page-size{
+    border-radius: 0;
+}
+
+.listable-data.selecting-page-size .popover-content{
+	padding: 0;
+}
+
+.listable-data.selecting-page-size .popover-content ul{
+	padding: 5px 0;
+    list-style-type: none;
+    margin: 0;
+}
+
+.listable-data.selecting-page-size .popover-content ul li{
+	padding: 0 10px;
+}
+
+.listable-data.selecting-page-size .popover-content ul li input{
+	float: left;
+    margin-right: 5px;
+}
+
+/* Search bar */
+
+.listable-data > header .search-bar{
+	display: inline-block;
+	vertical-align: middle;
+	border: none;
+	transition: 0.3s;
+	max-width: 0;
+	overflow: hidden;
+	height: 32px;
+	padding: 5px 0;
+	font-size: 14px;
+}
+
+
+.listable-data > header .search-bar.opened{
+    max-width: 100%;
+	padding-left: 10px;
+	padding-right: 10px;
+	border:1px solid #404a53;
+}
+
+.listable-data > header .search-bar input{
+	width: 90%;
+	padding: 0;
 }
 
 .listable-data > header .btn-group > .button:not(:first-child){
@@ -43,9 +109,69 @@
 	background: #6a7d8e
 }
 
-.listable-data > header .search-bar{
-	padding: 3px 5px 4px 5px;
+/* Pagination */
+
+.listable-data > .pagination{
+	display: block;
+    border: 0;
+    margin: 10px 20px;
+    text-align: right;
 }
+
+.listable-data > .pagination ul{
+    display: inline-block;
+    margin: 0;
+    border-radius: 0;
+}
+
+.listable-data > .pagination ul li a{
+	border-radius: 0;
+	background: #404a53;
+	color: #f5f5f5;
+	outline: none;
+	transition: 0.5s;
+	border: 1px solid #f5f5f5;
+}
+
+.listable-data > .pagination ul li a:hover,
+.listable-data > .pagination ul li a:active,
+.listable-data > .pagination ul li a:focus{
+	background: #292c2f;
+	outline: none;
+}
+
+.listable-data > .pagination ul li.active a{
+	background: #da2127;
+}
+
+.listable-data > .pagination ul li.active a:hover,
+.listable-data > .pagination ul li.active a:active,
+.listable-data > .pagination ul li.active a:focus{
+	background: #92262a;
+}
+
+.listable-data > .pagination ul li.disabled a{
+    background: #787d82;
+    color: #d5d4e6;
+}
+
+.listable-data > .pagination ul li.disabled a:hover,
+.listable-data > .pagination ul li.disabled a:active,
+.listable-data > .pagination ul li.disabled a:focus{
+    background: #787d82;
+    color: #d5d4e6;
+}
+
+/* Empty list */
+.listable-data > .empty-list{
+	padding: 10px 30px;
+}
+
+.listable-data > .empty-list + div div .list::before{
+	width: 0;
+}
+
+/* List */
 
 .listable-data .list{
 	position: relative;
@@ -56,7 +182,7 @@
 .listable-data .list::before{
     content: "";
 	background: linear-gradient(124deg, #2582f7,#0c168a);
-    width: 2px;
+    width: 0;
     height: 100%;
     top: 0;
     left: 20px;
@@ -90,19 +216,6 @@
 }
 
 /* Items */
-.listable-data .list .item .item-icon-container{
-	width: 50px;
-    height: 50px;
-    overflow: hidden;
-    display: flex;
-    align-content: center;
-    border-radius: 50%;
-    margin: 0 auto;
-}
-
-.listable-data .list .item .item-icon{
-	width: 100%;
-}
 
 /* List view */
 .listable-data.list-view .list {
@@ -113,7 +226,7 @@
 .listable-data.list-view .list .list-item:nth-child(even) .item{
 	 padding: 10px 0;
 	 border-bottom: 1px solid #c6c8cc;
-	 transition: 0.3s;
+	 transition: background 0.3s;
 	 background: transparent;
 }
 
@@ -130,7 +243,6 @@
     height: 50px;
     width: 50px;
     line-height: 50px;
-    background: #4c7bd2;
     border-radius: 50%;
     position: relative;
     overflow:hidden;
@@ -138,10 +250,26 @@
     display: block;
     opacity: 0.99;
     transition: 0.3s;
+    margin: 0 auto;
 }
 
-.listable-data.list-view .list .item:hover .item-icon-container{
-	background-color: #405f98;
+.listable-data.list-view .list .item .item-icon-container:not(.empty){
+	background: #da2127;
+}
+
+.listable-data.list-view .list .item .item-icon-container .item-icon{
+	margin:-100%;
+	width: 100%;
+}
+
+.listable-data.list-view .list .item .item-icon-container .item-icon.glyphicon{
+	font-size: 25px;
+    margin-top: 13px;
+    color: #f5f5f5;
+}
+
+.listable-data.list-view .list .item:hover .item-icon-container:not(.empty){
+	background-color: #92262a;
 }
 
 .listable-data.list-view .list .item .item-icon-container .item-selector{
@@ -150,10 +278,6 @@
     position: absolute;
     top: 40%;
     left: 38%;
-}
-
-.listable-data.list-view .list .item .item-icon-container .item-icon{
-	margin:-100%;
 }
 
 .listable-data.list-view .list .item h3{
@@ -183,21 +307,39 @@
     padding: 7px 10px;
 }
 
+.listable-data.list-view .list .item .item-number{
+    font-size: 16px;
+    display: block;
+    margin-top: 10px;
+    margin-left: 15px;
+}
+
+.listable-data.list-view .list .item .item-number::after{
+	content: ".";
+}
+
 /* Grid view */
 .listable-data.grid-view .list .item {
 	float: left;
 	margin: 10px 5px;
-    width: 285px;
+    width: 260px;
     transition: 0.3s;
+    overflow: hidden;
 }
 
 .listable-data.grid-view .list .item .card{
 	background: #fff;
+    height: 275px;
 	position: relative;
 }
 
+.listable-data.grid-view .list .item .card.tier-0{
+	background-color: rgb(185, 58, 70);
+	color: #fff;
+}
+
 .listable-data.grid-view .list .item .card > header{
-	background: #4c7bd2;
+	background: #da2127;
     width: 100%;
     height: 120px;
     display: block;
@@ -206,10 +348,35 @@
     margin: 0;
     position: relative;
     transition: 0.5s;
+	background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
 }
 
 .listable-data.grid-view .list .item .card:hover > header{
-	background: #405f98;
+	background-color: #92262a;
+	background-position: center center;
+}
+
+.listable-data.grid-view .list .item .card > header .data-container{
+	display: block;
+	height: 100%;
+	width: 100%;
+	position: absolute;
+	z-index: 1;
+	top: 0;
+	left: 0;
+}
+
+.listable-data.grid-view .list .item .card > header .curtain-container{
+	display: block;
+	height: 100%;
+	width: 100%;
+	position: absolute;
+	z-index: 0;
+	top: 0;
+	left: 0;
+    background: rgba(0, 0, 0, 0.5);
 }
 
 .listable-data.grid-view .list .item .card button:disabled{
@@ -230,10 +397,17 @@
 	background: rgba(255,255,255,0.5);
 }
 
-.listable-data.grid-view .list .item .card > header .edit-button{
+.listable-data.grid-view .list .item .card > header .edit-button,
+.listable-data.grid-view .list .item .card > header .save-button{
     position: absolute;
     top: 10px;
     right: 10px;
+}
+
+.listable-data.grid-view .list .item .card > header .cancel-button{
+	position: absolute;
+    top: 10px;
+    right: 50px;
 }
 
 .listable-data.grid-view .list .item .card > header .change-picture-button{
@@ -245,6 +419,12 @@
 .listable-data.grid-view .list .item .card > header .remove-button{
 	position: absolute;
 	bottom: 10px;
+	left: 10px;
+}
+
+.listable-data.grid-view .list .item .card > header .learning-button{
+	position: absolute;
+	top: 10px;
 	left: 10px;
 }
 
@@ -273,9 +453,10 @@
 }
 
 .listable-data.grid-view .list .item .card > .card-body .progress-bar{
-    margin-top: -65px;
-    margin-bottom: 20px;
-    width: 120px;
+	margin-top: -50px;
+    margin-bottom: 10px;
+    width: 95px;
+    color: #000;
 }
 
 .listable-data.grid-view .list .item .card > .card-body  .progress-bar > .content h3{
@@ -285,6 +466,19 @@
 .listable-data.grid-view .list .item .card > .card-body  .progress-bar > .content .small{
 	display: inline-block;
     margin-left: -8px;
+}
+
+.listable-data.grid-view .list .item .card > .card-body .card-data h1{
+    font-size: 15px;
+    margin: 0;
+    height: 50px;
+    max-height: 50px;
+    font-weight: bold;
+}
+
+.listable-data.grid-view .list .item .card > .card-body .card-data input[type='input']{
+	margin-bottom:23px;
+	color: #000;
 }
 
 .listable-data.grid-view .list .item .card > .card-body .card-data .glyphicon::before{
@@ -314,4 +508,46 @@
 	font-size: 20px;
     margin-top: 25%;
     margin-bottom: 25%;
+}
+
+.listable-data.grid-view .list .item .add-item{
+	border: 1px solid #ccc;
+	height: 275px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	cursor: pointer;
+}
+
+.listable-data.grid-view .list .item .add-item .icon-holder{
+	border-radius: 50%;
+	background: #b33737;
+	height: 100px;
+	width: 100px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+    font-size: 30px;
+    color: #f5f5f5;	
+    transition: 0.4s;
+}
+
+.listable-data.grid-view .list .item .add-item:hover .icon-holder{
+	background: #dc1717;
+}
+
+.listable-data.grid-view .list .item .add-item .icon-holder .glyphicon{
+    top: -1px;
+    left: 1px;
+}
+
+.listable-data.grid-view .list .item .add-item h5{
+    font-size: 25px;
+    font-weight: bold;
+    margin: 10px 0;
+    color: #808080;
+}
+
+.listable-data .list .with-left-space{
+	padding-left: 35px;
 }

@@ -4,8 +4,9 @@
 			<h1 class='previous-link' ng-click="ctrl.showAllCollections()">
 				<span translate='myLibrary.title'></span>
 			</h1>
-			<h2>
-				<span translate='myLibrary.addNewCollection.title'></span>
+			<h2 ng-switch="::ctrl.view">
+				<span ng-bind="::ctrl.collection.Name" ng-switch-when="edit"></span>
+				<span translate='myLibrary.addNewCollection.title' ng-switch-default></span>
 			</h2>
 		</div>
 	</page-header>
@@ -13,7 +14,6 @@
 		<div class='buttons'>
 			<button type='button' class='button' ng-click='ctrl.showAllCollections()'>
 				<span class='glyphicon glyphicon-remove'></span>
-				<span translate='buttons.close'></span>
 			</button>
 		</div>
 	</page-header-right>
@@ -26,6 +26,7 @@
 						<form-field name="name" type="input" is-required="true"
 							placeholder="myLibrary.addNewCollection.form.collectionName.placeholder"
 							label="myLibrary.addNewCollection.form.collectionName"
+							use-auto-focus="true"
 							model="ctrl.addCollectionFormData.Name"
 							error-occured="collectionForm.name.$touched && collectionForm.name.$invalid"
 						>
@@ -44,18 +45,18 @@
 						></form-field>
 						
 						<section class='buttons text-center'>
-							<button type="reset" class='button button-action'
+							<button type="button" class='button button-action'
 									ng-click = "ctrl.clearForm(collectionForm)"
-									ng-disabled="ctrl.addCollectionFormData.Name == null 
-										|| ctrl.addCollectionFormData.Name.length == 0  || ctrl.formSending"
-									translate="buttons.clear">
+									ng-disabled="!ctrl.hasChanged() || ctrl.formSending"
+									translate="button.clear">
 							</button>
 							<button type="submit" class='button button-action' 
-									ng-click="ctrl.sendAddCollectionRequest(collectionForm)"
-									ng-disabled="registerForm.$invalid || ctrl.addCollectionFormData.Name == null 
-										|| ctrl.addCollectionFormData.Name.length == 0 || ctrl.formSending">
+									ng-click="ctrl.sendForm(collectionForm)"
+									ng-disabled="!ctrl.canSave() || ctrl.formSending"
+									ng-switch="::ctrl.view">
 									<span class='glyphicon glyphicon-refresh glyphicon-spin' ng-if="ctrl.formSending"></span>
-									<span translate="buttons.create"></span>
+									<span translate="button.create" ng-switch-default></span>
+									<span translate="button.save" ng-switch-when="edit"></span>
 							</button>
 						</section>
 					</form>

@@ -1,4 +1,4 @@
-.progress-bar{
+.progress-bar:not(.from-bootstrap){
 	position: relative;
 	width: 100px;
 	background: transparent;

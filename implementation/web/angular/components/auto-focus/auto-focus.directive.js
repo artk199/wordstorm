@@ -6,7 +6,10 @@
 	function Directive($timeout){
 		 return {
 	        link: function ( scope, element, attrs ) {
-	            $timeout( function () { element[0].focus(); } );
+	        	var confirmAutoFocus = attrs.useAutoFocus;
+	        	if(confirmAutoFocus){
+	        		$timeout( function () { element[0].focus(); } );
+	        	}
 	        }
 	    };
 	}

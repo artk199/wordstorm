@@ -2,7 +2,18 @@
 	"restApi" : "http://wordstormapi.azurewebsites.net/api/",
 	"allowedLanguages" : ["pl"],
 	"defaultLanguage" : "pl",
-	"devMode" : true,
+	"devMode" : false,
 	"html5Mode" : true,
-	"defaultAlertsDisplayTimeInSec" : 10
+	"defaultAlertsDisplayTimeInSec" : 10,
+	"specialCharacters" : {
+		"english" : ["\u00E6","\u0259","\u026A","\u028A","\u0254","\u0251","\u014B","\u0283","\u02A7","\u03B8","\u00F0","\u0292","\u02A4","\u028C"],
+		"polish" : ["ą","ć","ę","ł","ń","ó","ś","ź","ż"]
+	},
+	"paginationSizes" : [1,5,10,15],
+	"defaultPaginationSize" : 10,
+	"searchUrl" : "https://www.diki.pl/",
+	"defaultDebounceTimeInMs": 100,
+	"uploadFileExtensions" : ["txt", "pdf", "docx", "doc"],
+	"uploadFileMaxSizeInMb" : 0.1,
+	"collectionAddElement" : "last"
 }

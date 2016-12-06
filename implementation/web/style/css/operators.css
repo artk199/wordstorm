@@ -17,3 +17,20 @@
 	padding: 0 2%;
 	display: inline;
 }
+
+.in-slashes::before, .in-slashes::after{
+	content:"/";
+}
+
+.separated-with-comma > *:not(:last-child)::after{
+	content: ",";
+	padding-right: 5px;
+}
+
+.in-parenthesis::before{
+	content:"(";
+}
+
+.in-parenthesis::after{
+	content:")";
+}

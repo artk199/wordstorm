@@ -1,0 +1,40 @@
+<div class='translation item' ng-switch="ctrl.isLoading()">
+	<spinner ng-switch-when="true"></spinner>
+	<div class="row vertical-middle" ng-switch-default>
+		<div class="col-xs-2 col-sm-2 col-md-1 col-lg-1">
+			<span class="item-number" ng-bind="ctrl.index + 1"></span>
+		</div>
+		<div class="col-xs-10 col-sm-10 col-md-5 col-lg-5">
+			<form-field type="input" is-required="true"
+				name="translation{{ctrl.index}}"
+				label="myLibrary.word.add.form.translation"
+				placeholder="myLibrary.word.add.form.translation.placeholder"
+				model="ctrl.item.Translation"
+				form="ctrl.parameters.form"
+				use-auto-focus="true"
+				label-position="top"
+			></form-field>
+		</div>
+		<div class="col-xs-10 col-sm-10 col-md-4 col-lg-4 top">
+			<form-field type="own"
+				label="myLibrary.word.add.form.partOfSpeech"
+				form="ctrl.parameters.form"
+				label-position="top"
+			>
+				<field-own-input>
+					<select name="partOfSpeech{{ctrl.index}}" required 
+						ng-model="ctrl.item.PartOfSpeech"  class="form-control"
+						ng-options="option | translate for option in ctrl.partOfSpeechEnum">
+					</select>
+				</field-own-input>
+			</form-field>
+		</div>
+		<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 text-right">
+			<button type="button" class="button button-action" ng-click="ctrl.removeTranslation()"
+				ng-if="ctrl.parameters.list.length > 1">
+				<span class="glyphicon glyphicon-remove"></span>
+				<span translate="button.remove"></span>
+			</button>
+		</div>
+	</div>
+</div>

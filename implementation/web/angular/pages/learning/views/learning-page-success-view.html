@@ -1,0 +1,83 @@
+<page page-class='learning-page' disallow-not-logged="true" is-loading="ctrl.isLoading()" scrollable-body="true">
+	<page-header>
+		<div class='link-tree'>
+			<h1 class='previous-link' ng-click="ctrl.showAllCollections()">
+				<span translate='myLibrary.title'></span>
+			</h1>
+			<h2 class='previous-link' ng-if="::ctrl.collection.Name" ng-click="ctrl.openCollection(ctrl.collection.Id, ctrl.collection.Name)">
+				<span ng-bind="::ctrl.collection.Name"></span>
+			</h2>
+			<h2>
+				<span translate="myLibrary.learning.title"></span>
+			</h2>
+		</div>
+	</page-header>
+	<page-header-right>
+		<div class='buttons'>
+			<button type='button' class='button' ng-click='ctrl.showAllCollections()'>
+				<span class='glyphicon glyphicon-remove'></span>
+				<span translate='button.close'></span>
+			</button>
+		</div>
+	</page-header-right>
+	<page-body-top>
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1"></div>
+				<div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
+					<h1 translate="myLibrary.learning.results.title"></h1>
+					
+					<section class="bordered summary">
+						<p translate="myLibrary.learning.results.info"></p>
+					
+						<section class="buttons">
+							<button type="button" class="button button-action" ng-click="ctrl.openCollection(ctrl.collection.Id, ctrl.collection.Name)">
+								<span class='glyphicon glyphicon-thumbs-down'></span>
+								<span translate="myLibrary.learning.results.buttons.goBack"></span>
+							</button>	
+							<button type="button" class="button button-action" ng-click="ctrl.restartLearning()">
+								<span class='glyphicon glyphicon-sunglasses'></span>
+								<span translate="myLibrary.learning.results.buttons.again"></span>
+							</button>
+						</section>
+					</section>
+				</div>
+				<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1"></div>
+			</div>
+		</div>
+	</page-body-top>
+	<page-body>
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1"></div>
+				<div class="col-xs-11 col-sm-11 col-md-5 col-lg-5">
+					<section class="bordered results">
+						<header>
+							<h4 translate="myLibrary.learning.results.statisticsTitle"></h4>
+						</header>
+						
+						<ul>
+							<li ng-if="::(ctrl.wordsTier != null)" translate="myLibrary.learning.results.tier" translate-values="::ctrl.results"></li>
+							<li translate="myLibrary.learning.results.goodAnswers" translate-values="::ctrl.results"></li>
+							<li translate="myLibrary.learning.results.longestCombo" translate-values="::ctrl.results"></li>
+						</ul>
+					</section>
+				</div>
+				<div class="clearfix visible-xs visible-sm"></div>
+				<div class="col-xs-1 col-sm-1 hidden-md hidden-lg"></div>
+				<div class="col-xs-11 col-sm-11 col-md-5 col-lg-5">
+					<section class="bordered results">
+						<header>
+							<h4 translate="myLibrary.learning.results.unknownWordsTitle"></h4>
+						</header>
+						<p ng-if="::(ctrl.results.wrongWords.length == 0)" translate="myLibrary.learning.results.unknownWords.noWords"></p>
+						<div class="wrong-words separated-with-comma">
+							<span ng-repeat="word in ::ctrl.results.wrongWords" ng-bind="::word.Word"></span>
+						</div>
+					</section>
+				</div>
+				<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1"></div>
+			</div>
+		</div>
+	</page-body>
+</page>

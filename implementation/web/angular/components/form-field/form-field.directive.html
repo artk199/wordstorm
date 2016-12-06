@@ -1,17 +1,65 @@
-<section class='form-group form-field' ng-class="{'has-error' : ctrl.errorOccured}" ng-switch="ctrl.type">
+<section class='form-group form-field' ng-switch="::ctrl.type"
+	ng-class="{'has-error' : ctrl.errorOccured 
+						     || (ctrl.isRequired && ctrl.form[ctrl.name].$touched && ctrl.form[ctrl.name].$invalid)}"
+>
 	<div ng-switch-default>
-		<label class="control-label col-xs-12 col-sm-5 col-md-4 col-lg-4"
-			for="{{ctrl.name}}" translate="{{ctrl.label}}"></label>
-		<div class="col-xs-10 col-sm-5 col-md-6 col-lg-6">
-			<input type="{{ctrl.type}}" name="{{ctrl.name}}" class="form-control" id="{{ctrl.name}}"
+		<label class="control-label"
+			ng-class="::ctrl.getColumSizeForLabel()"
+			for="{{ctrl.name}}" translate="{{::ctrl.label}}"></label>
+		<div ng-class="::ctrl.getColumSizeForInput()">
+			<input type="{{::ctrl.type}}" name="{{ctrl.name}}" class="form-control" id="{{ctrl.name}}"
 				ng-model="ctrl.model"
+				auto-focus
+				use-auto-focus="{{ctrl.useAutoFocus}}"
 				ng-attr-placeholder="{{ctrl.placeholder | translate}}"
 				ng-required="ctrl.isRequired" />
-			<div class='field-errors' ng-transclude="errors"></div>
+			<div class='field-errors'>
+				<span translate="userPanel.form.error.emptyField"
+					ng-if="ctrl.isRequired && ctrl.form[ctrl.name].$touched && ctrl.form[ctrl.name].$invalid"
+				></span>
+				<div ng-transclude="errors"></div>
+			</div>
 		</div>
 		<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
 			<span class='glyphicon glyphicon glyphicon-question-sign form-field-tooltip' 
-				ng-if="ctrl.tooltip != null" uib-tooltip="{{ctrl.tooltip | translate}}"></span>
+				ng-if="::(ctrl.tooltip != null)" uib-tooltip="{{ctrl.tooltip | translate}}"></span>
+		</div>
+	</div>
+	<div ng-switch-when="specialCharacters">
+		<label class="control-label"
+			ng-class="ctrl.getColumSizeForLabel()"
+			for="{{ctrl.name}}" translate="{{::ctrl.label}}"></label>
+		<div ng-class="ctrl.getColumSizeForInput()">
+			<special-characters-keyboard 
+				name="{{ctrl.name}}"
+				model="ctrl.model"
+				placeholder="ctrl.placeholder"
+				display="button"
+			></special-characters-keyboard>
+			<div class='field-errors'>
+				<span translate="userPanel.form.error.emptyField"
+					ng-if="ctrl.isRequired && ctrl.form[ctrl.name].$touched && ctrl.form[ctrl.name].$invalid"
+				></span>
+				<div ng-transclude="errors"></div>
+			</div>
+		</div>
+	</div>
+	<div ng-switch-when="own">
+		<label class="control-label"
+			ng-class="::ctrl.getColumSizeForLabel()"
+			for="{{ctrl.name}}" translate="{{::ctrl.label}}"></label>
+		<div ng-class="::ctrl.getColumSizeForInput()">
+			<span ng-transclude="ownField"></span>
+			<div class='field-errors'>
+				<span translate="userPanel.form.error.emptyField"
+					ng-if="ctrl.isRequired && ctrl.form[ctrl.name].$touched && ctrl.form[ctrl.name].$invalid"
+				></span>
+				<div ng-transclude="errors"></div>
+			</div>
+		</div>
+		<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+			<span class='glyphicon glyphicon glyphicon-question-sign form-field-tooltip' 
+				ng-if="::(ctrl.tooltip != null)" uib-tooltip="{{ctrl.tooltip | translate}}"></span>
 		</div>
 	</div>
 </section>	

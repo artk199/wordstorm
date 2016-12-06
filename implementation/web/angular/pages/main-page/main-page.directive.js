@@ -14,73 +14,54 @@
 	}
 	
 	var views = {
-		SPEAKING: 'speaking',
-		LISTENING: 'listening',
-		OPTION3: 'option3'
+		VIDEO : {
+			name: "video",
+			template: "angular/pages/main-page/views/main-page-video-view.html"	
+		},
+		ANOTHER : {
+			name: "another",
+			template: "angular/pages/main-page/views/main-page-another-view.html"	
+		}
 	};
 	
-	var backgroundImages = {
-		BOOKS: 'studying',
-		TABLET: 'option3',
-		TABLE: 'listening'
-	}
-	
-	DirectiveController.$inject = ['$interval', '$scope'];
-	function DirectiveController($interval, $scope){
+	DirectiveController.$inject = ['userPanelService', 'pages'];
+	function DirectiveController(userPanelService, pages){
 		var ctrl = this;
 		
-		ctrl.views = views;
-		ctrl.view = views.SPEAKING;
+		ctrl.currentView = null;
+		ctrl.isUserLogged = userPanelService.isPersonLogged;
+		ctrl.openVideoView = openVideoView;
+		ctrl.isVideoView = isVideoView;
+		ctrl.openAnotherView = openAnotherView;
+		ctrl.isAnotherView = isAnotherView;
 		
-		ctrl.changeOption = changeOption;
-		ctrl.getBackgroundImage = getBackgroundImage;
-		
-		$scope.$on("destroy", unregisterChangeOptionInterval);
+		init();
 		
 		//////////////////////////////
 		
-		var changeOptionInterval = $interval(changeOptionToNext, 3000);
-		
-		function changeOptionToNext(){
-			switch(ctrl.view){
-				case views.SPEAKING:
-					ctrl.view = views.LISTENING;
-				break;
-				case views.LISTENING:
-					ctrl.view = views.OPTION3;
-				break;
-				case views.OPTION3:
-					ctrl.view = views.SPEAKING;
-				break;
+		function init(){
+			if(userPanelService.isPersonLogged()){
+				pages.myLibrary.allCollections();
+			}
+			else{
+				ctrl.currentView = views.VIDEO;
 			}
 		}
 		
-		function changeOption(option){
-			ctrl.view = option;
-			unregisterChangeOptionInterval();
+		function openVideoView(){
+			ctrl.currentView = views.VIDEO;
 		}
 		
-		function getBackgroundImage(){
-			var restult = "";
-			switch(ctrl.view){
-				case ctrl.views.SPEAKING:
-					result = backgroundImages.BOOKS;
-				break;
-				case ctrl.views.LISTENING:
-					result = backgroundImages.TABLET;
-				break;
-				case ctrl.views.OPTION3:
-					result = backgroundImages.TABLE;
-				break;
-			}
-			
-			return result;
+		function isVideoView(){
+			return ctrl.currentView == views.VIDEO;
 		}
 		
-		function unregisterChangeOptionInterval(){
-			if(changeOptionInterval != null){
-				$interval.cancel(changeOptionInterval);
-			}
+		function openAnotherView(){
+			ctrl.currentView = views.ANOTHER;
+		}
+		
+		function isAnotherView(){
+			return ctrl.currentView == views.ANOTHER;
 		}
 	}
 }());

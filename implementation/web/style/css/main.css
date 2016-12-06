@@ -5,8 +5,7 @@ html{
 
 body{
 	height: 100%;
-	padding: 70px 0 0 70px;
-	background: #404a53;   
+	background: #325879;
 }
 
 /* Elementy ogólne */
@@ -23,6 +22,10 @@ body{
 
 .full-height{
 	height: 100%;
+}
+
+.full-width{
+	width: 100%;
 }
 
 .vertical-grid{
@@ -46,8 +49,12 @@ body{
 	position: relative;
 }
 
-.vertical-grid > .rest-height.scroller > div{
+.vertical-grid > .rest-height.scroller > div:not(.ps-scrollbar-x-rail){
 	height: 100%;
+}
+
+.vertical-grid > .rest-height.scroller > div.ps-scrollbar-x-rail{
+	display: none!important;
 }
 
 .inline-children > *{
@@ -110,6 +117,7 @@ body{
 	font-size: 25px;
 	margin: 0;
     padding: 1% 0 1% 1%;
+	font-family: 'Crete Round', serif;
 }
 
 #page-body .page-content > .page-header h1 >*,
@@ -121,13 +129,18 @@ body{
 	padding: 0;
 }
 
-#page-body .page-content > .page-header h1.previous-link{
+#page-body .page-content > .page-header .previous-link{
 	transition: 0.3s;
 	cursor: pointer;
 }
 
-#page-body .page-content > .page-header h1.previous-link:hover{
+#page-body .page-content > .page-header .previous-link:hover{
     color: #dc1717;
+}
+
+#page-body .page-content > .page-header .previous-link:hover::before{
+	color: #404a53;
+	transition: 0s;
 }
 
 #page-body .page-content > .page-header .buttons{
@@ -203,94 +216,6 @@ body{
 	z-index: 2;
 	right: 20px;
 	top: 20px;
-}
-
-/* Social panel */
-.social-panel > a{
-	text-decoration: none;
-}
-
-.social-panel > a > *{
-	background: rgba(255,255,255,0.8);
-	transition: 0.5s;
-	height: 40px;
-	width: 40px;
-	display: inline;
-	margin-right: 10px;
-}
-
-.social-panel .facebook:hover{
-	box-shadow: 0px 0px 10px #007dff;
-    transition: 0.5s;
-}
-
-/* Main page */
-.main-page .options{
-	position: absolute!important;
-	bottom: 0;
-	width: 100%;
-}
-
-.main-page .options .option{
-	opacity: 0.1;
-	background: rgba(255,255,255,0.6);
-	transition: 0.5s;
-	text-align: center;
-	cursor: pointer;
-	position: relative;
-}
-
-.main-page:hover .options .option{
-	opacity: 0.8;
-}
-
-.main-page .options .option.active, .main-page .options .option.active:hover{
-	transition: 0.5s;
-	background: #fff;
-	opacity: 1;
-}
-
-.main-page .options .option.active::before{
-	content: "";
-	display: block;
-	position: absolute;
-	top: -45px;
-	left: 50px;
-	width: 0; 
- 	height: 0; 
-  	border-left: 45px solid transparent;
-  	border-right: 45px solid transparent;
-  	border-bottom: 45px solid rgba(255,255,255,0);
-  	transition: 0.5s;
-}
-
-.main-page .options .option.active::before{
-	border-bottom: 45px solid rgba(255,255,255,1);
-	transition: 0.5s;
-}
-
-.main-page .options .option:hover{
-	transition: 0.5s;
-	background: rgba(255,255,255,0.95);
-}
-
-.main-page .options .option .option-icon{
-	max-height: 150px;
-	margin: 5% 0;
-}
-
-.main-page .text{
-	padding: 20% 10%;
-	text-align: left;
-	color: #fff;
-}
-
-.main-page .text h3{
-	font-size: 50px;
-}
-
-.main-page .text p{
-	font-size: 20px;
 }
 
 /* Page tiles */
@@ -435,6 +360,49 @@ body{
     align-items: center;
 }
 
+.vertical-middle > .top{
+	align-self: baseline;
+}
+
+.justified-content{
+	display: flex;
+	justify-content: space-between;
+}
+
+.centered-content{
+	display: flex;
+	align-items: center;
+}
+
 .highlighted{
 	color: #ffbe00;
+}
+
+.big-round-button{
+    text-align: center;
+}
+
+.big-round-button .button.button-action{
+	vertical-align: middle;
+	display: inline-block;
+	padding: 0;
+    margin: 10px 0;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+}
+
+.big-round-button .button.button-action.big{
+    width: 120px;
+    height: 120px;
+    margin: 0 10px;	
+}
+
+.big-round-button .button.button-action.big .glyphicon{
+	font-size: 50px;
+}
+
+.big-round-button .button.button-action .glyphicon{
+    font-size: 23px;
+    left: 1px;
 }
