@@ -11,14 +11,12 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 import pl.bialateam.wordstorm.R;
@@ -30,16 +28,18 @@ import pl.bialateam.wordstorm.pojo.Word;
 
 public class CollectionDetailsActivity extends AppCompatActivity {
 
-    ArrayList<Word> words = new ArrayList<>();
-
     WordListAdapter wordsAdapters[] = new WordListAdapter[10];
 
     Collection collection = null;
 
     LoadWordsTask loadWordsTask = null;
 
+    int currentPage = 0;
+
     private SectionsPagerAdapter mSectionsPagerAdapter;
     private ViewPager mViewPager;
+
+    FloatingActionButton fab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,15 +50,15 @@ public class CollectionDetailsActivity extends AppCompatActivity {
 
         setUpTabs();
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.start_quiz);
+        fab = (FloatingActionButton) findViewById(R.id.start_quiz);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(CollectionDetailsActivity.this,CardGameActivity.class);
                 Bundle bundle = new Bundle();
-                bundle.putSerializable("words",words);
+                bundle.putSerializable("words",wordsAdapters[currentPage].getData());
                 intent.putExtras(bundle);
-                startActivity(intent);
+                startActivityForResult(intent,1);
             }
         });
 
@@ -78,6 +78,12 @@ public class CollectionDetailsActivity extends AppCompatActivity {
         refreshWords();
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        refreshWords();
+    }
+
     private void setUpTabs() {
         // Initilization
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
@@ -85,6 +91,22 @@ public class CollectionDetailsActivity extends AppCompatActivity {
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
+        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                changeCurrentPage(position);
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                changeCurrentPage(position);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
         tabLayout.setupWithViewPager(mViewPager);
@@ -117,15 +139,24 @@ public class CollectionDetailsActivity extends AppCompatActivity {
             }
 
             for (Word word : wordList) {
-                Log.d("taggg",word.toString());
                 wordsAdapters[word.getTier()].add(word);
             }
-
-            words.addAll(wordList);
+            //Generuje bugi
+            changeCurrentPage(0);
+            changePageToFistNonEmpty();
             loadWordsTask = null;
         }
     }
 
+    private void changePageToFistNonEmpty() {
+        for (int i = 0; i < wordsAdapters.length; i++) {
+            if(!wordsAdapters[i].isEmpty()){
+                mViewPager.setCurrentItem(i);
+                changeCurrentPage(i);
+                return;
+            }
+        }
+    }
 
 
     public static class PlaceholderFragment extends Fragment {
@@ -165,12 +196,12 @@ public class CollectionDetailsActivity extends AppCompatActivity {
 
         @Override
         public Fragment getItem(int position) {
+            changeCurrentPage(position);
             return PlaceholderFragment.newInstance(position + 1,wordsAdapters[position]);
         }
 
         @Override
         public int getCount() {
-            // Show 3 total pages.
             return 6;
         }
 
@@ -181,5 +212,14 @@ public class CollectionDetailsActivity extends AppCompatActivity {
             }
             return String.valueOf(position+1);
         }
+    }
+
+    private void changeCurrentPage(int i) {
+        if(wordsAdapters[i].getData().isEmpty() || i == 5){
+            fab.hide();
+        }else{
+            fab.show();
+        }
+        this.currentPage = i;
     }
 }

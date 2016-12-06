@@ -2,6 +2,7 @@ package pl.bialateam.wordstorm.cardgame;
 
 import java.util.List;
 
+import pl.bialateam.wordstorm.network.WordEndpoint;
 import pl.bialateam.wordstorm.pojo.Word;
 
 /**
@@ -31,13 +32,13 @@ public class CardGame {
     }
 
     public void setToKnown(){
-        //TODO: wyslac wiadomosc ze to słowo jest znane
+        WordEndpoint.getInstance().setWordToKnown(getCurrentWord(),true);
         known++;
         nextWord();
     }
 
     public void setToNotKnown(){
-        //TODO: wyslac wiadomosc ze to slowo jest nieznane
+        WordEndpoint.getInstance().setWordToKnown(getCurrentWord(),false);
         notKnown++;
         nextWord();
     }
