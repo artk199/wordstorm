@@ -4,21 +4,13 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_camera"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:icon="@drawable/ic_menu_send"
             android:title="@string/nav_collections" />
     </group>
 
-    <item android:title="@string/nav_user_section">
-        <menu>
-            <item
-                android:id="@+id/nav_logout"
-                android:icon="@drawable/ic_menu_share"
-                android:title="@string/nav_logout" />
-            <item
-                android:id="@+id/nav_sync"
-                android:icon="@drawable/ic_menu_send"
-                android:title="@string/nav_sync" />
-        </menu>
-    </item>
+    <item
+        android:id="@+id/nav_logout"
+        android:icon="@drawable/ic_menu_send"
+        android:title="@string/nav_logout" />
 
 </menu>

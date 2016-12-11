@@ -5,28 +5,28 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
-    <string name="action_settings">Settings</string>
-    <string name="title_activity_login">Sign in</string>
+    <string name="action_settings">Ustawienia</string>
+    <string name="title_activity_login">Logowanie</string>
 
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
-    <string name="prompt_password">Password</string>
-    <string name="prompt_password_repeat">Repeat password</string>
-    <string name="action_sign_in">Sign in</string>
-    <string name="action_register">Register</string>
-    <string name="action_sign_in_short">Sign in</string>
-    <string name="error_invalid_email">This email address is invalid</string>
-    <string name="error_invalid_password">This password is too short</string>
-    <string name="error_incorrect_password">This password is incorrect</string>
-    <string name="error_field_required">This field is required</string>
-    <string name="action_login">Log in</string>
-    <string name="prompt_login">Login</string>
-    <string name="register_link"><u>or register here</u></string>
-    <string name="error_password_mismatch">Password mismatch</string>
-    <string name="nav_user_section">User</string>
-    <string name="nav_collections">Collections</string>
-    <string name="nav_logout">Logout</string>
-    <string name="nav_sync">Sync</string>
+    <string name="prompt_password">Hasło</string>
+    <string name="prompt_password_repeat">Powtórz hasło</string>
+    <string name="action_sign_in">Zaloguj się</string>
+    <string name="action_register">Rejestracja</string>
+    <string name="action_sign_in_short">Zaloguj się</string>
+    <string name="error_invalid_email">Błędny adres email</string>
+    <string name="error_invalid_password">Za krótkie hasło</string>
+    <string name="error_incorrect_password">Niepoprawne hasło</string>
+    <string name="error_field_required">Wymagane pole</string>
+    <string name="action_login">Zaloguj się</string>
+    <string name="prompt_login">Email</string>
+    <string name="register_link"><u>lub zarejestruj się tutaj!</u></string>
+    <string name="error_password_mismatch">Niepasujące hasła</string>
+    <string name="nav_user_section">Użytkownik</string>
+    <string name="nav_collections">Kolekcje</string>
+    <string name="nav_logout">Wyloguj się</string>
+    <string name="nav_sync">Synchronizacja</string>
     <string name="title_activity_collection_details">CollectionDetailsActivity</string>
 
     <string name="title_activity_card_game">CardGameActivity</string>
@@ -39,4 +39,6 @@
     <string name="search_hint">Szukaj</string>
     <string name="title_activity_temp">TempActivity</string>
     <string name="section_format">Hello World from section: %1$d</string>
+    <string name="preference_file_key">wordstorm_shared_pref</string>
+    <string name="error_unknown">Błąd podczas logowania.</string>
 </resources>

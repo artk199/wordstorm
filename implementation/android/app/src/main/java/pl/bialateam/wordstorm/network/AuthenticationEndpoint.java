@@ -2,18 +2,11 @@ package pl.bialateam.wordstorm.network;
 
 import android.util.Log;
 
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.RequestFuture;
+import junit.framework.Assert;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.concurrent.ExecutionException;
-
-import pl.bialateam.wordstorm.activities.StormApplication;
 import pl.bialateam.wordstorm.authentication.Authentication;
 
 /**
@@ -56,21 +49,7 @@ public class AuthenticationEndpoint extends Endpoint {
     }
 
     public boolean register(String username, String password) {
-        JSONObject params = new JSONObject();
-
-        try {
-            params.put("Email",username);
-            params.put("Password",password);
-        } catch (JSONException e) {
-            Log.e(TAG,"Błąd podczas tworzenia parametrów.",e);
-            return false;
-        }
-
-        JSONObject jsonObject = doPost("Register",params);
-        if(jsonObject == null){
-            return false;
-        }
-
+        Assert.assertTrue(false);
         return true;
     }
 }

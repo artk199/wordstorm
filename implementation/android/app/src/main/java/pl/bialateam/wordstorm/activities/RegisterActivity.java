@@ -3,21 +3,35 @@ package pl.bialateam.wordstorm.activities;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
+
+import com.android.volley.NetworkResponse;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.google.gson.JsonObject;
+
+import org.json.JSONObject;
 
 import pl.bialateam.wordstorm.R;
 import pl.bialateam.wordstorm.authentication.AuthenticationProvider;
+import pl.bialateam.wordstorm.network.RegisterRequest;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    private UserRegisterTask userRegisterTask = null;
+    private boolean userRegisterTask = false;
 
     // UI references.
     private EditText mRegisterLoginView;
@@ -49,7 +63,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void attemptRegister() {
-        if(userRegisterTask != null)
+        if(userRegisterTask)
             return;
 
         String login  = mRegisterLoginView.getText().toString();
@@ -83,9 +97,8 @@ public class RegisterActivity extends AppCompatActivity {
         }
 
         showProgress(true);
-        this.userRegisterTask = new UserRegisterTask(login, password);
-        userRegisterTask.doInBackground();
-
+        registerRequest(login,password);
+        userRegisterTask = true;
     }
 
     /**
@@ -124,26 +137,46 @@ public class RegisterActivity extends AppCompatActivity {
         }
     }
 
-    public class UserRegisterTask extends AsyncTask<Void, Void, Boolean> {
 
-        String login;
-        String password;
+    private void registerRequest(final String username, final String password) {
 
-        UserRegisterTask(String login,String password){
-            this.login = login;
-            this.password = password;
-        }
 
-        @Override
-        protected Boolean doInBackground(Void... params) {
-            AuthenticationProvider authenticationProvider = new AuthenticationProvider();
-            return authenticationProvider.registerAndAuthenticate(login,password);
-        }
+        RegisterRequest stringRequest = RegisterRequest.createRequest(username, password, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                AuthenticationProvider authenticationProvider = new AuthenticationProvider();
+                showProgress(false);
+                CharSequence text = "Poprawna rejestracja, możesz się teraz zalogować.";
+                int duration = Toast.LENGTH_SHORT;
 
-        @Override
-        protected void onPostExecute(Boolean aBoolean) {
-            userRegisterTask = null;
-            showProgress(false);
-        }
+                Toast toast = Toast.makeText(RegisterActivity.this, text, duration);
+                toast.show();
+                switchActivity();
+                finish();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("Volly Error", error.toString());
+
+                NetworkResponse networkResponse = error.networkResponse;
+                if (networkResponse != null) {
+                    Log.e("Status code", String.valueOf(networkResponse.statusCode));
+                    mRegisterLoginView.setError("Bład podczas rejestracji.");
+                }
+                userRegisterTask = false;
+                showProgress(false);
+            }
+        });
+
+        StormApplication.getRequestQueue().add(stringRequest);
+
+        return;
     }
+
+    private void switchActivity(){
+        Intent startActivity = new Intent(RegisterActivity.this,LoginActivity.class);
+        RegisterActivity.this.startActivity(startActivity);
+    }
+
 }

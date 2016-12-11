@@ -3,6 +3,7 @@ package pl.bialateam.wordstorm.activities;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -151,8 +152,13 @@ public class StartActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_logout) {
-            //TODO: perfrom additional actions when logging out, ie. switch to login screen/
             StormApplication.setAuthentication(null);
+            SharedPreferences sharedPref = getSharedPreferences(
+                    getString(R.string.preference_file_key), Context.MODE_PRIVATE);
+            sharedPref.edit().remove("username").commit();
+            Intent startActivity = new Intent(StartActivity.this,LoginActivity.class);
+            StartActivity.this.startActivity(startActivity);
+            finish();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

@@ -5,7 +5,9 @@ import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.ActionBar;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 
 import android.os.AsyncTask;
@@ -22,6 +24,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import pl.bialateam.wordstorm.R;
+import pl.bialateam.wordstorm.authentication.Authentication;
 import pl.bialateam.wordstorm.authentication.AuthenticationProvider;
 
 /**
@@ -45,6 +48,7 @@ public class LoginActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         getSupportActionBar().hide();
+
 
         // Set up the login form.
         mLoginView = (EditText) findViewById(R.id.loginText);
@@ -75,6 +79,19 @@ public class LoginActivity extends AppCompatActivity{
         mPasswordView.setText("a");
         //attemptLogin();
 
+        SharedPreferences sharedPref = getSharedPreferences(
+                getString(R.string.preference_file_key), Context.MODE_PRIVATE);
+        if(sharedPref.contains("username")){
+            showProgress(true);
+            String username = sharedPref.getString("username","username");
+            String token = sharedPref.getString("token","token");
+            Authentication authentication = new Authentication();
+            authentication.setUsername(username);
+            authentication.setToken(token);
+            StormApplication.setAuthentication(authentication);
+            switchActivity();
+            finish();
+        }
 
     }
 
@@ -189,9 +206,15 @@ public class LoginActivity extends AppCompatActivity{
 
             if (success) {
                 switchActivity();
+                SharedPreferences sharedPref = getSharedPreferences(
+                        getString(R.string.preference_file_key), Context.MODE_PRIVATE);
+                sharedPref.edit()
+                        .putString("username",StormApplication.getAuthentication().getUsername())
+                        .putString("token",StormApplication.getAuthentication().getToken())
+                        .commit();
                 finish();
             } else {
-                mPasswordView.setError(getString(R.string.error_incorrect_password));
+                mPasswordView.setError(getString(R.string.error_unknown));
                 mPasswordView.requestFocus();
             }
         }
