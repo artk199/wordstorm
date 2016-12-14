@@ -55,6 +55,7 @@
 			tier: null
 		});
 		addState("uploadFile", "/upload-file", "<upload-file-page></upload-file-page>", {title: "uploadFile.pageTitle"});
+		addState("contactUs", "/contact-us", "<contact-us-page></contact-us-page>", {title: "contactUs.pageTitle"});
 		
 		///////////////////////////
 		

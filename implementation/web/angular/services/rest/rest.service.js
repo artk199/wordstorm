@@ -43,6 +43,10 @@
 			text: uploadText
 		};
 		
+		service.contactUs = {
+			send: sendContactUs
+		};
+		
 		//////////////////////////////
 		
 		// Register user functions
@@ -141,6 +145,11 @@
 		function uploadText(text){
 			var params = { headers : {'Content-Type' : 'text/plain'}};
 			return restConfig.createPostPromise("File/Text", text, params, false, true);
+		}
+		
+		// Contact us functions
+		function sendContactUs(email, text){
+			return restMock.sendContactUs();
 		}
 	}
 }());

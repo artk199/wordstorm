@@ -27,6 +27,7 @@
 		ctrl.openPublicLibrary = pages.publicLibrary.main;
 		ctrl.openMyLibrary = pages.myLibrary.allCollections;
 		ctrl.openUploadFile = pages.uploadFile;
+		ctrl.openContactUs = pages.contactUs;
 			
 		ctrl.logout = logout;
 		

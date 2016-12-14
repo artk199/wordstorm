@@ -91,6 +91,10 @@
 			$state.go("uploadFile");
 		};
 		
+		service.contactUs = function(){
+			$state.go("contactUs");
+		};
+		
 		service.isPageOpened = function(stateName){
 			return $state.is(stateName);
 		};

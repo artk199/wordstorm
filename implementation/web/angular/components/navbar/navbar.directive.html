@@ -43,6 +43,10 @@
 					        	<span class="glyphicon glyphicon-user"></span>
 					        	<span  ng-bind="::ctrl.userData.Email"></span>
 					        </li>
+					        <li class="user-name clickable" ng-click="ctrl.openContactUs()">
+					        	<span class="glyphicon glyphicon-envelope"></span>
+					        	<span translate="contactUs.pageLink"></span>
+					        </li>
 					        <li class="clickable dark" ng-if="!ctrl.isLoading()" ng-click="ctrl.logout()">
 					        	<span class="glyphicon glyphicon-off"></span>
 					        	<span translate="userPanel.logout"></span>
