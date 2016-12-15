@@ -8,6 +8,7 @@
 		
 		service.isPersonLogged = isPersonLogged;
 		service.logout = logPersonOut;
+		service.sendContactUs = sendContactUs;
 		
 		//////////////////////////
 		
@@ -18,6 +19,10 @@
 	
 		function logPersonOut(email){
 			return $q.when();
+		}
+		
+		function sendContactUs(){
+			return $timeout(function(){return true}, 1000);
 		}
 	}
 }());

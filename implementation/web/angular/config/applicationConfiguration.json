@@ -1,5 +1,5 @@
 {
-	"restApi" : "http://wordstormapi.azurewebsites.net/api/",
+	"restApi" : "http://wordstormapi.azurewebsites.net/v1/",
 	"allowedLanguages" : ["pl"],
 	"defaultLanguage" : "pl",
 	"devMode" : false,

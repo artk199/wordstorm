@@ -107,6 +107,7 @@
 	"button.yes" : "Tak",
 	"button.no" : "Nie",
 	"button.cancel" : "Anuluj",
+	"button.send" : "Wyślij",
 	"button.remove.confirmAction" : "Czy na pewno chcesz usunąć ten obiekt?",
 	"listableData.searchPlaceholder" : "Wyszukaj na liście...",
 	"collection.addWord" : "Dodaj słówko...",
@@ -188,5 +189,10 @@
 	"uploadFile.results.words.known" : "Umiem",
 	"uploadFile.results.words.unknown" : "Nie umiem",
 	"uploadFile.results.info" : "Poniżej znajduje się lista słów, które udało się rozpoznać. Nie zapomnij wybrać spośród nich tych, które już umiesz!",
-	"uploadFile.results.buttons.cancel" : "Cofnij"
+	"uploadFile.results.buttons.cancel" : "Cofnij",
+	"contactUs.pageLink": "Skontaktuj się z nami",
+	"contactUs.pageTitle" : "Kontakt z administracją",
+	"contactUs.text" : "O czym chcesz nas poinformować:",
+	"contactUs.informationText" : "Odkryłeś błąd na stronie? Chcesz się o coś zapytać administracji strony? Skorzystaj z formularza poniżej.",
+	"contactUs.alert.title" : "Wysłano informację do administracji. Odpowiedź przyjdzie na adres {{email}}."
 }
