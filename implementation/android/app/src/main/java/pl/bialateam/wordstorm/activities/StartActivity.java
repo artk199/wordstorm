@@ -198,8 +198,10 @@ public class StartActivity extends AppCompatActivity
 
         @Override
         protected void onPostExecute(List<Collection> collectionList) {
-            adapter.clear();
-            adapter.addAll(collectionList);
+            if(collectionList!=null) {
+                adapter.clear();
+                adapter.addAll(collectionList);
+            }
             swipeRefreshLayout.setRefreshing(false);
             loadCollectionsTask = null;
         }

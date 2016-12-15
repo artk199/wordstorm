@@ -13,6 +13,24 @@ public class Collection implements Serializable {
     boolean isPublic;
     int difficultLevel;
     Category category;
+    int totalWords;
+    int totalKnownWords;
+
+    public int getTotalWords() {
+        return totalWords;
+    }
+
+    public void setTotalWords(int totalWords) {
+        this.totalWords = totalWords;
+    }
+
+    public int getTotalKnownWords() {
+        return totalKnownWords;
+    }
+
+    public void setTotalKnownWords(int totalKnownWords) {
+        this.totalKnownWords = totalKnownWords;
+    }
 
     public String getId() {
         return id;

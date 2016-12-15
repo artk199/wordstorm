@@ -1,25 +1,25 @@
 package pl.bialateam.wordstorm.activities;
 
-import android.annotation.SuppressLint;
 import android.app.Fragment;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.SeekBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import java.util.Collection;
 import java.util.List;
 
 import pl.bialateam.wordstorm.R;
 import pl.bialateam.wordstorm.activities.card.game.OnSwipeTouchListener;
 import pl.bialateam.wordstorm.cardgame.CardGame;
+import pl.bialateam.wordstorm.pojo.Translation;
 import pl.bialateam.wordstorm.pojo.Word;
 
 
@@ -34,7 +34,7 @@ public class CardGameActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
         final List<Word> words = (List<Word>) bundle.getSerializable("words");
@@ -162,11 +162,40 @@ public class CardGameActivity extends AppCompatActivity {
                                  Bundle savedInstanceState) {
             View v = inflater.inflate(R.layout.fragment_card_translation, container, false);
 
-            TextView wordTextView = (TextView) v.findViewById(R.id.word);
-            TextView pronunciationTextView = (TextView) v.findViewById(R.id.pronunciation);
-            String translation = word.getTranslations().get(0).getTranslation();
-            //wordTextView.setText(translation);
-            //pronunciationTextView.setText(word.getPronunciation());
+            List<Translation> translations = word.getTranslations();
+            for (int i = 0; i < translations.size(); i++) {
+                if(i==0) {
+                    Translation translation = translations.get(0);
+                    TranslationFragment translationFragment = new TranslationFragment(translation);
+                    CardReverseFragment.this.getChildFragmentManager().beginTransaction()
+                            .add(R.id.translation_fragment_container, translationFragment, "translationFragment")
+                            .addToBackStack(null)
+                            .commit();
+                }
+            }
+
+
+            return v;
+        }
+    }
+
+    public class TranslationFragment extends Fragment{
+
+        private Translation translation;
+
+        TranslationFragment(Translation translation){
+            this.translation = translation;
+        }
+
+        @Override
+        public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                                 Bundle savedInstanceState) {
+            View v = inflater.inflate(R.layout.translation_fragment, container, false);
+
+            TextView translationText = (TextView) v.findViewById(R.id.translation_text);
+            TextView translationType = (TextView) v.findViewById(R.id.translation_type);
+            translationText.setText(translation.getTranslation());
+            translationType.setText("");
 
             return v;
         }

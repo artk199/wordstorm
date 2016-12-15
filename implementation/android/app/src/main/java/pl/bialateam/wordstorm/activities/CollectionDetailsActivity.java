@@ -1,6 +1,7 @@
 package pl.bialateam.wordstorm.activities;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -46,6 +47,7 @@ public class CollectionDetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_collection_details);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
         setSupportActionBar(toolbar);
 
         setUpTabs();
@@ -164,6 +166,7 @@ public class CollectionDetailsActivity extends AppCompatActivity {
         private static final String ARG_SECTION_NUMBER = "section_number";
         WordListAdapter wordsAdapter;
 
+        public PlaceholderFragment(){}
 
         public PlaceholderFragment(WordListAdapter wordsAdapter) {
             this.wordsAdapter = wordsAdapter;

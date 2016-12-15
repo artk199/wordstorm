@@ -73,23 +73,10 @@ public class CollectionListAdapter extends ArrayAdapter<Collection> {
         }
         Collection collection = data.get(position);
         collectionHolder.title.setText(collection.getName());
-        Random rnd = new Random();
-        int random = rnd.nextInt(3);
         int drawable = R.drawable.stick3;
-        switch (random){
-        case 0:
-            drawable = R.drawable.stick3;
-            break;
-        case 1:
-            drawable = R.drawable.stock0;
-            break;
-        case 2:
-            drawable = R.drawable.stock1;
-            break;
-        }
         collectionHolder.image.setImageResource(drawable);
-        collectionHolder.totalCount.setText("/"+String.valueOf(rnd.nextInt(20)+10));
-        collectionHolder.count.setText(String.valueOf(rnd.nextInt(10)));
+        collectionHolder.totalCount.setText("/"+String.valueOf(collection.getTotalWords()));
+        collectionHolder.count.setText(String.valueOf(collection.getTotalKnownWords()));
         return view;
     }
 
