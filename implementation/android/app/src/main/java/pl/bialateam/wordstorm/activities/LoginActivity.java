@@ -15,6 +15,7 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.WindowManager;
@@ -22,10 +23,18 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import pl.bialateam.wordstorm.R;
 import pl.bialateam.wordstorm.authentication.Authentication;
 import pl.bialateam.wordstorm.authentication.AuthenticationProvider;
+import pl.bialateam.wordstorm.network.auth.LoginRequest;
 
 /**
  * A login screen that offers login via email/password.
@@ -35,7 +44,7 @@ public class LoginActivity extends AppCompatActivity{
     /**
      * Keep track of the login task to ensure we can cancel it if requested.
      */
-    private UserLoginTask mAuthTask = null;
+    private boolean mAuthTask = false;
 
     // UI references.
     private EditText mLoginView;
@@ -96,7 +105,7 @@ public class LoginActivity extends AppCompatActivity{
     }
 
     private void attemptLogin() {
-        if (mAuthTask != null) {
+        if (mAuthTask) {
             return;
         }
 
@@ -133,8 +142,7 @@ public class LoginActivity extends AppCompatActivity{
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
             showProgress(true);
-            mAuthTask = new UserLoginTask(email, password);
-            mAuthTask.execute((Void) null);
+            startLoginRequest(email,password);
         }
     }
 
@@ -179,32 +187,32 @@ public class LoginActivity extends AppCompatActivity{
         LoginActivity.this.startActivity(startActivity);
     }
 
-    /**
-     * Represents an asynchronous login/registration task used to authenticate
-     * the user.
-     */
-    public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
 
-        private final String mLogin;
-        private final String mPassword;
-
-        UserLoginTask(String email, String password) {
-            mLogin = email;
-            mPassword = password;
-        }
-
-        @Override
-        protected Boolean doInBackground(Void... params) {
-            AuthenticationProvider authenticationProvider = new AuthenticationProvider();
-            return authenticationProvider.authenticate(mLogin,mPassword);
-        }
-
-        @Override
-        protected void onPostExecute(final Boolean success) {
-            mAuthTask = null;
-            showProgress(false);
-
-            if (success) {
+    private void startLoginRequest(final String login, String password){
+        mAuthTask = true;
+        LoginRequest.createRequest(login, password, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                //TODO: Stworzyć z tego generyka i zeby zwracał Authentication a nie JsonObject
+                if(response == null){
+                    showToastError();
+                    return;
+                }
+                Authentication authentication = new Authentication();
+                try {
+                    JSONObject result = null;
+                    result = response.getJSONObject("Result");
+                    authentication.setUsername(login);
+                    authentication.setToken(result.getString("access_token"));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    showToastError();
+                    return;
+                }
+                mAuthTask = false;
+                showProgress(false);
+                AuthenticationProvider authenticationProvider = new AuthenticationProvider();
+                authenticationProvider.authenticate(authentication);
                 switchActivity();
                 SharedPreferences sharedPref = getSharedPreferences(
                         getString(R.string.preference_file_key), Context.MODE_PRIVATE);
@@ -213,17 +221,21 @@ public class LoginActivity extends AppCompatActivity{
                         .putString("token",StormApplication.getAuthentication().getToken())
                         .commit();
                 finish();
-            } else {
-                mPasswordView.setError(getString(R.string.error_unknown));
-                mPasswordView.requestFocus();
-            }
-        }
 
-        @Override
-        protected void onCancelled() {
-            mAuthTask = null;
-            showProgress(false);
-        }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                //TODO: Wypisywac bledy normalnie a nie tostem
+                showToastError();
+                mAuthTask = false;
+                showProgress(false);
+            }
+        });
+    }
+
+    private void showToastError() {
+        Toast.makeText(LoginActivity.this, "Nienznany błąd podczas logowania.", Toast.LENGTH_LONG).show();
     }
 }
 

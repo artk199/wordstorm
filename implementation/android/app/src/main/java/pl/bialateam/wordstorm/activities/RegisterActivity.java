@@ -3,10 +3,7 @@ package pl.bialateam.wordstorm.activities;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.os.AsyncTask;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -20,14 +17,12 @@ import android.widget.Toast;
 import com.android.volley.NetworkResponse;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.google.gson.JsonObject;
 
 import org.json.JSONObject;
 
 import pl.bialateam.wordstorm.R;
 import pl.bialateam.wordstorm.authentication.AuthenticationProvider;
-import pl.bialateam.wordstorm.network.RegisterRequest;
+import pl.bialateam.wordstorm.network.auth.RegisterRequest;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -141,7 +136,7 @@ public class RegisterActivity extends AppCompatActivity {
     private void registerRequest(final String username, final String password) {
 
 
-        RegisterRequest stringRequest = RegisterRequest.createRequest(username, password, new Response.Listener<JSONObject>() {
+        RegisterRequest.createRequest(username, password, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 AuthenticationProvider authenticationProvider = new AuthenticationProvider();
@@ -168,10 +163,6 @@ public class RegisterActivity extends AppCompatActivity {
                 showProgress(false);
             }
         });
-
-        StormApplication.getRequestQueue().add(stringRequest);
-
-        return;
     }
 
     private void switchActivity(){
