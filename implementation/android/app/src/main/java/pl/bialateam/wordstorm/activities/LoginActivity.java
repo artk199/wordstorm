@@ -227,7 +227,11 @@ public class LoginActivity extends AppCompatActivity{
             @Override
             public void onErrorResponse(VolleyError error) {
                 //TODO: Wypisywac bledy normalnie a nie tostem
-                showToastError();
+                if(error.networkResponse.statusCode == 422){
+                    Toast.makeText(LoginActivity.this, "Nieprawidłowa nazwa użytkownika lub hasło.", Toast.LENGTH_LONG).show();
+                }else {
+                    showToastError();
+                }
                 mAuthTask = false;
                 showProgress(false);
             }

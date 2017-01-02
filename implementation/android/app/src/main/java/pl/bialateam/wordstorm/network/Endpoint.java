@@ -29,7 +29,7 @@ public class Endpoint {
 
     public boolean block = true;
 
-    public static final String baseURL = "http://wordstormapi.azurewebsites.net/";
+    public static final String baseURL = "http://wordstorm.aspnet.pl/";
 
     JSONObject doPost(String urlPostfix,JSONObject params){
         return doRequest(Request.Method.POST,urlPostfix,params);
