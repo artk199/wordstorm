@@ -37,6 +37,8 @@
 		ctrl.isMyLibraryOpened = isMyLibraryOpened;
 		ctrl.isPublicLibraryOpened = isPublicLibraryOpened;
 		
+		ctrl.getDownloadAndroidApkLink = getDownloadAndroidApkLink;
+		
 		init();
 		
 		////////////////
@@ -84,6 +86,10 @@
 		
 		function isPublicLibraryOpened(){
 			return pages.isPageOpened('collectionPreview') || pages.isPageOpened('publicLibrary');
+		}
+		
+		function getDownloadAndroidApkLink(){
+			return config.androidApkDownloadLink;
 		}
 	}
 }());

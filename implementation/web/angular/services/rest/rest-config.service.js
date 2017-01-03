@@ -41,7 +41,10 @@
 			var params = parameters || {};
 			params.headers = params.headers || {};
 			params.headers['Content-Type'] = params.headers['Content-Type'] || 'application/json';
-			params.headers['Authorization'] = params.headers['Authorization'] || cookies.credentials.createHeader();
+			var authorizationHeader = cookies.credentials.createHeader();
+			if(authorizationHeader || params.headers['Authorization']){
+				params.headers['Authorization'] = params.headers['Authorization'] || authorizationHeader;
+			}
 			return params;
 		}
 	}

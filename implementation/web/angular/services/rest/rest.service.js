@@ -24,7 +24,8 @@
 			remove: removeCollection,
 			removeList: removeListOfCollections,
 			edit: editCollection,
-			getPublic: getPublicCollections
+			getPublic: getPublicCollections,
+			downloadAsPdf: downloadCollectionAsPdf
 		};
 		
 		service.word = {
@@ -106,6 +107,10 @@
 			return restCache.get("publicCollections", "Collection/Public", null, null, useCache, forceReload);
 		}
 		
+		function downloadCollectionAsPdf(collectionId){
+			return restCache.get("publicCollections", "File/Pdf/" + collectionId, null, null, false, false)
+		}
+		
 		// Words functions
 		
 		function createWord(collectionId, data){
@@ -149,7 +154,11 @@
 		
 		// Contact us functions
 		function sendContactUs(email, text){
-			return restMock.sendContactUs();
+			var data = {
+				Email: email,
+				Text: text
+			};
+			return restConfig.createPostPromise("Contact/Form", data, null, false, true);
 		}
 	}
 }());

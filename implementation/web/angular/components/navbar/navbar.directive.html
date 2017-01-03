@@ -41,11 +41,17 @@
 							</li>			
 					        <li class="user-name" ng-if="!ctrl.isLoading()">
 					        	<span class="glyphicon glyphicon-user"></span>
-					        	<span  ng-bind="::ctrl.userData.Email"></span>
+					        	<span  ng-bind="ctrl.userData.Email"></span>
 					        </li>
 					        <li class="user-name clickable" ng-click="ctrl.openContactUs()">
 					        	<span class="glyphicon glyphicon-envelope"></span>
 					        	<span translate="contactUs.pageLink"></span>
+					        </li>
+					        <li class="link">
+					        	<a ng-href='{{::ctrl.getDownloadAndroidApkLink()}}' target="_self" download="{{::'mobile.download.androidFilename' | translate}}">
+					        		<span class='glyphicon glyphicon-save-file'></span>
+					        		<span translate="mobile.download.androidApplication"></span>
+					        	</a>
 					        </li>
 					        <li class="clickable dark" ng-if="!ctrl.isLoading()" ng-click="ctrl.logout()">
 					        	<span class="glyphicon glyphicon-off"></span>
@@ -58,8 +64,7 @@
    		</section>
 
 		<ul class="main-menu" ng-if="ctrl.isPersonLogged()">
-			<li ng-class="{'active' : ctrl.isMyLibraryOpened()}" ng-click="ctrl.openMyLibrary()">Twoje</li>
-			<li ng-class="{'active' : ctrl.isPublicLibraryOpened()}" ng-click="ctrl.openPublicLibrary()">Publiczne</li>
+			<li ng-class="{'active' : ctrl.isMyLibraryOpened()}" ng-click="ctrl.openMyLibrary()" translate="navbar.yourLibrary"></li>
 		</ul>
  	</div>
 </header>

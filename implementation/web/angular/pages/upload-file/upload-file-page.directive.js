@@ -84,14 +84,28 @@
 		
 		function uploadFile(file){
 			if(validateFile(file)){
-				loadingData.SENDING = true;
-				
-				$timeout(function(){
-					loadingData.SENDING = false;
-					ctrl.view = views.CHOOSE;
-				}, 2000);
+				sendLocalTextFile(file);
 			}
 			$scope.$apply();
+		}
+		
+		function sendLocalTextFile(file){
+			loadingData.SENDING = true;
+			var r = new FileReader();
+			
+		    r.onload = function(e) { 
+		    	var text = e.target.result;
+		    	rest.upload.text(text).then(function(data){	
+					if(data.Result){
+						ctrl.wordsList = data.Result;
+					}
+					
+					loadingData.SENDING = false;
+					ctrl.view = views.CHOOSE;
+				});
+		    };
+		    
+		    r.readAsText(file);
 		}
 		
 		function sendManualInput(text){
@@ -113,8 +127,8 @@
 		}
 		
 		function validateFileSize(fileSize){
-			var maxAllowed = config.uploadFileMaxSizeInMb;
-			var size = fileSize * 1024 * 1024;
+			var maxAllowed = config.uploadFileMaxSizeInMb * 1024 * 1024;
+			var size = fileSize;
 			
 			if(size <= maxAllowed){
 				return true;

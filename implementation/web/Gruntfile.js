@@ -9,7 +9,8 @@ module.exports = function (grunt) {
 					{cwd: 'style',  src: '**/*.*', dest: 'release/style', expand: true},
 					{cwd: 'libs',  src: '**/*.*', dest: 'release/libs', expand: true},
 					{cwd: 'images',  src: '**/*.*', dest: 'release/images', expand: true},
-					{cwd: '',  src: 'index.html', dest: 'release', expand: true},
+					{cwd: 'download',  src: '**/*.*', dest: 'release/download', expand: true},
+					{src: 'index.min.html', dest: 'release/index.html'},
 				]
 			}
 		},

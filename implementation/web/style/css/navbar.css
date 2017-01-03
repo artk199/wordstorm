@@ -126,6 +126,12 @@
 
 #main-header .dropdown-menu  li{
  	padding: 5px 20px;
+ 	transition: 0.3s;
+}
+
+#main-header .dropdown-menu  li:hover{
+	cursor: pointer;
+	background: #f5f5f5;
 }
 
 #main-header .dropdown-menu .glyphicon{
@@ -137,6 +143,20 @@
 #main-header .dropdown-menu .dark{
 	background: #646671;
     color: #fff;
+    padding: 10px 20px;
+}
+
+#main-header .dropdown-menu li.dark:hover{
+	background: #504b4b;
+}
+
+#main-header .dropdown-menu li.link{
+	padding: 0;
+}
+
+#main-header .dropdown-menu li.link > a{
+	padding: 10px 20px;
+	display: block;
 }
 
 #main-header .button-action{

@@ -1,5 +1,5 @@
 {
-	"restApi" : "http://wordstormapi.azurewebsites.net/v1/",
+	"restApi" : "http://wordstorm.aspnet.pl/",
 	"allowedLanguages" : ["pl"],
 	"defaultLanguage" : "pl",
 	"devMode" : false,
@@ -13,7 +13,9 @@
 	"defaultPaginationSize" : 10,
 	"searchUrl" : "https://www.diki.pl/",
 	"defaultDebounceTimeInMs": 100,
-	"uploadFileExtensions" : ["txt", "pdf", "docx", "doc"],
-	"uploadFileMaxSizeInMb" : 0.1,
-	"collectionAddElement" : "last"
+	"uploadFileExtensions" : ["txt"],
+	"uploadFileMaxSizeInMb" : 10,
+	"collectionAddElement" : "last",
+	"androidApkDownloadLink" : "download/app-debug.apk",
+	"mainPageVideoLink" : "https://www.youtube.com/embed/RG06ewnqiB4"
 }

@@ -36,6 +36,7 @@
 		var wordsRemoving = false;
 		var currentTier = null;
 		var activeTiers = null;
+		var pdfDownloading = false;
 		
 		ctrl.formSending = false;
 		
@@ -70,6 +71,9 @@
 		ctrl.reduceWordsToTier = reduceWordsToTier;
 		ctrl.changeCurrentTier = changeCurrentTier;
 		ctrl.isTierActive = isTierActive;
+		
+		ctrl.downloadCollectionAsPdfPage = downloadCollectionAsPdfPage;
+		ctrl.isPdfDownloading = isPdfDownloading;
 		
 		init();
 		
@@ -126,6 +130,68 @@
 		}
 		
 		// ===== Displaying list of words ===== 
+		function downloadCollectionAsPdfPage(collectionId, fileName){
+			pdfDownloading = true;
+			rest.collection.downloadAsPdf(collectionId).then(function(data){
+				var pdfContent = data.Result;
+				var contentType = 'application/pdf';
+				var blob = b64toBlob(pdfContent, contentType);
+				downloadBlob(blob, fileName);
+				
+				pdfDownloading = false;
+			});
+		}
+		
+		function b64toBlob(b64Data, contentType, sliceSize) {
+		  contentType = contentType || '';
+		  sliceSize = sliceSize || 512;
+
+		  var byteCharacters = atob(b64Data);
+		  var byteArrays = [];
+
+		  for (var offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+		    var slice = byteCharacters.slice(offset, offset + sliceSize);
+
+		    var byteNumbers = new Array(slice.length);
+		    for (var i = 0; i < slice.length; i++) {
+		      byteNumbers[i] = slice.charCodeAt(i);
+		    }
+
+		    var byteArray = new Uint8Array(byteNumbers);
+
+		    byteArrays.push(byteArray);
+		  }
+		    
+		  var blob = new Blob(byteArrays, {type: contentType});
+		  return blob;
+		}
+		
+		function downloadBlob(blob, fileName){
+			var isIE = /*@cc_on!@*/false || !!document.documentMode; 
+			if(isIE){
+				window.navigator.msSaveBlob(blob, fileName)
+			}
+			else{		
+				var a = document.createElement("a");
+			    document.body.appendChild(a);
+			    a.style = "display: none";
+	            var url = window.URL.createObjectURL(blob);
+		        a.href = url;
+		        a.download = fileName;
+		        a.click();
+		        window.URL.revokeObjectURL(url);
+		        
+		        setTimeout(function(){
+		        	document.body.removeChild(a);
+			        window.URL.revokeObjectURL(url);  
+			    }, 100);
+			}
+		}
+		
+		function isPdfDownloading(){
+			return pdfDownloading;
+		}
+		
 		function initTiersSettings(){
 			activeTiers = [];
 			

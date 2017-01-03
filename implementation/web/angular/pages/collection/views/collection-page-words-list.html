@@ -35,6 +35,15 @@
 				ng-click="ctrl.addWord(ctrl.collection.Id, ctrl.collection.Name)">
 					<span class="glyphicon glyphicon-plus"></span>
 			</button>
+			<button type="button" class="button button-action" 
+				uib-tooltip="{{::('myLibrary.collection.downloadPdf' | translate)}}" tooltip-placement="bottom"
+				ng-switch="ctrl.isPdfDownloading()"
+				ng-disabled="ctrl.isPdfDownloading()"
+				ng-click="ctrl.downloadCollectionAsPdfPage(ctrl.collection.Id, ctrl.collection.Name + '.pdf')">
+					<span ng-switch-default class="glyphicon glyphicon-spin glyphicon-refresh"></span>
+					<span ng-switch-when="false" class="glyphicon glyphicon-file"></span>
+			</button>
+			<a class="hidden-xs hidden-sm hidden-md hidden-lg" id="download-anchor"></a>
 		</div>
 		<div>
 			<div class="full-height row">

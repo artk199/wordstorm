@@ -1,6 +1,8 @@
 {
 	"application.title" : "WordStorm",
 	"application.motto" : "Szkolimy naszych przyjaciół",
+	"mobile.download.androidApplication" : "Pobierz aplikację na Androida",
+	"mobile.download.androidFilename" : "Wordstorm.apk",
 	"authError.pageTitle" : "Wymagane logowanie",
 	"navbar.search.placeholder" : "Wyszukaj słówko...",
 	"state1.linkName" : "Przykładowa strona",
@@ -36,7 +38,7 @@
 	"register.title" : "Rejestracja",
 	"register.mainText" : "Dzięki rejestracji uzyskasz szereg możliwości dostępnych jedynie dla naszych użytkowników. Będziesz mógł tworzyć swoje grupy fiszek, dodawać gotowe pakiety do swojego konta, a nawet śledzić swoje postępy w nauce!",
 	"mainPage.applicationInfo.goods.title": "Dlaczego warto korzystać z WordStorm?",
-	"mainPage.applicationInfo.goods.text" : "<li>Za Ciebie przetłumaczymy wszystkie słowa w tekście, żebyś nie czuł się zakłopotany podczas czytania.</li><li>Generowanie fiszek z możliwością drukowania - dzięki temu będziesz mógł się uczyć słówek, które chcesz!</li><li>Twoje zestawy słówek dostępne są w naszej chmurze, dzięki czemu masz do nich dostęp na różnych platformach: <a href='#'>Android</a> oraz aplikacja internetowa.</li>",
+	"mainPage.applicationInfo.goods.text" : "<li>Za Ciebie przetłumaczymy wszystkie słowa w tekście, żebyś nie czuł się zakłopotany podczas czytania.</li><li>Generowanie fiszek z możliwością drukowania - dzięki temu będziesz mógł się uczyć słówek, które chcesz!</li><li>Twoje zestawy słówek dostępne są w naszej chmurze, dzięki czemu masz do nich dostęp na różnych platformach: <a href='{{link}}' target='_self' download='{{fileName}}'>Android</a> oraz aplikacja internetowa.</li>",
 	"register.labels.email" : "Adres e-mail",
 	"register.placeholders.email" : "Wprowadź swój adres e-mail",
 	"register.labels.password" : "Hasło",
@@ -64,6 +66,7 @@
 	"myLibrary.noAddedCollectionsAvailable" : "Niestety, jeszcze nie dodałeś żadnych kolekcji z fiszkami do swojego konta. Aby to zmienić, możesz wykorzystać dodać już zdefiniowane kolekcje (prezentowane poniżej) lub dodać własną!",
 	"myLibrary.noCollectionsAfterFiltering" : "Nie znaleziono żadnych elementów spełniających założone kryteria.",
 	"myLibrary.collection.add.pageTitle" : "Dodaj kolekcję",
+	"myLibrary.collection.downloadPdf" : "Pobierz fiszki w formacie PDF",
 	"myLibrary.collection.show.pageTitle" : "Kolekcja",
 	"myLibrary.collection.edit.pageTitle" : "Edytuj kolekcję",
 	"myLibrary.buttons.addNewCollection" : "Utwórz własną kolekcję",
@@ -174,7 +177,7 @@
 	"uploadFile.link.title" : "Wgraj plik",
 	"uploadFile.link.subtitle" : "... a my zrobimy fiszki!",
 	"uploadFile.title" : "Wgrywanie pliku",
-	"uploadFile.buttons.upload" : "Wgraj plik",
+	"uploadFile.buttons.upload" : "Wgraj plik tekstowy",
 	"uploadFile.manualInput" : "Wprowadź ręcznie tekst",
 	"uploadFile.manualInput.placeholder" : "Wprowadź tekst, z którego chcesz zrobić fiszki...",
 	"uploadFile.pickChoice" : "... lub po prostu...",
@@ -194,5 +197,6 @@
 	"contactUs.pageTitle" : "Kontakt z administracją",
 	"contactUs.text" : "O czym chcesz nas poinformować:",
 	"contactUs.informationText" : "Odkryłeś błąd na stronie? Chcesz się o coś zapytać administracji strony? Skorzystaj z formularza poniżej.",
-	"contactUs.alert.title" : "Wysłano informację do administracji. Odpowiedź przyjdzie na adres {{email}}."
+	"contactUs.alert.title" : "Wysłano informację do administracji. Odpowiedź przyjdzie na adres {{email}}.",
+	"navbar.yourLibrary" : "Twoje kolekcje"
 }

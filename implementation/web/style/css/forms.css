@@ -104,6 +104,13 @@
 	
 }
 
+.form-horizontal textarea.normal-field{
+    background: #fff;
+    border: 1px solid #ccc;
+    margin: 10px 0;
+    padding: 10px;
+}
+
 .hidden-input{
 	opacity: 0;
 	visible: hidden;

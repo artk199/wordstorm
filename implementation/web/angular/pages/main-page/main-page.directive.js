@@ -24,10 +24,11 @@
 		}
 	};
 	
-	DirectiveController.$inject = ['userPanelService', 'pages'];
-	function DirectiveController(userPanelService, pages){
+	DirectiveController.$inject = ['userPanelService', 'pages', 'config'];
+	function DirectiveController(userPanelService, pages, config){
 		var ctrl = this;
 		
+		ctrl.androidApplicationDownloadLink = config.androidApkDownloadLink;
 		ctrl.currentView = null;
 		ctrl.isUserLogged = userPanelService.isPersonLogged;
 		ctrl.openVideoView = openVideoView;
