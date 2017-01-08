@@ -3,7 +3,6 @@ module.exports = function (grunt) {
 		copy: {
 			wordstorm: {
 				files: [
-					{cwd: 'angular',  src: '**/*.html', dest: 'release/angular', expand: true},
 					{cwd: 'angular',  src: '**/*.json', dest: 'release/angular', expand: true},
 					{cwd: 'angular/modules',  src: '**/*.*', dest: 'release/angular/modules', expand: true},
 					{cwd: 'style',  src: '**/*.*', dest: 'release/style', expand: true},
@@ -22,7 +21,8 @@ module.exports = function (grunt) {
 					'angular/services/**/*.js',
 					'angular/filters/**/*.js',
 					'angular/pages/**/*.js',
-					'angular/components/**/*.js'
+					'angular/components/**/*.js',
+					'release/templates.js'
 				],
 				dest: 'release/wordstorm.min.js',
 				flatten: true,  
@@ -38,6 +38,26 @@ module.exports = function (grunt) {
 			  'release/wordstorm.min.css': ['style/css/*.css', '!css/*.min.css']
 			}
 		  }
+		},
+		ngtemplates:  {
+		  app:        { cwd: 'angular', src: '**/*.html', dest: 'release/templates.js'},
+		  options:    {
+			  htmlmin:  { 
+			      collapseBooleanAttributes:      true,
+				  collapseWhitespace:             true,
+				  removeAttributeQuotes:          true,
+				  removeComments:                 true,
+				  removeEmptyAttributes:          true,
+				  removeRedundantAttributes:      true,
+				  removeScriptTypeAttributes:     true,
+				  removeStyleLinkTypeAttributes:  true
+			  },
+			  module: "wordStormApp",
+			  bootstrap:  function(module, script) {
+				return '(function () {angular.module("' + module + '").run(["$templateCache", function($templateCache) { ' + script + ' }])}());';
+			  },
+			  url:    function(url) { return "angular/" + url; }
+		  }
 		}
 });
 
@@ -46,7 +66,8 @@ grunt.loadNpmTasks('grunt-contrib-watch');
 grunt.loadNpmTasks('grunt-contrib-uglify');
 grunt.loadNpmTasks('grunt-contrib-cssmin');
 grunt.loadNpmTasks('grunt-contrib-copy');
+grunt.loadNpmTasks('grunt-angular-templates');
 
 // register at least this one task
-grunt.registerTask('default', [ 'uglify', 'cssmin', 'copy' ]);
+grunt.registerTask('default', [ 'ngtemplates', 'uglify', 'cssmin', 'copy' ]);
 };

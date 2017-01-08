@@ -49,7 +49,7 @@
 	"register.button.save" : "Zarejestruj",
 	"register.serviceErrors.generalInfo" : "Przepraszamy, rejestracja nie została zakończona pomyślnie. Proszę sprawdzić pola w celu uzyskania szczegółowych informacji.",
 	"register.alerts.success.title" : "Konto {{name}} zostało pomyślnie zarejestrowane.",
-	"register.alerts.success.subtitle" : "Sprawdź swój email - wysłaliśmy tam szczegółowe informacje na temat Twojego konta.",
+	"register.alerts.success.subtitle" : "Teraz możesz się zalogować na utworzone konto.",
 	"dev-panel.watchersCount.title" : "Liczba wszystkich watcherów na stronie (w nawiasie bez duplikatów)",
 	"dev-panel.domElements.title" : "Liczba wszystkich elementów drzewa DOM na stronie",
 	"dev-panel.refreshButton.title" : "Odśwież pomiary",
