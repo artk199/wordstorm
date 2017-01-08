@@ -4,9 +4,8 @@ module.exports = function (grunt) {
 			wordstorm: {
 				files: [
 					{cwd: 'angular',  src: '**/*.json', dest: 'release/angular', expand: true},
-					{cwd: 'angular/modules',  src: '**/*.*', dest: 'release/angular/modules', expand: true},
 					{cwd: 'style',  src: '**/*.*', dest: 'release/style', expand: true},
-					{cwd: 'libs',  src: '**/*.*', dest: 'release/libs', expand: true},
+					{cwd: 'libs',  src: 'bootstrap/fonts/*.*', dest: 'release/libs', expand: true},
 					{cwd: 'images',  src: '**/*.*', dest: 'release/images', expand: true},
 					{cwd: 'download',  src: '**/*.*', dest: 'release/download', expand: true},
 					{src: 'index.min.html', dest: 'release/index.html'},
@@ -25,19 +24,32 @@ module.exports = function (grunt) {
 					'release/templates.js'
 				],
 				dest: 'release/wordstorm.min.js',
-				flatten: true,  
+				flatten: true
+			},
+			vendor: {
+				src: [
+					'libs/jquery/*.js',
+					'libs/progressbar/*.js',
+					'libs/angular/**/*.js',
+					'angular/modules/**/*.js',
+					'libs/cookies-popup/*.js',
+					'libs/bootstrap/js/bootstrap.min.js'
+				],
+				dest: 'release/vendor.min.js',
+				flatten: true
 			}
 		},
 		cssmin: {
-		  options: {
-			shorthandCompacting: false,
-			roundingPrecision: -1
-		  },
-		  combine: {
-			files: {
-			  'release/wordstorm.min.css': ['style/css/*.css', '!css/*.min.css']
+			options: {
+				shorthandCompacting: false,
+				roundingPrecision: -1
+			},
+			combine: {
+				files: {
+				  'release/wordstorm.min.css': ['style/css/*.css', '!css/*.min.css', '!style/css/fonts.css'],
+				  'release/vendor.min.css': ['libs/**/*.css', 'angular/modules/**/*.css']
+				}
 			}
-		  }
 		},
 		ngtemplates:  {
 		  app:        { cwd: 'angular', src: '**/*.html', dest: 'release/templates.js'},
@@ -70,4 +82,4 @@ grunt.loadNpmTasks('grunt-angular-templates');
 
 // register at least this one task
 grunt.registerTask('default', [ 'ngtemplates', 'uglify', 'cssmin', 'copy' ]);
-};
+}; 
