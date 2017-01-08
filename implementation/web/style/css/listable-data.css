@@ -75,8 +75,6 @@
 }
 
 .listable-data > header .right-section{
-	display: flex;
-	align-items: center;
 }
 
 .listable-data > header .right-section .button{
@@ -322,9 +320,9 @@
 .listable-data.grid-view .list .item {
 	float: left;
 	margin: 10px 5px;
-    width: 260px;
     transition: 0.3s;
     overflow: hidden;
+    width: 260px;
 }
 
 .listable-data.grid-view .list .item .card{
@@ -455,7 +453,7 @@
 .listable-data.grid-view .list .item .card > .card-body .progress-bar{
 	margin-top: -50px;
     margin-bottom: 10px;
-    width: 95px;
+    width: 120px;
     color: #000;
 }
 
@@ -530,6 +528,7 @@
     font-size: 30px;
     color: #f5f5f5;	
     transition: 0.4s;
+    margin: 0 auto;
 }
 
 .listable-data.grid-view .list .item .add-item:hover .icon-holder{

@@ -3,9 +3,19 @@
 }
 
 .special-characters-keyboard.main .open-button{
-    position: absolute;
-    right: -30px;
-    top: 1px;
+	position: absolute;
+    right: -36px;
+    top: -3px;
+    background: #b93a46 url(../img/keyboard-icon.png) center center no-repeat;
+    background-size: 63%;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    transition: 0.3s;
+}
+
+.special-characters-keyboard.main .open-button:hover{
+	background-color: #dc1717;
 }
 
 /* Keyboard */

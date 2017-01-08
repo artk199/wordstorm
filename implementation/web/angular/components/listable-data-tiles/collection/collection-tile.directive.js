@@ -64,6 +64,7 @@
 		ctrl.openLearning = pages.learning.main;
 		
 		ctrl.addCollection = addCollection;
+		ctrl.addCollectionFromText = pages.uploadFile;
 		
 		/////////////////////
 		

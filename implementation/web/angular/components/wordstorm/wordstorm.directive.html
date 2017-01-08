@@ -2,7 +2,19 @@
 	<navbar></navbar>
 	<div id='page-body' class="rest-height" ng-model-options="::ctrl.ngModelOptions">
 		<alerts group="global-alerts" overflowing="true"></alerts>
-		<spinner spinner-class="fancy" ng-if="ctrl.isLoading()"></spinner>
+		
+		<section class="loading-page" ng-if="ctrl.isLoading()">
+			<progress-bar progress="1" 
+				max-progress="1"
+				type="heart"
+				repeat="true"
+				background="#fff"
+			>
+				<progress-content>
+					<spinner></spinner>
+				</progress-content>
+			</progress-bar>
+		</section>
 		<div ng-if="!ctrl.isLoading()" class='ui-view-container' ui-view></div>
 	</div>
 </div>

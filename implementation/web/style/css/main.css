@@ -98,11 +98,28 @@ body{
     width: 100%;
     overflow: hidden;
     height: 100%;
+    text-align: center;
+}
+
+#page-body .loading-page{
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+#page-body .loading-page .progress-bar{
+	width: 350px;
+}
+
+#page-body .loading-page .progress-bar .spinner{
+    margin-top: -35px;
 }
 
 #page-body .ui-view-container{
 	height: 100%;
 	width: 100%;
+	text-align: left;
 }
 
 #page-body .page-content > .page-header{
@@ -273,18 +290,18 @@ body{
 /* Error page */
 .error-page{
 	text-align: center;
-	color: #fff;
+	color: #000;
 }
 
 .error-page h1{
     margin: 0 0 20px 0;
-    padding: 2% 0 1%;
+    padding: 1% 0 1%;
     font-size: 50px;
 }
 
 .error-page .glyphicon-warning-sign{
-	font-size: 200px;
-	margin: 2% 0;
+	font-size: 160px;
+	margin: 1% 0;
 }
 
 .error-info{
@@ -405,4 +422,13 @@ body{
 .big-round-button .button.button-action .glyphicon{
     font-size: 23px;
     left: 1px;
+}
+
+.with-help-tooltip .tooltip{
+	width: 400px;
+}
+
+.with-help-tooltip .tooltip .tooltip-inner{
+	max-width: none;
+	text-align: left;
 }

@@ -54,7 +54,10 @@
 			collectionId: null,
 			tier: null
 		});
-		addState("uploadFile", "/upload-file", "<upload-file-page></upload-file-page>", {title: "uploadFile.pageTitle"});
+		addState("uploadFile", "/upload-file", "<upload-file-page></upload-file-page>", {
+			title: "uploadFile.pageTitle",
+			collectionName: null
+		});
 		addState("contactUs", "/contact-us", "<contact-us-page></contact-us-page>", {title: "contactUs.pageTitle"});
 		
 		///////////////////////////

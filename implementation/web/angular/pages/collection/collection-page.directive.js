@@ -29,8 +29,8 @@
 		PREVIEW: "preview"
 	};
 	
-	DirectiveController.$inject = ['$stateParams', 'pages', 'rest', 'config', 'alerts'];
-	function DirectiveController($stateParams, pages, rest, config, alerts){
+	DirectiveController.$inject = ['$stateParams', 'pages', 'rest', 'config', 'alerts', '$sce', '$translate'];
+	function DirectiveController($stateParams, pages, rest, config, alerts, $sce, $translate){
 		var ctrl = this;
 		var collectionLoading = false;
 		var wordsRemoving = false;
@@ -75,6 +75,9 @@
 		ctrl.downloadCollectionAsPdfPage = downloadCollectionAsPdfPage;
 		ctrl.isPdfDownloading = isPdfDownloading;
 		
+		ctrl.addCollectionFromText = pages.uploadFile;
+		ctrl.tiersHelpHtml = initTiersInfoHtml();
+		
 		init();
 		
 		//////////////////////
@@ -100,6 +103,11 @@
 					}
 				});
 			}
+		}
+		
+		function initTiersInfoHtml(){
+			var info = $translate.instant('myLibrary.collection.tiers.info');
+			return $sce.trustAsHtml(info);
 		}
 		
 		function refreshCollection(useCache, forceReload){
@@ -203,9 +211,7 @@
 				}
 			}
 			
-			if(activeTiers.length > 0){
-				currentTier = activeTiers[0];
-			}
+			currentTier = "all";
 		}
 		
 		function initParametersForWords(){
@@ -250,12 +256,12 @@
 		}
 		
 		function isTierActive(tier){
-			return activeTiers.indexOf(tier) >= 0;
+			return tier == 'all' || activeTiers.indexOf(tier) >= 0;
 		}
 		
 		function reduceWordsToTier(item){
 			var result = false;
-			if(item.Tier == getCurrentTier()){
+			if(getCurrentTier() == 'all' || item.Tier == getCurrentTier()){
 				result = true;
 			}
 			return result;

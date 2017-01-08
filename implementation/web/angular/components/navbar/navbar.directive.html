@@ -26,40 +26,32 @@
   				<word-search ng-if="::ctrl.displaySearchBar"></word-search>
   			</div>
   			<div class="col-xs-12 col-sm-12 col-md-5 col-lg-5 text-right inline-children">
-  				<button class="button button-action" type="button" ng-click="ctrl.openUploadFile()"  ng-if="ctrl.isPersonLogged()">
+  				<div class="logged-user-info" ng-if="ctrl.userData.data.Email" translate="navbar.loggedUserInfo" translate-value-user="{{ctrl.userData.data.Email}}"></div>
+  			
+  				<button class="button button-action" type="button" ng-click="ctrl.openUploadFile()"  ng-if="ctrl.isPersonLogged()"
+  					uib-tooltip="{{::'navbar.uploadFile.tooltip' | translate}}" tooltip-placement="bottom"
+  				>
   					<span translate="navbar.uploadFile"></span>
   				</button>
   				
-  				<section ng-if="ctrl.isPersonLogged()">
-  					<span uib-dropdown>
-						<img class="user-icon clickable" src="images/user-panel/default-avatar.png" alt=""
-						 	uib-dropdown-toggle
-						/>
-						<ul class="dropdown-menu" uib-dropdown-menu aria-labelledby="simple-dropdown">
-							<li ng-if="ctrl.isLoading()">
-								<spinner></spinner>
-							</li>			
-					        <li class="user-name" ng-if="!ctrl.isLoading()">
-					        	<span class="glyphicon glyphicon-user"></span>
-					        	<span  ng-bind="ctrl.userData.Email"></span>
-					        </li>
-					        <li class="user-name clickable" ng-click="ctrl.openContactUs()">
-					        	<span class="glyphicon glyphicon-envelope"></span>
-					        	<span translate="contactUs.pageLink"></span>
-					        </li>
-					        <li class="link">
-					        	<a ng-href='{{::ctrl.getDownloadAndroidApkLink()}}' target="_self" download="{{::'mobile.download.androidFilename' | translate}}">
-					        		<span class='glyphicon glyphicon-save-file'></span>
-					        		<span translate="mobile.download.androidApplication"></span>
-					        	</a>
-					        </li>
-					        <li class="clickable dark" ng-if="!ctrl.isLoading()" ng-click="ctrl.logout()">
-					        	<span class="glyphicon glyphicon-off"></span>
-					        	<span translate="userPanel.logout"></span>
-					        </li>
-				      	</ul>
-					</span>
-				</section>
+  				<br class="hidden-sm hidden-md hidden-lg"/>
+  				
+  				<a class="rounded-navbar-button android" 
+  					ng-href='{{::ctrl.getDownloadAndroidApkLink()}}' target="_self" download="{{::'mobile.download.androidFilename' | translate}}"
+  					uib-tooltip="{{::'mobile.download.androidApplication' | translate}}" tooltip-placement="bottom-right"
+  				></a>
+  				
+  				<button class="rounded-navbar-button" ng-click="ctrl.openContactUs()" ng-if="ctrl.isPersonLogged()"
+  					uib-tooltip="{{::'contactUs.pageLink' | translate}}" tooltip-placement="bottom-right"
+  				>
+  					<span class="glyphicon glyphicon-envelope"></span>
+  				</button>
+  				
+  				<button class="rounded-navbar-button" ng-click="ctrl.logout()" ng-if="ctrl.isPersonLogged()"
+  					uib-tooltip="{{::'userPanel.logout' | translate}}" tooltip-placement="bottom-right"
+  				>
+  					<span class="glyphicon glyphicon-off"></span>
+  				</button>
  			</div>
    		</section>
 

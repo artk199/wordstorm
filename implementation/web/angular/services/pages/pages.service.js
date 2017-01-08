@@ -87,8 +87,10 @@
 			}
 		};
 		
-		service.uploadFile = function(){
-			$state.go("uploadFile");
+		service.uploadFile = function(collectionName){
+			$state.go("uploadFile", {
+				collectionName: collectionName
+			});
 		};
 		
 		service.contactUs = function(){

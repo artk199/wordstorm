@@ -12,7 +12,7 @@
 				auto-focus
 				use-auto-focus="{{ctrl.useAutoFocus}}"
 				ng-attr-placeholder="{{ctrl.placeholder | translate}}"
-				ng-required="ctrl.isRequired" />
+				ng-required="{{ctrl.isRequired == true}}" />
 			<div class='field-errors'>
 				<span translate="userPanel.form.error.emptyField"
 					ng-if="ctrl.isRequired && ctrl.form[ctrl.name].$touched && ctrl.form[ctrl.name].$invalid"
@@ -22,6 +22,7 @@
 		</div>
 		<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
 			<span class='glyphicon glyphicon glyphicon-question-sign form-field-tooltip' 
+				tooltip-placement="left"
 				ng-if="::(ctrl.tooltip != null)" uib-tooltip="{{ctrl.tooltip | translate}}"></span>
 		</div>
 	</div>
@@ -33,7 +34,8 @@
 			<special-characters-keyboard 
 				name="{{ctrl.name}}"
 				model="ctrl.model"
-				placeholder="ctrl.placeholder"
+				is-required="ctrl.isRequired"
+				placeholder="{{::ctrl.placeholder}}"
 				display="button"
 			></special-characters-keyboard>
 			<div class='field-errors'>

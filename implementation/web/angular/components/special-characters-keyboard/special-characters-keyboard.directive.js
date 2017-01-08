@@ -32,8 +32,8 @@
 		SIMPLE: "simple"
 	};
 	
-	DirectiveController.$inject = ['config', 'settings'];
-	function DirectiveController(config, settings){
+	DirectiveController.$inject = ['config', 'settings', '$element'];
+	function DirectiveController(config, settings, $element){
 		var ctrl = this;
 		
 		ctrl.englishCharacters = config.specialCharacters.english;
@@ -63,6 +63,7 @@
 			else{
 				ctrl.model += (character);
 			}
+			focusInput();
 		}
 		
 		function changeKeysColor(color){
@@ -76,6 +77,13 @@
 		
 		function isOpen(){
 			return displayType.SIMPLE == ctrl.display;
+		}
+		
+		function focusInput(){
+			 var input = $element.find(".characters-input");
+			 if(input != null){
+				 input[0].focus(); 
+			 }
 		}
 	}
 }());

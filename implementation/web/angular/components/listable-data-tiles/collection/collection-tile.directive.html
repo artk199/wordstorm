@@ -1,13 +1,27 @@
-<div class='collection item' ng-switch="ctrl.controlItem == null || ctrl.controlItem.length == 0">
-	<div ng-switch-default>
+<span ng-switch="ctrl.controlItem == null || ctrl.controlItem.length == 0">
+	<div class='collection item' ng-switch-default>
 		<ng-include src="ctrl.getModeInclude()"></ng-include>
 	</div>
-	<div class="add-item" ng-switch-when="false" ng-click="ctrl.addCollection()">
-		<div class="text-center">
-			<div class="icon-holder">
-				<span class="glyphicon glyphicon-plus"></span>
+	<span ng-switch-when="false">
+		<div class='collection item'>
+			<div class="add-item" ng-click="ctrl.addCollectionFromText()">
+				<div class="text-center">
+					<div class="icon-holder">
+						<span class="glyphicon glyphicon-plus"></span>
+					</div>
+					<h5 translate="button.addFromText"></h5>
+				</div>
 			</div>
-			<h5 translate="button.add"></h5>
 		</div>
-	</div>
-</div>
+		<div class='collection item'>
+			<div class="add-item" ng-click="ctrl.addCollection()">
+				<div class="text-center">
+					<div class="icon-holder">
+						<span class="glyphicon glyphicon-plus"></span>
+					</div>
+					<h5 translate="button.add"></h5>
+				</div>
+			</div>
+		</div>
+	</span>
+</span>

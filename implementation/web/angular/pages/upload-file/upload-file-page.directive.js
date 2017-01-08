@@ -39,15 +39,15 @@
 		CREATING: false
 	};
 	
-	DirectiveController.$inject = ['rest', 'alerts', "config", "$scope", "pages", "$timeout"];
-	function DirectiveController(rest, alerts, config, $scope, pages, $timeout){
+	DirectiveController.$inject = ['rest', 'alerts', "config", "$scope", "pages", "$timeout", "$stateParams"];
+	function DirectiveController(rest, alerts, config, $scope, pages, $timeout, $stateParams){
 		var ctrl = this;
 		
 		ctrl.manualInputSelected = false;
 		ctrl.errors = null;
 		ctrl.view = null;
 		ctrl.wordsList = null;
-		ctrl.collection = null;
+		ctrl.collection = initCollection();
 		
 		ctrl.uploadFile = uploadFile;
 		ctrl.sendManualInput = sendManualInput;
@@ -69,6 +69,15 @@
 			ctrl.errors = initErrors();
 			ctrl.view = views.INPUT;
 			initLoadingData();
+		}
+		
+		function initCollection(){
+			if($stateParams.collectionName){
+				return {
+					Name : $stateParams.collectionName
+				};
+			}
+			return null;
 		}
 		
 		function initErrors(){

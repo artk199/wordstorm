@@ -163,14 +163,14 @@
 		function isFormValid(){
 			var result = false;
 			// Check if fields are not empty
-			if(ctrl.formData != null){
-				var currentForm = ctrl.formData;
-				var areFieldsSet = currentForm.Word && currentForm.Pronunciation 
-					&& currentForm.Translations && currentForm.Translations.length > 0;
+			if(ctrl.formData != null && ctrl.formData.Word != null){
+				result = true;
 				
-				// Check if all translations are provided
-				if(areFieldsSet){
-					result = true;
+				var currentForm = ctrl.formData;
+				var isAnyTranslation = currentForm.Translations && currentForm.Translations.length > 0;
+				
+				// Check if all translations are provided properly
+				if(isAnyTranslation){
 					var translations = currentForm.Translations;
 					for(var i = 0; i < translations.length; i++){
 						if(!translations[i].Translation || !translations[i].PartOfSpeech){

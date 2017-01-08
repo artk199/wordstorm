@@ -40,13 +40,18 @@
 					</button>
 				</div>
 				<span ng-if="ctrl.isNormalMode() || ctrl.isExpandedMode()">
-					<button type="button" class="button button-action" ng-click="ctrl.switchToRemoveMode()">
+					<button type="button" class="button button-action" ng-click="ctrl.switchToRemoveMode()"
+						uib-tooltip="{{::'button.remove' | translate}}" tooltip-placement=left
+					>
 						<span class="glyphicon glyphicon-remove"></span>
 					</button>
-					<button type="button" class="button button-action" ng-click="ctrl.switchToEditMode()">
+					<button type="button" class="button button-action" ng-click="ctrl.switchToEditMode()"
+						uib-tooltip="{{::'button.edit' | translate}}" tooltip-placement="right"
+					>
 						<span class="glyphicon glyphicon-pencil"></span>
 					</button>
 					<button type="button" class="button button-action" 
+						uib-tooltip="{{::'myLibrary.word.expand' | translate}}" tooltip-placement="right"
 						ng-click="ctrl.switchExpandedMode()" ng-switch="ctrl.isExpandedMode()">
 						<span class="glyphicon glyphicon-eye-open" ng-switch-when="false"></span>
 						<span class="glyphicon glyphicon-eye-close" ng-switch-default></span>
@@ -62,6 +67,7 @@
 		<div class="col-xs-9 col-sm-9 col-md-11 col-lg-11">
 			<div class="translations">
 				<h3 translate="myLibrary.word.translations"></h3>
+				<span translate="myLibrary.word.noTranslations" ng-if="::(ctrl.item.Translations == null || ctrl.item.Translations.length == 0)"></span>
 				<section class="row">
 					<div class="translation col-xs-12 col-sm-6 col-md-4 col-lg-4"
 						 ng-repeat="(partOfSpeech, translations) in ::ctrl.item.Translations | groupBy: 'PartOfSpeech'">

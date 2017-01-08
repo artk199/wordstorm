@@ -16,6 +16,6 @@
 	"uploadFileExtensions" : ["txt"],
 	"uploadFileMaxSizeInMb" : 10,
 	"collectionAddElement" : "last",
-	"androidApkDownloadLink" : "download/app-debug.apk",
+	"androidApkDownloadLink" : "download/ws.apk",
 	"mainPageVideoLink" : "https://www.youtube.com/embed/RG06ewnqiB4"
 }

@@ -1,13 +1,15 @@
 .tiers-menu{
-	display: block;
+	display: inline-block;
     padding: 0;
-    margin: 0;
+	margin: 10px 0;
     list-style: none;
 }
 
 .tiers-menu li{
 	text-align: center;
 	cursor: pointer;	
+	display: inline-block;
+	margin-right: 10px;
 }
 
 .tiers-menu li:not(:last-child) span{
@@ -17,7 +19,7 @@
 .tiers-menu li span{
     display: block;
     background: #fff;
-    padding: 15px 20px;
+	padding: 10px 20px;
     font-size: 16px;
     font-weight: bold;
     color: #808080;
@@ -34,27 +36,12 @@
     cursor: not-allowed;
 }
 
-@media (min-width: 992px) {
-	.tiers-menu li:not(.active){
-		padding-right: 25px;
-	}
-}
-
-@media (max-width: 992px) {
-	.tiers-menu{
-		margin: 20px 0;
-	}
-	.tiers-menu li{
-		display: inline-block;
-		margin-right: 10px;
-	}
-}
-
 .tiers-menu-container{
 	padding-left: 15px;
 }
 
 .tiers-menu-container h3{
-    margin: 0 0 23px 0;
+    margin: 0 15px 0 0;
     font-size: 20px;
+    display: inline-block;
 }

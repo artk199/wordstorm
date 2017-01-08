@@ -10,7 +10,8 @@
 	    	controllerAs: 'ctrl',
 	    	bindToController: true,
 	    	scope: {
-	    		word: '='
+	    		word: '=',
+	    		view: '='
 	    	}
 	    };
 	}
@@ -24,8 +25,6 @@
 	function DirectiveController(){
 		var ctrl = this;
 		
-		ctrl.selectedView = null;
-		
 		ctrl.switchToAnotherView = switchToAnotherView;
 		
 		init();
@@ -33,12 +32,12 @@
 		///////////////////////
 		
 		function init(){
-			ctrl.selectedView = views.WORD;
+			ctrl.view = views.WORD;
 		}
 		
 		function switchToAnotherView(){
-			var nextView = ctrl.selectedView == views.WORD ? views.TRANSLATION : views.WORD;
-			ctrl.selectedView = nextView;
+			var nextView = ctrl.view == views.WORD ? views.TRANSLATION : views.WORD;
+			ctrl.view = nextView;
 		}
 	}
 }());

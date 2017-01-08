@@ -16,96 +16,99 @@
 			</button>
 		</div>
 	</page-header-right>
-	<page-body>
+	<page-body-top>
 		<div class="vertical-grid">
 			<div class="big-round-button text-center" ng-if="ctrl.collection.TotalWords > 0">
-			<button type='button' class='button button-action' ng-click="ctrl.editCollection()"
-				uib-tooltip="{{::('myLibrary.collection.edit' | translate)}}" tooltip-placement="bottom"
-			>
-				<span class='glyphicon glyphicon-pencil'></span>
-			</button>
-			<button class="button button-action big" ng-click="ctrl.openLearning(ctrl.collection.Id, ctrl.collection.Name, ctrl.getCurrentTier())"
-				uib-tooltip="{{::('myLibrary.collection.playLearn' | translate)}}" tooltip-placement="bottom"
-				ng-disabled="5 == ctrl.getCurrentTier()"
-			>
-				<span class="glyphicon glyphicon-education"></span>
-			</button>
-			<button type="button" class="button button-action" 
-				uib-tooltip="{{::('myLibrary.collection.add' | translate)}}" tooltip-placement="bottom"
-				ng-click="ctrl.addWord(ctrl.collection.Id, ctrl.collection.Name)">
-					<span class="glyphicon glyphicon-plus"></span>
-			</button>
-			<button type="button" class="button button-action" 
-				uib-tooltip="{{::('myLibrary.collection.downloadPdf' | translate)}}" tooltip-placement="bottom"
-				ng-switch="ctrl.isPdfDownloading()"
-				ng-disabled="ctrl.isPdfDownloading()"
-				ng-click="ctrl.downloadCollectionAsPdfPage(ctrl.collection.Id, ctrl.collection.Name + '.pdf')">
-					<span ng-switch-default class="glyphicon glyphicon-spin glyphicon-refresh"></span>
-					<span ng-switch-when="false" class="glyphicon glyphicon-file"></span>
-			</button>
-			<a class="hidden-xs hidden-sm hidden-md hidden-lg" id="download-anchor"></a>
-		</div>
-		<div>
-			<div class="full-height row">
-				<div class="col-xs-12 col-sm-12 col-md-1 col-lg-1">
-					<section class="tiers-menu-container">
-						<h3 translate="myLibrary.collection.tiers"></h3>
-						<ul class="tiers-menu">
-							<li ng-repeat="tier in ::ctrl.getTiersList()" ng-click="ctrl.changeCurrentTier(tier)"
-								ng-class="{'active' : tier == ctrl.getCurrentTier(), 'disabled' : !ctrl.isTierActive(tier)}"
-							>
-								<span ng-bind="::(tier+1)"></span>
-							</li>
-							
-							<li ng-click="ctrl.changeCurrentTier(5)"
-								ng-class="{'active' : 5 == ctrl.getCurrentTier(), 'disabled' : !ctrl.isTierActive(5)}"
-							>
-								<span translate="myLibrary.collection.tiers.knownWords"></span>
-							</li>
-						</ul>
-					</section>
-				</div>
-				<div class="full-height col-xs-12 col-sm-12 col-md-11 col-lg-11">
-					<listable-data list="ctrl.collection.Words"
-						display-directive-name="word-tile"
-						refresh-data-action="ctrl.refreshCollection(true, true)"
-						display-directive-parameters="ctrl.parametersForWords"
-						filter-function="ctrl.wordsListFilter"
-						reduce-list-function="ctrl.reduceWordsToTier"
-						scrollable-body="true"
-						events="ctrl.listableDataEvents"
-						no-view-change="true"
-						view="list"
-						no-buttons="true"
-					>
-						<listable-data-header-right>
-							<button class='button button-action red one-line'
-									ng-disabled="ctrl.isRemovingWords()"
-									ng-if="ctrl.isAnyWordSelected()"
-									ng-click="ctrl.removeSelectedWords()"
-							>
-								<span class="glyphicon" 
-									ng-class="{'glyphicon-spin glyphicon-refresh' : ctrl.isRemovingSelected(),
-											   'glyphicon-remove' : !ctrl.isRemovingSelected()}">
-								</span>
-								<span translate="myLibrary.buttons.removeSelected" translate-value-count="{{ctrl.parametersForWords.selectedItems.length}}"></span>
-							</button>
-						</listable-data-header-right>
-						<listable-data-empty-list>
-							<span translate="myLibrary.noCollectionsAfterFiltering"  ng-if="ctrl.collection.TotalWords > 0"></span>
-							<span  ng-if="ctrl.collection.TotalWords == 0">
-								<p translate="collection.noWords"></p>
-								<button type="button" class="button button-action red" 
-									ng-click="ctrl.addWord(ctrl.collection.Id, ctrl.collection.Name)">
-										<span class="glyphicon glyphicon-plus"></span>
-										<span translate="collection.addWord"></span>
-								</button>
-							</span>
-						</listable-data-empty-list>
-					</listable-data>
-				</div>
+				<button type='button' class='button button-action' ng-click="ctrl.editCollection()"
+					uib-tooltip="{{::('myLibrary.collection.edit' | translate)}}" tooltip-placement="bottom"
+				>
+					<span class='glyphicon glyphicon-pencil'></span>
+				</button>
+				<button class="button button-action big" ng-click="ctrl.openLearning(ctrl.collection.Id, ctrl.collection.Name, ctrl.getCurrentTier() != 'all' ? ctrl.getCurrentTier() : null)"
+					uib-tooltip="{{::('myLibrary.collection.playLearn' | translate)}}" tooltip-placement="bottom"
+				>
+					<span class="glyphicon glyphicon-education"></span>
+				</button>
+				<button type="button" class="button button-action" 
+					uib-tooltip="{{::('myLibrary.word.add.pageTitle' | translate)}}" tooltip-placement="bottom"
+					ng-click="ctrl.addWord(ctrl.collection.Id, ctrl.collection.Name)">
+						<span class="glyphicon glyphicon-plus"></span>
+				</button>
+				<button type="button" class="button button-action" 
+					uib-tooltip="{{::('myLibrary.collection.downloadPdf' | translate)}}" tooltip-placement="bottom"
+					ng-switch="ctrl.isPdfDownloading()"
+					ng-disabled="ctrl.isPdfDownloading()"
+					ng-click="ctrl.downloadCollectionAsPdfPage(ctrl.collection.Id, ctrl.collection.Name + '.pdf')">
+						<span ng-switch-default class="glyphicon glyphicon-spin glyphicon-refresh"></span>
+						<span ng-switch-when="false" class="glyphicon glyphicon-file"></span>
+				</button>
+				<a class="hidden-xs hidden-sm hidden-md hidden-lg" id="download-anchor"></a>
 			</div>
 		</div>
-		</div>
+	</page-body-top>
+	<page-body>
+		<listable-data list="ctrl.collection.Words"
+			display-directive-name="word-tile"
+			refresh-data-action="ctrl.refreshCollection(true, true)"
+			display-directive-parameters="ctrl.parametersForWords"
+			filter-function="ctrl.wordsListFilter"
+			reduce-list-function="ctrl.reduceWordsToTier"
+			scrollable-body="true"
+			events="ctrl.listableDataEvents"
+			no-view-change="true"
+			view="list"
+			no-buttons="true"
+		>
+			<listable-data-header-right>
+				<button class='button button-action red one-line'
+						ng-disabled="ctrl.isRemovingWords()"
+						ng-if="ctrl.isAnyWordSelected()"
+						ng-click="ctrl.removeSelectedWords()"
+				>
+					<span class="glyphicon" 
+						ng-class="{'glyphicon-spin glyphicon-refresh' : ctrl.isRemovingSelected(),
+								   'glyphicon-remove' : !ctrl.isRemovingSelected()}">
+					</span>
+					<span translate="myLibrary.buttons.removeSelected" translate-value-count="{{ctrl.parametersForWords.selectedItems.length}}"></span>
+				</button>
+				
+				<section class="tiers-menu-container">
+					<h3 class='with-help-tooltip'>
+						<span translate="myLibrary.collection.tiers"></span>
+						<span class='glyphicon glyphicon glyphicon-question-sign info-sign' 
+							tooltip-placement="bottom" uib-tooltip-html="::ctrl.tiersHelpHtml"></span>
+					</h3>
+					<ul class="tiers-menu">
+						<li ng-click="ctrl.changeCurrentTier('all')"
+							ng-class="{'active' : 'all' == ctrl.getCurrentTier()}"
+						>
+							<span translate="myLibrary.collection.tiers.all"></span>
+						</li>
+						<li ng-repeat="tier in ::ctrl.getTiersList()" ng-click="ctrl.changeCurrentTier(tier)"
+							ng-class="{'active' : tier == ctrl.getCurrentTier(), 'disabled' : !ctrl.isTierActive(tier)}"
+						>
+							<span ng-bind="::(tier+1)"></span>
+						</li>
+						
+						<li ng-click="ctrl.changeCurrentTier(5)"
+							ng-class="{'active' : 5 == ctrl.getCurrentTier(), 'disabled' : !ctrl.isTierActive(5)}"
+						>
+							<span translate="myLibrary.collection.tiers.knownWords"></span>
+						</li>
+					</ul>
+				</section>
+			</listable-data-header-right>
+			<listable-data-empty-list>
+				<span translate="myLibrary.noCollectionsAfterFiltering"  ng-if="ctrl.collection.TotalWords > 0"></span>
+				<span  ng-if="ctrl.collection.TotalWords == 0">
+					<p translate="collection.noWords"></p>
+					<button type="button" class="button button-action red" 
+						ng-click="ctrl.addWord(ctrl.collection.Id, ctrl.collection.Name)">
+							<span class="glyphicon glyphicon-plus"></span>
+							<span translate="collection.addWord"></span>
+					</button>
+				</span>
+			</listable-data-empty-list>
+		</listable-data>
 	</page-body>
 </page>

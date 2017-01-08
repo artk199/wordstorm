@@ -162,3 +162,43 @@
 #main-header .button-action{
 	background: #456785;
 }
+
+#main-header .rounded-navbar-button{
+    width: 50px;
+    height: 50px;
+    border: none;
+    display: inline-block;
+    border-radius: 50%;
+    background-color: #b93a46;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: 70%;
+    outline: none;
+    transition: 0.3s;
+    font-size: 20px;
+    color: white;
+}
+
+#main-header .rounded-navbar-button .glyphicon{
+	top: 2px;
+}
+
+#main-header .rounded-navbar-button{
+	margin-right: 10px;
+}
+
+#main-header .rounded-navbar-button:hover{
+	background-color: #dc1717;
+}
+
+#main-header .rounded-navbar-button.android{
+	background-image: url('../../images/android-logo.png');
+}
+
+#main-header .logged-user-info{
+	display: block;
+	text-align: right;
+	color: #fff;
+	margin: 5px 15px;
+	font-size: 12px;
+}

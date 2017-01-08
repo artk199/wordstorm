@@ -35,3 +35,8 @@
 .progress-bar > .content .small{
 	font-size: 15px;	
 }
+
+.progress-bar > .container,
+.progress-bar > .container > *{
+	width: 100%;
+}

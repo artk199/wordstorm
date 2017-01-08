@@ -1,26 +1,32 @@
 <form name='collectionForm' class='form-horizontal'>
 	<div class="clickable card user-action" ng-click="ctrl.openCollection(ctrl.item)" ng-class="'tier-0'">
-		<header ng-style="{'background-image' : 'url(http://static.swiat-pogody.pl/img/web/bandeaux/pays/polska.jpg)'}">	
+		<header ng-style="{'background-image' : 'url(\'style/img/collection-card-background.jpg\')'}">	
 			<div class='data-container' ng-switch="ctrl.isEditMode()" >
 				<!-- Normal mode -->
 				<span ng-switch-default>
 					<span ng-if="ctrl.canDisplayActionButtons()">
 						<button  class="button button-empty edit-button show-on-hover"
+							uib-tooltip="{{::'button.edit' | translate}}"
+							tooltip-placement="left"
 							ng-click="ctrl.openEditMode();"
 						>
 							<span class='glyphicon glyphicon-pencil'></span>
 						</button>
-						<button class='button button-empty change-picture-button show-on-hover'
+						<button ng-if="false" class='button button-empty change-picture-button show-on-hover'
 							ng-click="$event.stopPropagation();"
 						>
 							<span class='glyphicon glyphicon-picture'></span>
 						</button>
 						<button class="button button-empty remove-button show-on-hover"
+							uib-tooltip="{{::'button.remove' | translate}}"
+							tooltip-placement="right"
 							ng-click="ctrl.openRemoveMode();"
 						>
 							<span class='glyphicon glyphicon-remove'></span>
 						</button>
 						<button class="button button-empty learning-button show-on-hover" ng-if="ctrl.item.TotalWords > 0"
+							uib-tooltip="{{::'myLibrary.collection.playLearn' | translate}}"
+							tooltip-placement="right"
 							ng-click="ctrl.playLearningMode(ctrl.item.Id, ctrl.item.Name);"
 						>
 							<span class='glyphicon glyphicon-education'></span>

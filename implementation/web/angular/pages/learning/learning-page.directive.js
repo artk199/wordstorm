@@ -37,6 +37,7 @@
 	function DirectiveController($stateParams, rest, pages){
 		var ctrl = this;
 		
+		ctrl.cardView = initCardView();
 		ctrl.collection = null;
 		ctrl.words = null;
 		ctrl.currentWord = null;
@@ -77,6 +78,10 @@
 				
 				loadingData.INITIALIZING = false;
 			});
+		}
+		
+		function initCardView(){
+			return "word";
 		}
 		
 		function refreshCollection(useCache, forceReload){
@@ -199,6 +204,7 @@
 		}
 		
 		function handleNextWord(){
+			ctrl.cardView = initCardView();
 			ctrl.currentWord = getNextWord(false);
 			if(ctrl.currentWord == null){
 				ctrl.currentView = views.SUCCESS;

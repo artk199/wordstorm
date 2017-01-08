@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
   <head>
-  	<base href='/'/>
+  	<base href='/WordStorm/'/>
   	
   	<!-- Meta-data -->
 	<title ng-bind="pages.getCurrentPagetitle()">Word Storm</title>
@@ -31,8 +31,82 @@
 	<script src="angular/modules/perfect-scrollbar/angular-perfect-scrollbar.js"></script>
 
 	<!-- Wordstorm Angular App !-->
-    <script src="wordstorm.min.js"></script>
-	<link href="wordstorm.min.css" rel="stylesheet"/>
+	<script src="angular/app.js"></script>
+	
+	<script src="angular/services/rest/rest.service.js"></script> 
+	<script src="angular/services/rest/rest-cache.service.js"></script> 
+	<script src="angular/services/rest/rest-config.service.js"></script> 
+	<script src="angular/services/rest/rest-mock.service.js"></script> 
+	<script src="angular/services/pages/pages.service.js"></script> 
+	<script src="angular/services/cookies/cookies.service.js"></script> 
+	<script src="angular/services/settings/settings.service.js"></script>
+	
+	<script src="angular/config/state.config.js"></script> 
+	<script src="angular/config/exception-handler.config.js"></script> 
+	<script src="angular/config/httpInterceptor.config.js"></script> 
+	
+	<script src="angular/components/spinner/spinner.directive.js"></script> 
+	<script src="angular/components/wordstorm/wordstorm.directive.js"></script> 
+	<script src="angular/components/sidebar/sidebar.directive.js"></script> 
+	<script src="angular/components/user-panel/user-panel.service.js"></script> 
+	<script src="angular/components/user-panel/user-panel.directive.js"></script> 
+	<script src="angular/components/dev-panel/dev-panel.directive.js"></script> 
+	<script src="angular/components/dev-panel/dev-panel.service.js"></script> 
+	<script src="angular/components/page/page.directive.js"></script> 
+	<script src="angular/components/change-language/change-language.directive.js"></script> 
+	<script src="angular/components/alerts/alerts.directive.js"></script> 
+	<script src="angular/components/alerts/alerts.service.js"></script> 
+	<script src="angular/components/form-field/form-field.directive.js"></script> 
+	<script src="angular/components/listable-data/listable-data.directive.js"></script> 
+	<script src="angular/components/compile-html/compile-html.directive.js"></script> 
+	<script src="angular/components/listable-data-tiles/collection/collection-tile.directive.js"></script> 
+	<script src="angular/components/listable-data-tiles/translation/translation-tile.directive.js"></script> 
+	<script src="angular/components/progress-bar/progress-bar.directive.js"></script> 
+	<script src="angular/components/auto-focus/auto-focus.directive.js"></script> 
+	<script src="angular/components/special-characters-keyboard/special-characters-keyboard.directive.js"></script> 
+	<script src="angular/components/listable-data-tiles/word/word-tile.directive.js"></script>
+	<script src="angular/components/word-search/word-search.directive.js"></script>
+	<script src="angular/components/word-card/word-card.directive.js"></script>
+	<script src="angular/components/locale/locale.directive.js"></script>
+	<script src="angular/components/navbar/navbar.directive.js"></script>
+	<script src="angular/components/register-panel/register-panel.directive.js"></script>
+	<script src="angular/components/listable-data-tiles/upload-file/upload-file-tile.directive.js"></script>
+	
+	<script src="angular/filters/highlight/highlight.filter.js"></script> 
+	
+	<script src="angular/pages/main-page/main-page.directive.js"></script> 
+	<script src="angular/pages/register/register.directive.js"></script> 
+	<script src="angular/pages/error/error-page.directive.js"></script> 
+	<script src="angular/pages/my-library/my-library-page.directive.js"></script> 
+	<script src="angular/pages/collection/collection-page.directive.js"></script> 
+	<script src="angular/pages/authorization-error/authorization-error-page.directive.js"></script> 
+	<script src="angular/pages/word/word-page.directive.js"></script> 
+	<script src="angular/pages/public-library/public-library-page.directive.js"></script> 
+	<script src="angular/pages/learning/learning-page.directive.js"></script> 
+	<script src="angular/pages/upload-file/upload-file-page.directive.js"></script>
+	<script src="angular/pages/contact-us/contact-us-page.directive.js"></script> 
+	
+	<link href="style/css/main.css" rel="stylesheet"/>
+	<link href="style/css/actions.css" rel="stylesheet"/>
+	<link href="style/css/dev-panel.css" rel="stylesheet"/>
+	<link href="style/css/forms.css" rel="stylesheet"/>
+	<link href="style/css/navbar.css" rel="stylesheet"/>
+	<link href="style/css/sidebar.css" rel="stylesheet"/>
+	<link href="style/css/color-bar.css" rel="stylesheet"/>
+	<link href="style/css/search-bar.css" rel="stylesheet"/>
+	<link href="style/css/spinner.css" rel="stylesheet"/>
+	<link href="style/css/alerts.css" rel="stylesheet"/>
+	<link href="style/css/operators.css" rel="stylesheet"/>
+	<link href="style/css/listable-data.css" rel="stylesheet"/>
+	<link href="style/css/progress-bar.css" rel="stylesheet"/>
+	<link href="style/css/special-characters-keyboard.css" rel="stylesheet"/>	
+	<link href="style/css/words.css" rel="stylesheet"/>
+	<link href="style/css/word-card.css" rel="stylesheet"/>
+	<link href="style/css/fonts.css" rel="stylesheet"/>
+	<link href="style/css/main-page.css" rel="stylesheet"/>	 
+	<link href="style/css/upload-file.css" rel="stylesheet"/>
+	<link href="style/css/tier-menu.css" rel="stylesheet"/>
+	<link href="style/css/toggle-button.css" rel="stylesheet"/>
   </head>
   <body>
 	<word-storm></word-storm>

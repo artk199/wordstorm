@@ -38,13 +38,18 @@
 							</field-errors>
 						</form-field>
 						
-						<form-field name="public" type="checkbox"
+						<form-field name="public" type="checkbox" ng-if="false"
 							label="myLibrary.addNewCollection.form.public"
 							model="ctrl.addCollectionFormData.IsPublic"
 							tooltip="myLibrary.addNewCollection.form.public.tooltip"
 						></form-field>
 						
 						<section class='buttons text-center'>
+							<button type="button" class='button button-action'
+									ng-if="::(ctrl.view != 'edit')"
+									ng-click="ctrl.addCollectionFromText(ctrl.addCollectionFormData.Name)"
+									translate="button.addFromText">
+							</button>
 							<button type="button" class='button button-action'
 									ng-click = "ctrl.clearForm(collectionForm)"
 									ng-disabled="!ctrl.hasChanged() || ctrl.formSending"

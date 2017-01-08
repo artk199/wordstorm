@@ -7,7 +7,7 @@
 
 /* Video view */
 .main-page.video{
-	background-image: url('https://pace.oregonstate.edu/sites/default/files/styles/course_banner_large/public/images/course/cover/elearning-video-chat.jpg?itok=EO3ZiX9L');	
+	background-image: url('../../images/main-page/background.jpg');	
 }
 
 .main-page .youtube-video{
@@ -38,7 +38,7 @@
 }
 
 .main-page .main-panel form{
-	background: #fff;
+	background: rgba(255,255,255,0.9);
 	border: 1px solid #ccc;
 	padding: 5%;
 	color: #000;

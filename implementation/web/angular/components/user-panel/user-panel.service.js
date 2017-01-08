@@ -7,12 +7,14 @@
 		var service = this;
 		var checkPersonLoggedPromise = null;
 		var personLogged = false;
+		var personData = {};
 	
 		service.isPersonLogged = isPersonLogged;
 		service.checkPersonLogged = checkPersonLogged;
 		service.logPersonIn = logPersonIn;
 		service.logPersonOut = logPersonOut;
 		service.loadPersonData = loadPersonData;
+		service.getPersonData = getPersonData;
 		
 		//////////////////////////
 		
@@ -20,6 +22,9 @@
 			if(reload == true || checkPersonLoggedPromise == null){
 				checkPersonLoggedPromise = rest.user.isLogged().then(function(data){
 					personLogged = data != null? data.Result : false;
+					if(personLogged){
+						loadPersonData();
+					}
 				});
 			}
 			return checkPersonLoggedPromise;
@@ -40,29 +45,40 @@
 					return false;
 				}
 				else{
-					var userData = data.Result;
-					cookies.credentials.store(userData);
-					personLogged = true;
-					return true;
+					return loadPersonData().then(function(){
+						var userData = data.Result;
+						cookies.credentials.store(userData);
+						personLogged = true;
+						
+						return true;
+					});
 				}
 			});
 		}
 		
 		function logPersonOut(){
 			personLogged = false;
+			personData.data = null;
 			cookies.credentials.remove();
 			return rest.user.logout();
 		}
 		
 		function loadPersonData(){
-			return rest.user.profile().then(function(result){
+			userDataLoadedPromise = rest.user.profile().then(function(result){
 				if(result.Result){
+					personData.data = result.Result;
 					return result.Result;
 				}
 				else{
 					return null;
 				}
 			});
+			
+			return userDataLoadedPromise;
+		}
+		
+		function getPersonData(){
+			return personData;
 		}
 	}
 }());

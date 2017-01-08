@@ -21,7 +21,7 @@
 		
 		ctrl.displayDevMode = config.devMode == true;
 		ctrl.displaySearchBar = config.searchUrl != null;
-		ctrl.userData = null;
+		ctrl.userData = userPanelService.getPersonData();
 		
 		ctrl.openHomePage = pages.home;
 		ctrl.openPublicLibrary = pages.publicLibrary.main;
@@ -67,7 +67,7 @@
 		function refreshUserData(){
 			isUserDataLoading = true;
 			return userPanelService.loadPersonData().then(function(data){
-				ctrl.userData = data;
+				ctrl.userData = userPanelService.getPersonData();
 				isUserDataLoading = false;
 			});
 		}

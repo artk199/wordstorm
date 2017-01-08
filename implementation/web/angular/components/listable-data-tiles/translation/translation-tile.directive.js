@@ -34,6 +34,13 @@
 		
 		function init(){
 			refreshEnum();
+			initTranslations();
+		}
+		
+		function initTranslations(){
+			if(ctrl.item.PartOfSpeech != null){
+				ctrl.item.PartOfSpeech = TRANSLATE_PREFIX + ctrl.item.PartOfSpeech;
+			}
 		}
 		
 		function refreshEnum(){
