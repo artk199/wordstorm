@@ -23,8 +23,7 @@
 }
 
 .separated-with-comma > *:not(:last-child)::after{
-	content: ",";
-	padding-right: 5px;
+	content: ", ";
 }
 
 .in-parenthesis::before{
