@@ -16,6 +16,7 @@
 .word-card .card-body .word-main-data{
 	text-align: center;
 	justify-content: center;
+	padding: 20px 0;
 }
 
 .word-card .card-body .word-main-data h1,
