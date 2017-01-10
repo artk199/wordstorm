@@ -79,7 +79,7 @@
 							tooltip-placement="bottom" uib-tooltip-html="::ctrl.tiersHelpHtml"></span>
 					</h3>
 					<ul class="tiers-menu">
-						<li ng-click="ctrl.changeCurrentTier('all')"
+						<li class="special-tier" ng-click="ctrl.changeCurrentTier('all')"
 							ng-class="{'active' : 'all' == ctrl.getCurrentTier()}"
 						>
 							<span translate="myLibrary.collection.tiers.all"></span>
@@ -90,7 +90,7 @@
 							<span ng-bind="::(tier+1)"></span>
 						</li>
 						
-						<li ng-click="ctrl.changeCurrentTier(5)"
+						<li class="special-tier" ng-click="ctrl.changeCurrentTier(5)"
 							ng-class="{'active' : 5 == ctrl.getCurrentTier(), 'disabled' : !ctrl.isTierActive(5)}"
 						>
 							<span translate="myLibrary.collection.tiers.knownWords"></span>

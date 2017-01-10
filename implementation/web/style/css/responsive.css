@@ -1,8 +1,45 @@
-/* Removing scrollable from lower resolutions */
 @media (max-width: 768px){
+	/* Removing scrollable from lower resolutions */
 	html, html body{
 		overflow: auto;
 		height: auto;
+	}
+	
+	#page-body,
+	#page-body .ui-view-container{
+		height: auto;
+		overflow: auto;
+	}
+	
+	.full-height{
+		height: auto;
+	}
+	
+	.vertical-grid{
+		display: block;
+		height: auto;
+	}
+	
+	.vertical-grid > *{
+		flex: 0;
+	}
+	
+	.vertical-grid > .rest-height{
+		height: auto;
+		flex: 0;
+	}
+	
+	.vertical-grid > .rest-height.scroller{
+		overflow: auto;
+	}
+	
+	.vertical-grid > .rest-height.scroller > div:not(.ps-scrollbar-x-rail){
+		height: auto;
+	}
+	
+	.vertical-grid > .rest-height.scroller > div.ps-scrollbar-x-rail,
+	.vertical-grid > .rest-height.scroller > div.ps-scrollbar-y-rail{
+		display: none!important;
 	}
 	
 	/* Big round buttons */
@@ -25,4 +62,23 @@
 	    font-size: 20px;
 	}
 		
+	/* Listable data elements */
+	.listable-data > header{
+		display: block;
+	}
+	
+	.listable-data > header > *{
+		display: block;
+	}
+	
+	.listable-data > header .search-bar.opened{
+		width: 100%;
+		margin: 10px 0;
+	}
+	
+	.listable-data.list-view .list .item .buttons{
+		display: block;
+		padding-left: 0;
+		margin-top: 5px;
+	}
 }

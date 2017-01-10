@@ -44,6 +44,7 @@
 		
 		ctrl.viewMode = ctrl.view != null ? ctrl.view : getDefaultListView();
 		ctrl.pagination = null;
+		ctrl.scrollOptions = {};
 		
 		ctrl.isSearchModeOn = isSearchModeOn;
 		ctrl.switchSearchMode = switchSearchMode;
@@ -64,6 +65,7 @@
 		
 		ctrl.getAvailablePaginations = getAvailablePaginations;
 		ctrl.updatePagination = updatePagination;
+		ctrl.pageChanged = pageChanged;
 		
 		init();
 		
@@ -163,6 +165,12 @@
 		
 		function getAvailablePaginations(){
 			return config.paginationSizes;
+		}
+		
+		function pageChanged(){
+			if(ctrl.scrollOptions.scrollTop){
+				ctrl.scrollOptions.scrollTop(0);
+			}
 		}
 	}
 }());

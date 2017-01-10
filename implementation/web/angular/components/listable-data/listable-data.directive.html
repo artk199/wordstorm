@@ -59,7 +59,7 @@
 		<ng-include src="'angular/components/listable-data/listable-data-list-part.html'"></ng-include>
 	</div>
 	
-	<perfect-scrollbar ng-if="ctrl.scrollableBody" class="rest-height scroller" wheel-propagation="false">
+	<perfect-scrollbar expand-scrollbar="ctrl.scrollOptions" ng-if="ctrl.scrollableBody" class="rest-height scroller" wheel-propagation="false">
 		<div class="list">
 			<ng-include src="'angular/components/listable-data/listable-data-list-part.html'"></ng-include>
 		</div>
@@ -71,6 +71,7 @@
 			items-per-page="ctrl.getMaxListSize()"
 			ng-model="ctrl.listCurrentPage"
 			boundary-links="false"
+			ng-change="ctrl.pageChanged()"
 			direction-links="false"
 			force-ellipses="true"
 			rotate="true"
